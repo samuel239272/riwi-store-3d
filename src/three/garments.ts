@@ -962,6 +962,7 @@ export function categoryKind(category: string): GarmentKind {
       sudaderas: 'joggers',
       accesorios: 'cap',
       chaquetas: 'jacket',
+      clanes: 'tee',
     } as Record<string, GarmentKind>
   )[category] ?? 'tee';
 }

@@ -4,7 +4,7 @@ test('catálogo RIWI: búsqueda, categoría, filtros combinados y orden', async 
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/#/catalogo');
-  await expect(page.locator('.product-card')).toHaveCount(10);
+  await expect(page.locator('.product-card')).toHaveCount(17);
   const search = page.getByRole('textbox', { name: 'Buscar por nombre o referencia' });
   await search.fill('hoodie');
   await expect(page.locator('.product-card h3')).toHaveText('Hoodie Compile');
@@ -13,6 +13,8 @@ test('catálogo RIWI: búsqueda, categoría, filtros combinados y orden', async 
   await search.fill('sin-resultados');
   await expect(page.getByRole('heading', { name: 'No encontramos ese producto.' })).toBeVisible();
   await page.getByRole('button', { name: 'Ver todos los productos' }).click();
+  await page.getByRole('button', { name: 'Clanes7', exact: true }).click();
+  await expect(page.locator('.product-card')).toHaveCount(7);
   await page.getByRole('button', { name: 'Camisetas2', exact: true }).click();
   await expect(page.locator('.product-card')).toHaveCount(2);
   await page.getByRole('combobox', { name: 'Filtrar por color' }).selectOption('Crudo');
