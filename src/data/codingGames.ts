@@ -31,7 +31,18 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       concept: 'Cadenas de texto · Muy fácil',
       task: 'Completa el espacio con el texto Hola, RIWI! entre comillas.',
       code: 'const saludo = ___;\nconsole.log(saludo);',
-      answers: ['"Hola, RIWI!"', "'Hola, RIWI!'", '`Hola, RIWI!`'],
+      answers: [
+        '"Hola, RIWI!"',
+        "'Hola, RIWI!'",
+        '`Hola, RIWI!`',
+        'Hola, RIWI!',
+        '"Hola, RIWI"',
+        "'Hola, RIWI'",
+        '`Hola, RIWI`',
+        'Hola, RIWI',
+        '"hola, riwi!"',
+        "'hola, riwi!'",
+      ],
       hint: 'En JavaScript, el texto se escribe entre comillas. Conserva la coma, el espacio y el signo de admiración.',
       explanation:
         'Las comillas convierten las palabras en una cadena de texto. ¡Tu primer mensaje está listo!',
@@ -41,7 +52,19 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       concept: 'Variables y operadores · Fácil',
       task: 'Usa las variables precio y envio para calcular el total.',
       code: 'const precio = 40;\nconst envio = 5;\nconst total = ___; // 45',
-      answers: ['precio + envio', 'envio + precio'],
+      answers: [
+        'precio + envio',
+        'envio + precio',
+        'precio+envio',
+        'envio+precio',
+        '40 + 5',
+        '5 + 40',
+        '45',
+        'precio + 5',
+        '5 + precio',
+        '40 + envio',
+        'envio + 40',
+      ],
       hint: 'El operador + suma dos números. Usa los nombres de las variables.',
       explanation: 'Sumar variables permite reutilizar el cálculo aunque cambien sus valores.',
     },
@@ -50,7 +73,15 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       concept: 'Condicionales · Fácil',
       task: 'Permite entrar cuando edad sea mayor o igual a 18. El valor 18 también debe pasar.',
       code: 'const edad = 18;\nif (___) {\n  console.log("Acceso permitido");\n}',
-      answers: ['edad >= 18', '18 <= edad'],
+      answers: [
+        'edad >= 18',
+        '18 <= edad',
+        '(edad >= 18)',
+        '(18 <= edad)',
+        'edad > 17',
+        '17 < edad',
+        '(edad > 17)',
+      ],
       hint: '>= significa mayor o igual. Usar solamente > dejaría fuera a quienes tienen 18.',
       explanation:
         'Los límites cuentan: >= incluye el valor del umbral, mientras que > lo excluye.',
@@ -60,7 +91,18 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       concept: 'Arrays y filter · Intermedio',
       task: 'Conserva solo productos cuyo stock sea mayor que cero.',
       code: 'const disponibles = productos.filter(\n  producto => ___\n);',
-      answers: ['producto.stock > 0', '0 < producto.stock', 'producto.stock >= 1'],
+      answers: [
+        'producto.stock > 0',
+        '0 < producto.stock',
+        'producto.stock >= 1',
+        '1 <= producto.stock',
+        'producto.stock != 0',
+        'producto.stock !== 0',
+        '0 != producto.stock',
+        '0 !== producto.stock',
+        '(producto.stock > 0)',
+        'producto.stock',
+      ],
       hint: 'Accede a la propiedad con producto.stock y compárala con cero. El inventario contiene cantidades enteras.',
       explanation: 'filter crea un nuevo array con los elementos cuya condición devuelve true.',
     },
@@ -72,10 +114,19 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       answers: [
         'precio * 0.9',
         '0.9 * precio',
+        'precio * 0.90',
+        '0.90 * precio',
         'precio - precio * 0.1',
+        'precio - precio * 0.10',
         'precio * (1 - 0.1)',
+        'precio * (1 - 0.10)',
         'precio * 90 / 100',
+        'precio * (90 / 100)',
+        'precio * (90/100)',
         'precio - (precio * 0.1)',
+        'precio - (precio * 0.10)',
+        'precio - (precio * 10 / 100)',
+        '(precio * 0.9)',
       ],
       hint: 'Después de descontar el 10 %, queda el 90 %. En decimal, 90 % es 0.9.',
       explanation: 'Una función flecha de una expresión devuelve su resultado de forma implícita.',
@@ -85,7 +136,7 @@ export const gameLevels: Record<GameId, CodingLevel[]> = {
       concept: 'Async / await · Desafío',
       task: 'Completa la palabra que espera a que fetch resuelva su promesa.',
       code: 'async function cargarProductos() {\n  const respuesta = ___ fetch("/api/productos");\n  return respuesta.json();\n}',
-      answers: ['await'],
+      answers: ['await', 'await fetch', 'await fetch("/api/productos")', "await fetch('/api/productos')"],
       hint: 'La función ya es async. La palabra complementaria pausa esta función hasta que la promesa se resuelva.',
       explanation:
         'await espera la promesa sin bloquear toda la página. En una aplicación real también manejarías los errores de red.',
@@ -174,21 +225,75 @@ export const rewards: CodingReward[] = (['debug', 'pipeline'] as GameId[]).flatM
     level: index + 1,
   })),
 );
-// Normalize whitespace outside strings only. No user code is executed.
+export function stripOuterParens(str: string): string {
+  const trimmed = str.trim();
+  if (trimmed.startsWith('(') && trimmed.endsWith(')')) {
+    let depth = 0;
+    let safe = true;
+    for (let i = 0; i < trimmed.length - 1; i++) {
+      if (trimmed[i] === '(') depth++;
+      else if (trimmed[i] === ')') depth--;
+      if (depth === 0) {
+        safe = false;
+        break;
+      }
+    }
+    if (safe) return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
+
+// Normalize whitespace outside strings and strip trailing semicolons/outer parens
 export function normalizeAnswer(value: string) {
+  const cleaned = stripOuterParens(value.trim().replace(/;+\s*$/, ''));
   return (
-    value.trim().match(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\S/g) ?? []
+    cleaned.match(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\S/g) ?? []
   ).join('');
 }
+
+export function evaluateAnswer(index: number, rawAnswer: string): boolean {
+  try {
+    const cleaned = stripOuterParens(rawAnswer.trim().replace(/;+\s*$/, ''));
+    if (index === 0) {
+      if (/^["'`]?Hola,\s+RIWI!?["'`]?$/i.test(cleaned)) return true;
+    } else if (index === 1) {
+      const fn = new Function('precio', 'envio', `return ${cleaned};`);
+      if (fn(40, 5) === 45) return true;
+    } else if (index === 2) {
+      const fn = new Function('edad', `return Boolean(${cleaned});`);
+      if (fn(18) === true && fn(19) === true && fn(17) === false && fn(0) === false) return true;
+    } else if (index === 3) {
+      const fn = new Function('producto', `return Boolean(${cleaned});`);
+      if (
+        fn({ stock: 5 }) === true &&
+        fn({ stock: 1 }) === true &&
+        fn({ stock: 0 }) === false &&
+        fn({ stock: -1 }) === false
+      )
+        return true;
+    } else if (index === 4) {
+      const fn = new Function('precio', `return ${cleaned};`);
+      if (Math.abs(fn(100) - 90) < 0.001 && Math.abs(fn(50) - 45) < 0.001) return true;
+    } else if (index === 5) {
+      if (/^await(?:\s+fetch.*)?$/i.test(cleaned)) return true;
+    }
+  } catch {
+    return false;
+  }
+  return false;
+}
+
 export function isCorrect(game: GameId, index: number, answer: string | number[]) {
   const level = gameLevels[game]?.[index];
   if (!level) return false;
-  if (game === 'debug')
-    return (
-      typeof answer === 'string' &&
-      answer.length < 300 &&
-      level.answers!.some((expected) => normalizeAnswer(expected) === normalizeAnswer(answer))
-    );
+  if (game === 'debug') {
+    if (typeof answer !== 'string' || answer.length >= 300) return false;
+    const normalizedUser = normalizeAnswer(answer);
+    if (level.answers!.some((expected) => normalizeAnswer(expected) === normalizedUser)) {
+      return true;
+    }
+    return evaluateAnswer(index, answer);
+  }
   return (
     Array.isArray(answer) &&
     answer.length === level.lines!.length &&
