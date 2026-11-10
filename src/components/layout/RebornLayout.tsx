@@ -59,7 +59,7 @@ export function RebornBrand() {
       }}
     >
       <span className="official-logo">
-        <img src={assetUrl('/logos/riwi-coder.png')} width="94" height="45" alt="RIWI" />
+        <img src={assetUrl('/logos/riwi-letters.svg')} width="112" height="32" alt="RIWI" />
       </span>
       <span className="reborn-brand-name">
         SYSTEM
