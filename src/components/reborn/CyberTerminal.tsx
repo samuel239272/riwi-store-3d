@@ -3,6 +3,7 @@ import { ArrowUpRight, CornerDownLeft, Terminal } from 'lucide-react';
 import { GlassPanel } from './GlassPanel';
 import { useExperience } from '../digital/Experience';
 import { Reveal } from './ScrollReveal';
+import { useNavigate } from 'react-router-dom';
 
 interface Line {
   id: number;
@@ -14,6 +15,7 @@ const welcome: Line[] = [
   { id: 1, type: 'output', text: 'Human creativity loaded. Escribe help para empezar.' },
 ];
 export function CyberTerminal() {
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const [lines, setLines] = useState<Line[]>(welcome);
   const [history, setHistory] = useState<string[]>([]);
@@ -42,6 +44,7 @@ export function CyberTerminal() {
       respond('COMANDOS DISPONIBLES');
       respond('help   → muestra esta guía');
       respond('shop   → abre el drop destacado');
+      respond('play   → aprende a programar y gana descuentos');
       respond('about  → descubre el código de RIWI');
       respond('clear  → limpia la terminal');
     } else if (command === 'shop') {
@@ -49,6 +52,8 @@ export function CyberTerminal() {
       document
         .getElementById('code-collection')
         ?.scrollIntoView({ behavior: stopped ? 'instant' : 'smooth' });
+    } else if (command === 'play') {
+      navigate('/retos');
     } else if (command === 'about') {
       respond('Somos curiosidad, aprendizaje y creatividad compartida.');
       respond('El futuro lo construyen quienes se atreven a programarlo.');
@@ -146,7 +151,7 @@ export function CyberTerminal() {
               </button>
             </form>
             <div className="terminal-quick-commands">
-              {['help', 'shop', 'about', 'clear'].map((command) => (
+              {['help', 'shop', 'play', 'about', 'clear'].map((command) => (
                 <button
                   onClick={() => {
                     run(command);

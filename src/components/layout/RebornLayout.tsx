@@ -17,6 +17,7 @@ import { useExperience } from '../digital/Experience';
 import { useCart } from '../cart/CartProvider';
 import { CommandPalette } from '../cyber/CommandPalette';
 import { assetUrl } from '../../utils/assets';
+import { DeveloperWorkspace } from '../rewards/DeveloperWorkspace';
 
 const sections = [
   { id: 'system-online', label: 'Universo' },
@@ -138,6 +139,13 @@ export function Layout() {
             Estudio <span>3D</span>
           </Link>
           <Link to="/probador">Probador virtual</Link>
+          <Link
+            className="arcade-nav-link"
+            to="/retos"
+            aria-current={location.pathname === '/retos' ? 'page' : undefined}
+          >
+            Code Arcade <span>PLAY</span>
+          </Link>
         </nav>
         <div className="reborn-header-actions">
           <button
@@ -179,6 +187,7 @@ export function Layout() {
         </div>
       </header>
       <main id="main-content" tabIndex={-1}>
+        <DeveloperWorkspace />
         <Suspense
           fallback={
             <div className="page-loading" role="status">
@@ -208,6 +217,9 @@ export function Layout() {
               </Link>
               <Link to="/probador">
                 Probador virtual <ArrowUpRight size={13} />
+              </Link>
+              <Link to="/retos">
+                Codifica y gana descuentos <ArrowUpRight size={13} />
               </Link>
               <a href={assetUrl('/tech/ATTRIBUTION.txt')} target="_blank" rel="noreferrer">
                 Créditos visuales <ArrowUpRight size={13} />

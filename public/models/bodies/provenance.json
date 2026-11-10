@@ -1,0 +1,23 @@
+[
+  {
+    "id": "male",
+    "source": "humanMesh6.fbx",
+    "sha256": "57595b2683dbc9003ef81b893063c12b85a623abced7868483aef4d21cbd142b",
+    "sourceVertices": {
+      "Cube": 7534
+    },
+    "pose": "relaxed arms, baked from uploaded mesh",
+    "geometry": "original topology; no decimation; uniform height normalization"
+  },
+  {
+    "id": "female",
+    "source": "Female Body.fbx",
+    "sha256": "b3a9ed76b8acf0a4177a62e28b34ea1afc477a793b8f6761aad81e1ae23967e4",
+    "sourceVertices": {
+      "Female Sculpt": 188994,
+      "Male Sculpt.002": 708
+    },
+    "pose": "relaxed arms, baked from uploaded mesh",
+    "geometry": "original topology; no decimation; uniform height normalization"
+  }
+]

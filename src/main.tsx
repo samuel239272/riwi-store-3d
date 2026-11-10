@@ -30,3 +30,5 @@ import './styles/reborn.css';
 import './styles/motion-refinement.css';
 import './styles/mascot-scroll.css';
 import './styles/materialization.css';
+import './styles/fitting.css';
+import './styles/developer-store.css';

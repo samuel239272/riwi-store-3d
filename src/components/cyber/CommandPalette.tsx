@@ -50,6 +50,7 @@ export function CommandPalette({ close }: { close: () => void }) {
               ['/catalogo', 'Explorar la colección'],
               ['/experiencia', 'Abrir el estudio 360°'],
               ['/probador', 'Crear mi versión digital'],
+              ['/retos', 'Code Arcade · Codificar y ganar descuentos'],
             ].map(([route, label]) => (
               <button onClick={() => go(route)} key={route}>
                 {label}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "female.glb",
+    "originalBytes": 9103888,
+    "optimizedBytes": 6346116,
+    "meshoptViews": 8
+  },
+  {
+    "name": "male.glb",
+    "originalBytes": 272316,
+    "optimizedBytes": 253420,
+    "meshoptViews": 2
+  }
+]

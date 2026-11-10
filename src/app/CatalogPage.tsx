@@ -5,6 +5,7 @@ import { categories } from '../data/categories';
 import { products } from '../data/products';
 import { useProducts, type ProductSort } from '../hooks/useProducts';
 import { ProductCard } from '../components/catalog/ProductCard';
+import { StoreRewardBanner } from '../components/rewards/DeveloperWorkspace';
 import '../styles/commerce.css';
 export default function CatalogPage() {
   const [params, setParams] = useSearchParams();
@@ -34,6 +35,7 @@ export default function CatalogPage() {
   const clear = () => { setQuery(''); latest.current = new URLSearchParams(); setParams({}); };
   return <div className="page-width catalog-page">
     <header className="commerce-intro"><span className="eyebrow">~/RIWI / COLLECTION</span><h1>Encuentra tu<br /><em>próxima versión.</em></h1><p>Prendas para quienes imaginan, crean y construyen. Explora cada detalle en 360°.</p></header>
+    <StoreRewardBanner />
     <div className="catalog-toolbar"><label className="search-field"><Search size={20} /><input value={query} onChange={event => { setQuery(event.target.value); update('q', event.target.value); }} placeholder="Busca tu próximo favorito..." aria-label="Buscar por nombre o referencia" />{query && <button aria-label="Borrar búsqueda" onClick={() => { setQuery(''); update('q', ''); }}><X size={17} /></button>}</label><label className="sort-field"><SlidersHorizontal size={17} /><span className="sr-only">Ordenar productos</span><select aria-label="Ordenar productos" value={sort} onChange={event => update('orden', event.target.value)}><option value="featured">Destacados</option><option value="price-asc">Precio: menor a mayor</option><option value="price-desc">Precio: mayor a menor</option><option value="name-asc">Nombre: A–Z</option><option value="newest">Más recientes</option></select></label></div>
     <div className="catalog-categories" aria-label="Filtrar por categoría">{[{ id: 'all', name: 'Todo el drop' }, ...categories].map(item => {
       const count = item.id === 'all' ? published.length : published.filter(product => product.category === item.id).length;

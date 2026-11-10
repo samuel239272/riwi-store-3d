@@ -7,20 +7,32 @@ import path from 'node:path';
 await Promise.all([MeshoptEncoder.ready, MeshoptDecoder.ready]);
 const sizes = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4, MAT4: 16 };
 const components = { 5120: 1, 5121: 1, 5122: 2, 5123: 2, 5125: 4, 5126: 4 };
-const report = JSON.parse(readFileSync('artifacts/garment-optimization.json', 'utf8'));
-for (const name of readdirSync('public/models/optimized').filter((file) => file.endsWith('.glb'))) {
-  const file = path.join('public/models/optimized', name);
+const bodies = process.argv.includes('--bodies');
+const directory = bodies ? 'public/models/bodies' : 'public/models/optimized';
+const reportPath = bodies
+  ? `${directory}/optimization.json`
+  : 'artifacts/garment-optimization.json';
+const report = bodies ? [] : JSON.parse(readFileSync(reportPath, 'utf8'));
+for (const name of readdirSync(directory).filter((file) => file.endsWith('.glb'))) {
+  const file = path.join(directory, name);
   const original = readFileSync(file);
   const jsonLength = original.readUInt32LE(12);
   const json = JSON.parse(original.toString('utf8', 20, 20 + jsonLength));
   if (json.extensionsRequired?.includes('EXT_meshopt_compression'))
-    throw new Error('Regenerate texture-optimized models before recompressing.');
+    throw new Error(`Regenerate ${directory} before recompressing.`);
   const binary = original.subarray(28 + jsonLength);
   const vertexViews = new Set(
     json.meshes.flatMap((mesh) =>
       mesh.primitives.flatMap((primitive) =>
         Object.values(primitive.attributes).map((index) => json.accessors[index].bufferView),
       ),
+    ),
+  );
+  const indexViews = new Set(
+    json.meshes.flatMap((mesh) =>
+      mesh.primitives
+        .filter((p) => p.indices !== undefined)
+        .map((p) => json.accessors[p.indices].bufferView),
     ),
   );
   const pieces = [];
@@ -33,17 +45,17 @@ for (const name of readdirSync('public/models/optimized').filter((file) => file.
     const stride =
       view.byteStride || (accessor && sizes[accessor.type] * components[accessor.componentType]);
     let stored = bytes;
+    const indexSequence = bodies && indexViews.has(index) && (stride === 2 || stride === 4);
     if (
-      vertexViews.has(index) &&
       stride &&
-      stride % 4 === 0 &&
-      stride <= 256 &&
-      bytes.length % stride === 0
+      bytes.length % stride === 0 &&
+      (indexSequence || (vertexViews.has(index) && stride % 4 === 0 && stride <= 256))
     ) {
       const count = bytes.length / stride;
-      const compressed = MeshoptEncoder.encodeGltfBuffer(bytes, count, stride, 'ATTRIBUTES');
+      const mode = indexSequence ? 'INDICES' : 'ATTRIBUTES';
+      const compressed = MeshoptEncoder.encodeGltfBuffer(bytes, count, stride, mode);
       const decoded = new Uint8Array(bytes.length);
-      MeshoptDecoder.decodeGltfBuffer(decoded, count, stride, compressed, 'ATTRIBUTES', 'NONE');
+      MeshoptDecoder.decodeGltfBuffer(decoded, count, stride, compressed, mode, 'NONE');
       assert.deepEqual(Buffer.from(decoded), bytes, `${name}: lossless round trip`);
       if (compressed.length < bytes.length) {
         view.buffer = 1;
@@ -55,7 +67,7 @@ for (const name of readdirSync('public/models/optimized').filter((file) => file.
             byteLength: compressed.length,
             byteStride: stride,
             count,
-            mode: 'ATTRIBUTES',
+            mode,
             filter: 'NONE',
           },
         };
@@ -94,9 +106,13 @@ for (const name of readdirSync('public/models/optimized').filter((file) => file.
   binHeader.writeUInt32LE(0x004e4942, 4);
   const output = Buffer.concat([header, padded, binHeader, blob]);
   writeFileSync(file, output);
-  const result = report.find((item) => item.name === name);
+  let result = report.find((item) => item.name === name);
+  if (!result) {
+    result = { name, originalBytes: original.length };
+    report.push(result);
+  }
   result.optimizedBytes = output.length;
   result.meshoptViews = encoded;
   console.log(JSON.stringify({ name, optimizedBytes: output.length, encodedViews: encoded }));
 }
-writeFileSync('artifacts/garment-optimization.json', JSON.stringify(report, null, 2));
+writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n');

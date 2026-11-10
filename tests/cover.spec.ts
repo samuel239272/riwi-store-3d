@@ -5,12 +5,12 @@ test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
 });
 
-test('cinco capítulos editoriales conducen a categorías reales', async ({ page }) => {
+test('la portada y Code Arcade conducen a categorías reales', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('WEARTHE FUTURE.');
   await page.getByRole('button', { name: 'EXPLORE DROP 001' }).click();
   await expect(page.locator('#select-loadout h2')).toBeInViewport();
-  await expect(page.locator('.reborn-home > section')).toHaveCount(5);
+  await expect(page.locator('.reborn-home > section')).toHaveCount(6);
   await page.locator('.loadout-02 .loadout-link').click();
   await expect(page).toHaveURL(/catalogo\?categoria=camisetas/);
   await expect(page.locator('.product-card')).toHaveCount(2);

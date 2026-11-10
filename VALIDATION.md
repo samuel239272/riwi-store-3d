@@ -2,6 +2,17 @@ GATE: ERROR (the copy (the page showed no <main>, <section> or <h1> to lint); co
 
 # Validación de RIWI — System Reborn / Project Ascension
 
+## Code Arcade e interfaz de desarrollo — 10 de noviembre de 2026
+
+Comprobación en el entorno Linux de esta sesión, independiente de los registros anteriores:
+
+- `npm run build`: aprobado. Se conserva la advertencia de tamaño del motor Three.js; Code Arcade se carga como ruta diferida.
+- `npx playwright test tests/coding-games.spec.ts tests/catalog.spec.ts`: **22 pruebas aprobadas** en escritorio y móvil. Incluyen los doce niveles, intentos incorrectos, pistas, bloqueo progresivo, recompensas sin duplicados, persistencia, almacenamiento inválido o bloqueado, navegación con teclado, descuentos sobre precios promocionales, cambio de cantidades, sustitución de códigos sin acumulación y descarga con el total correcto.
+- `npx playwright test tests/cover.spec.ts tests/fitting-bodies.spec.ts --grep 'portada|primer Tab|terminal ejecuta|Add to Loadout|FBX|complexión|fallo del modelo'`: **14 pruebas aprobadas**. Portada, enlace para saltar al contenido, terminal, carrito, cambio hombre/mujer, deformación corporal y recuperación ante fallo del modelo conservan su funcionamiento.
+- Inspección de portada, catálogo, ficha, juegos, recompensa y carrito. Cabecera y contenido sin desbordamiento horizontal a 320, 390, 768, 1024, 1280 y 1440 px. Se verificaron también el comando `play`, la copia de un código y el aviso de descuento ganado en el catálogo.
+- Se investigó un espacio vacío observado en una captura del carrito. No se reprodujo al verificar la ruta producto → carrito: el documento estabilizado mide 1586 px y su pie termina a 1586 px, sin espacio sobrante persistente.
+- Los códigos son locales y demostrativos. La autorización comercial, emisión y canje requieren un servidor; no se habilitaron pagos ni se publicó el sitio. No se volvió a ejecutar la suite completa ni se sustituyen sus registros anteriores con estos resultados enfocados.
+
 Última revisión: 10 de noviembre de 2026. Repositorio existente en Windows. La línea anterior corresponde al comprobador adicional de `design-taste-frontend`, ejecutado el 9 de noviembre: no pudo completar su recorrido y no se considera aprobado. Su informe se conserva en `.taste-skill/gate.json`. No se volvió a ejecutar tras su error. Las comprobaciones siguientes se ejecutaron con la configuración Playwright del proyecto y scripts de inspección independientes.
 
 ## Refinamiento de interfaz y movimiento — 10 de noviembre

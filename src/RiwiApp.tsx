@@ -5,6 +5,8 @@ import { CartProvider } from './components/cart/CartProvider';
 import { ExperienceProvider } from './components/digital/Experience';
 import { RebornExperience } from './components/reborn/RebornExperience';
 import HomePage from './app/RebornHome';
+import { RewardsProvider } from './components/rewards/RewardsProvider';
+const CodingArena = lazy(() => import('./app/CodingArena'));
 const FittingPage = lazy(() => import('./app/FittingPage'));
 const CatalogPage = lazy(() => import('./app/CatalogPage'));
 const ProductPage = lazy(() => import('./app/ProductPage'));
@@ -15,22 +17,25 @@ const NotFoundPage = lazy(() => import('./app/RiwiNotFoundPage'));
 export default function App() {
   return (
     <ExperienceProvider>
-      <CartProvider>
-        <RebornExperience>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="probador" element={<FittingPage />} />
-              <Route path="catalogo" element={<CatalogPage />} />
-              <Route path="producto/:id" element={<ProductPage />} />
-              <Route path="carrito" element={<CartPage />} />
-              <Route path="colecciones" element={<CollectionsPage />} />
-              <Route path="experiencia" element={<ExperiencePage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </RebornExperience>
-      </CartProvider>
+      <RewardsProvider>
+        <CartProvider>
+          <RebornExperience>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="probador" element={<FittingPage />} />
+                <Route path="retos" element={<CodingArena />} />
+                <Route path="catalogo" element={<CatalogPage />} />
+                <Route path="producto/:id" element={<ProductPage />} />
+                <Route path="carrito" element={<CartPage />} />
+                <Route path="colecciones" element={<CollectionsPage />} />
+                <Route path="experiencia" element={<ExperiencePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </RebornExperience>
+        </CartProvider>
+      </RewardsProvider>
     </ExperienceProvider>
   );
 }

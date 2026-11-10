@@ -9,6 +9,7 @@ import { Reveal, ParallaxImage } from '../components/reborn/ScrollReveal';
 import { useExperience } from '../components/digital/Experience';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { products } from '../data/products';
+import { CodingGateway } from '../components/rewards/DeveloperWorkspace';
 
 export default function RebornHome() {
   usePageMeta(
@@ -68,6 +69,9 @@ export default function RebornHome() {
               <button className="system-button" onClick={() => scrollTo('select-loadout')}>
                 EXPLORE DROP 001 <ArrowUpRight size={19} />
               </button>
+              <Link className="hero-arcade-link" to="/retos">
+                <Code2 size={18} /> CODIFICA Y GANA <ArrowUpRight size={17} />
+              </Link>
               <span>
                 BUILT BY CODERS.
                 <br />
@@ -88,6 +92,7 @@ export default function RebornHome() {
           </div>
         </div>
       </section>
+      <CodingGateway />
       <section
         className="reborn-section loadout-section"
         id="select-loadout"

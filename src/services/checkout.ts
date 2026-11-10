@@ -1,5 +1,6 @@
 import type { CartItem } from '../components/cart/CartProvider';
 import { formatPrice } from '../utils/format';
+import { discountedTotal, type CodingReward } from '../data/codingGames';
 
 /** Future checkout adapters must validate price and stock on the server. */
 export interface CheckoutRequest {
@@ -19,11 +20,12 @@ export const checkoutAvailability = {
   reason: 'Los pagos y los pedidos todavía no están habilitados.',
 } as const;
 
-export function selectionSummary(items: CartItem[]): string {
+export function selectionSummary(items: CartItem[], reward: CodingReward | null = null): string {
   const total = items.reduce(
     (sum, line) => sum + (line.product.promoPrice ?? line.product.price) * line.quantity,
     0,
   );
+  const { discount, payable } = discountedTotal(total, reward);
   return [
     'RIWI 360° — Mi selección',
     'Lista de productos de muestra. No constituye un pedido, una reserva ni un comprobante de pago.',
@@ -35,12 +37,19 @@ export function selectionSummary(items: CartItem[]): string {
     ),
     '',
     `Subtotal de productos: ${formatPrice(total)}`,
+    ...(reward
+      ? [
+          `Código ganado: ${reward.code} (${reward.percent} %)`,
+          `Descuento demostrativo: ${formatPrice(discount)}`,
+          `Total con descuento: ${formatPrice(payable)}`,
+        ]
+      : []),
   ].join('\n');
 }
 
-export function downloadSelection(items: CartItem[]) {
+export function downloadSelection(items: CartItem[], reward: CodingReward | null = null) {
   const url = URL.createObjectURL(
-    new Blob([selectionSummary(items)], { type: 'text/plain;charset=utf-8' }),
+    new Blob([selectionSummary(items, reward)], { type: 'text/plain;charset=utf-8' }),
   );
   const link = document.createElement('a');
   link.href = url;

@@ -4,9 +4,14 @@ import { useCart } from '../components/cart/CartProvider';
 import { downloadSelection } from '../services/checkout';
 import { formatPrice } from '../utils/format';
 import '../styles/cart.css';
+import { CouponBox } from '../components/rewards/CouponBox';
+import { useRewards } from '../components/rewards/RewardsProvider';
+import { discountedTotal } from '../data/codingGames';
 
 export default function CartPage() {
   const { items, count, total, removeItem, updateQuantity, updateVariant } = useCart();
+  const { active } = useRewards();
+  const { discount, payable } = discountedTotal(total, active);
   return (
     <div className="page-width cart-page">
       <Link className="cart-back mono" to="/catalogo">
@@ -127,6 +132,7 @@ export default function CartPage() {
               <span className="cart-summary-dot" />
             </div>
             <h2>Tu selección</h2>
+            <CouponBox />
             <dl>
               <div>
                 <dt>Productos ({count})</dt>
@@ -136,16 +142,22 @@ export default function CartPage() {
                 <dt>Envío</dt>
                 <dd>Por definir</dd>
               </div>
+              {active && (
+                <div className="cart-discount">
+                  <dt>Descuento ({active.percent} %)</dt>
+                  <dd data-testid="cart-discount">−{formatPrice(discount)}</dd>
+                </div>
+              )}
               <div className="cart-summary-total">
                 <dt>Subtotal</dt>
                 <dd>
-                  {formatPrice(total)} <small>COP</small>
+                  <span data-testid="cart-payable">{formatPrice(payable)}</span> <small>COP</small>
                 </dd>
               </div>
             </dl>
             <button
               className="button primary cart-download"
-              onClick={() => downloadSelection(items)}
+              onClick={() => downloadSelection(items, active)}
             >
               Guardar mi selección <Download size={17} />
             </button>
@@ -162,6 +174,15 @@ export default function CartPage() {
           <span className="mono">0 ITEMS · INFINITAS POSIBILIDADES</span>
           <h2>Un espacio para lo que viene.</h2>
           <p>Explora la colección y añade tus prendas favoritas.</p>
+          {active && (
+            <p className="empty-cart-reward">
+              Tu código {active.code} ({active.percent} %) está listo para aplicar al añadir
+              prendas.
+            </p>
+          )}
+          <Link className="cart-arcade-link" to="/retos">
+            Codifica y gana descuentos →
+          </Link>
           <Link className="button primary" to="/catalogo">
             Explorar colección <ArrowUpRight size={18} />
           </Link>
