@@ -17,26 +17,41 @@
   background-image: radial-gradient(#94b4b21a 1px, transparent 1px);
   background-size: 19px 19px;
 }
-.reborn-header.cyber-header {
-  background: #101525ed;
-  border-radius: 12px;
-}
-.reborn-nav {
-  gap: clamp(12px, 1.4vw, 23px);
-}
 .reborn-nav > .arcade-nav-link {
-  color: var(--dev-green);
+  color: #087858;
 }
-.reborn-nav > .arcade-nav-link > span {
-  color: var(--dev-green);
-  border-color: #a9f5ce55;
-}
-.reborn-nav > a[aria-current='page'] {
-  color: white;
+.reborn-nav > .arcade-nav-link > .reborn-nav-tag {
+  color: #087858;
+  border-color: #08785840;
+  background: #0878580a;
 }
 .reborn-shell :is(button, a, input, select):focus-visible {
   outline: 2px solid #a9f5ce;
   outline-offset: 4px;
+}
+.reborn-header :is(button, a):focus-visible {
+  outline-color: #6d28d9;
+}
+.reborn-footer .reborn-brand-name > b {
+  color: #eee9ff;
+}
+@media (max-width: 1350px) {
+  .reborn-header .reborn-status-pill {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .reborn-header.cyber-header {
+    padding-inline: 8px;
+    gap: 8px;
+  }
+  .reborn-header .reborn-header-actions {
+    gap: 2px;
+  }
+  .reborn-header .reborn-header-actions > :is(button, a) {
+    min-width: 36px;
+    width: 36px;
+  }
 }
 .developer-workspace {
   position: relative;

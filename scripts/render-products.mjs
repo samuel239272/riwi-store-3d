@@ -8,8 +8,16 @@ const products=[
   ['buzo-loop','sweatshirt','#e8e5da'],
   ['sudadera-flow','joggers','#e8e5da'],
   ['camiseta-hello','tee','#a99aff'],
-  ['gorra-commit','cap','#a99aff'],
-  ['chaqueta-deploy','jacket','#e8e5da']
+  ['gorra-commit','cap-snapback','#a99aff'],
+  ['gorra-origin','cap-baseball','#e8e5da'],
+  ['chaqueta-deploy','jacket','#e8e5da'],
+  ['camiseta-clan-ubuntu','tee-ubuntu','#16171d'],
+  ['camiseta-clan-ritchie','tee-ritchie','#16171d'],
+  ['camiseta-clan-nakamoto','tee-nakamoto','#16171d'],
+  ['camiseta-clan-turing','tee-turing','#16171d'],
+  ['camiseta-clan-vanrossum','tee-vanrossum','#16171d'],
+  ['camiseta-clan-gosling','tee-gosling','#16171d'],
+  ['camiseta-clan-tesla','tee-tesla','#16171d']
 ];
 await mkdir('public/images/products',{recursive:true});
 await withStudio(async page=>{

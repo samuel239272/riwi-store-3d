@@ -199,6 +199,7 @@ function SourceCollection() {
   const [category, setCategory] = useState('todos');
   const categories = [
     { id: 'todos', name: 'Todo el código' },
+    { id: 'clanes', name: 'Clanes' },
     { id: 'hoodies', name: 'Hoodies' },
     { id: 'camisetas', name: 'Camisetas' },
     { id: 'chaquetas', name: 'Outerwear' },

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>RIWI Caps Builder</title>
+  <style>body{margin:0;background:#070911;color:#fff}canvas{display:block}</style>
+</head>
+<body>
+<div id="status">Loading...</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(900, 1000);
+renderer.setPixelRatio(1.5);
+renderer.setClearColor(0, 0);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(32, 0.9, 0.1, 40);
+scene.add(new THREE.AmbientLight('#ffffff', 1.6));
+for (const [color, power, pos] of [
+  ['#fff8f0', 3, [3, 5, 6]],
+  ['#dcd4ff', 2, [-4, 2, 2]],
+  ['#ffffff', 2, [1, 3, -4]]
+]) {
+  const l = new THREE.DirectionalLight(color, power);
+  l.position.set(...pos);
+  scene.add(l);
+}
+
+const texLoader = new THREE.TextureLoader();
+const objLoader = new OBJLoader();
+const colladaLoader = new ColladaLoader();
+
+async function loadResizedTexture(url, maxDim = 1024, isSRGB = false) {
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(img.width * scale);
+  canvas.height = Math.round(img.height * scale);
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  if (isSRGB) tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function createConformingPatch(targetGroup, logoTexture, {
+  center,
+  width,
+  height,
+  gridX = 24,
+  gridY = 8,
+  dir = new THREE.Vector3(0, 0, -1),
+  rayOriginDistance = 1.5,
+  normalOffset = 0.005,
+  roughness = 0.45,
+  metalness = 0.05,
+}) {
+  const meshes = [];
+  targetGroup.traverse(c => {
+    if (c.isMesh) meshes.push(c);
+  });
+
+  const forward = dir.clone().normalize();
+  const worldUp = new THREE.Vector3(0, 1, 0);
+  const right = new THREE.Vector3().crossVectors(worldUp, forward.clone().negate()).normalize();
+  const up = new THREE.Vector3().crossVectors(forward.clone().negate(), right).normalize();
+
+  const cVec = new THREE.Vector3(center.x, center.y, center.z);
+  const geom = new THREE.PlaneGeometry(width, height, gridX, gridY);
+  const posAttr = geom.attributes.position;
+  const normAttr = geom.attributes.normal;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.set(cVec.clone().sub(forward.clone().multiplyScalar(rayOriginDistance)), forward);
+  const centerHits = raycaster.intersectObjects(meshes, true);
+  const baseHit = centerHits[0];
+  const baseHitNormal = baseHit && baseHit.face ? baseHit.face.normal.clone().normalize() : forward.clone().negate();
+
+  for (let iy = 0; iy <= gridY; iy++) {
+    const vNorm = 0.5 - (iy / gridY);
+    for (let ix = 0; ix <= gridX; ix++) {
+      const uNorm = (ix / gridX) - 0.5;
+      const vertIdx = iy * (gridX + 1) + ix;
+
+      const pPlane = cVec.clone()
+        .addScaledVector(right, uNorm * width)
+        .addScaledVector(up, vNorm * height);
+
+      const rayStart = pPlane.clone().sub(forward.clone().multiplyScalar(rayOriginDistance));
+      raycaster.set(rayStart, forward);
+      const hits = raycaster.intersectObjects(meshes, true);
+
+      if (hits.length > 0) {
+        const hit = hits[0];
+        const normalMatrix = new THREE.Matrix3().getNormalMatrix(hit.object.matrixWorld);
+        const worldNormal = hit.face.normal.clone().applyMatrix3(normalMatrix).normalize();
+        const pFinal = hit.point.clone().addScaledVector(worldNormal, normalOffset);
+        posAttr.setXYZ(vertIdx, pFinal.x, pFinal.y, pFinal.z);
+        normAttr.setXYZ(vertIdx, worldNormal.x, worldNormal.y, worldNormal.z);
+      } else {
+        const pFinal = pPlane.clone().addScaledVector(baseHitNormal, normalOffset);
+        posAttr.setXYZ(vertIdx, pFinal.x, pFinal.y, pFinal.z);
+        normAttr.setXYZ(vertIdx, baseHitNormal.x, baseHitNormal.y, baseHitNormal.z);
+      }
+    }
+  }
+
+  posAttr.needsUpdate = true;
+  normAttr.needsUpdate = true;
+
+  const mat = new THREE.MeshStandardMaterial({
+    name: 'brand',
+    map: logoTexture,
+    transparent: true,
+    alphaTest: 0.02,
+    roughness,
+    metalness,
+    side: THREE.DoubleSide,
+    polygonOffset: true,
+    polygonOffsetFactor: -3,
+    polygonOffsetUnits: -3,
+  });
+
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function normalizeAndCenter(group, targetHeight, rotY = 0) {
+  group.rotation.y = rotY;
+  group.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(group);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const scale = targetHeight / size.y;
+
+  group.traverse(child => {
+    if (child.isMesh) {
+      child.geometry = child.geometry.clone();
+      child.geometry.applyMatrix4(child.matrixWorld);
+      child.geometry.translate(-center.x, -center.y, -center.z);
+      child.geometry.scale(scale, scale, scale);
+      child.geometry.computeVertexNormals();
+    }
+  });
+  group.position.set(0, 0, 0);
+  group.rotation.set(0, 0, 0);
+  group.scale.set(1, 1, 1);
+  group.updateMatrixWorld(true);
+  return group;
+}
+
+window.buildCap1 = async () => {
+  const logo = await texLoader.loadAsync('/logos/riwi-original.png');
+  logo.colorSpace = THREE.SRGBColorSpace;
+
+  const normalMap = await loadResizedTexture('/imported_assets/new_caps/cap1/capTex_N.jpg', 1024, false);
+
+  const obj = await objLoader.loadAsync('/imported_assets/new_caps/cap1/Cap.obj');
+  normalizeAndCenter(obj, 1.25, Math.PI);
+
+  const fabricMat = new THREE.MeshStandardMaterial({
+    name: 'fabric',
+    color: new THREE.Color('#a99aff'),
+    roughness: 0.82,
+    metalness: 0.04,
+    normalMap: normalMap,
+    normalScale: new THREE.Vector2(0.9, 0.9),
+    side: THREE.DoubleSide,
+  });
+
+  obj.traverse(c => {
+    if (c.isMesh) {
+      c.material = fabricMat;
+      c.castShadow = true;
+      c.receiveShadow = true;
+    }
+  });
+
+  // Conforming patch on crown facing +Z
+  const crownPatch = createConformingPatch(obj, logo, {
+    center: { x: 0, y: 0.10, z: 0.65 },
+    width: 0.28,
+    height: 0.088,
+    dir: new THREE.Vector3(0, -0.2, -1).normalize(),
+    normalOffset: 0.005,
+  });
+
+  const model = new THREE.Group();
+  model.add(obj, crownPatch);
+
+  const bounds = new THREE.Box3().setFromObject(model);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  model.position.sub(center);
+
+  const wrapper = new THREE.Group();
+  wrapper.add(model);
+  wrapper.scale.setScalar(2.65 / Math.max(size.x, size.y));
+
+  const buffer = await new GLTFExporter().parseAsync(wrapper, { binary: true });
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(new Blob([buffer]));
+  });
+};
+
+window.buildCap2 = async () => {
+  const logo = await texLoader.loadAsync('/logos/riwi-original.png');
+  logo.colorSpace = THREE.SRGBColorSpace;
+
+  const dae = await colladaLoader.loadAsync('/imported_assets/new_caps/cap2/models/kmz.dae');
+  
+  // STRIP cameras and lights so bounding box only includes meshes
+  const toRemove = [];
+  dae.scene.traverse(c => {
+    if (c.isCamera || c.isLight) toRemove.push(c);
+  });
+  toRemove.forEach(c => c.parent && c.parent.remove(c));
+
+  // In DAE, visor is already pointing to +Z
+  normalizeAndCenter(dae.scene, 1.25, 0);
+
+  // Load normal map from PBR textures (1024x1024)
+  const normalMap = await loadResizedTexture('/imported_assets/new_caps/cap2/textures_pbr/baseBallCap_normal.tga.png', 1024, false);
+
+  const fabricMat = new THREE.MeshStandardMaterial({
+    name: 'fabric',
+    color: new THREE.Color('#e8e5da'),
+    roughness: 0.82,
+    metalness: 0.04,
+    normalMap: normalMap,
+    normalScale: new THREE.Vector2(0.85, 0.85),
+    side: THREE.DoubleSide,
+  });
+
+  const plasticMat = new THREE.MeshStandardMaterial({
+    name: 'trim',
+    color: new THREE.Color('#1f2029'),
+    roughness: 0.35,
+    metalness: 0.08,
+    side: THREE.DoubleSide,
+  });
+
+  const metalMat = new THREE.MeshStandardMaterial({
+    name: 'hardware',
+    color: new THREE.Color('#c5c7cb'),
+    roughness: 0.22,
+    metalness: 0.9,
+    side: THREE.DoubleSide,
+  });
+
+  dae.scene.traverse(c => {
+    if (c.isMesh) {
+      c.castShadow = true;
+      c.receiveShadow = true;
+      const lower = c.name.toLowerCase();
+      if (lower.includes('strap') || lower.includes('plastic')) {
+        c.material = plasticMat;
+      } else if (lower.includes('metal') || (lower.includes('button') && !lower.includes('topbutton'))) {
+        c.material = metalMat;
+      } else {
+        c.material = fabricMat;
+      }
+    }
+  });
+
+  // Conforming patch on crown facing +Z
+  const crownPatch = createConformingPatch(dae.scene, logo, {
+    center: { x: 0, y: 0.16, z: 0.50 },
+    width: 0.28,
+    height: 0.088,
+    dir: new THREE.Vector3(0, -0.2, -1).normalize(),
+    normalOffset: 0.005,
+  });
+
+  const model = new THREE.Group();
+  model.add(dae.scene, crownPatch);
+
+  const bounds = new THREE.Box3().setFromObject(model);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  model.position.sub(center);
+
+  const wrapper = new THREE.Group();
+  wrapper.add(model);
+  wrapper.scale.setScalar(2.65 / Math.max(size.x, size.y));
+
+  const buffer = await new GLTFExporter().parseAsync(wrapper, { binary: true });
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(new Blob([buffer]));
+  });
+};
+
+let currentSceneModel;
+window.renderAssetGlb = async (glbUrl, view, color) => {
+  if (currentSceneModel) {
+    scene.remove(currentSceneModel);
+    currentSceneModel.traverse(o => {
+      o.geometry?.dispose();
+      if (o.material) {
+        for (const m of [o.material].flat()) {
+          m.map?.dispose();
+          m.normalMap?.dispose();
+          m.bumpMap?.dispose();
+          m.dispose();
+        }
+      }
+    });
+  }
+  const gltf = await new GLTFLoader().loadAsync(glbUrl);
+  currentSceneModel = gltf.scene;
+  currentSceneModel.traverse(o => {
+    if (o.material?.name === 'fabric' && color) {
+      o.material.color.set(color);
+    }
+  });
+  scene.add(currentSceneModel);
+
+  const bounds = new THREE.Box3().setFromObject(currentSceneModel);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  const distance = Math.max(size.y, size.x / 0.9) * 1.9;
+
+  camera.position.set(view === 'back' ? -0.3 : 0.4, center.y + 0.13, view === 'back' ? -distance : distance);
+  camera.lookAt(center);
+  renderer.render(scene, camera);
+
+  const output = document.createElement('canvas');
+  output.width = 900;
+  output.height = 1000;
+  output.getContext('2d').drawImage(renderer.domElement, 0, 0, 900, 1000);
+  return output.toDataURL('image/webp', 0.92);
+};
+
+window.ready = true;
+</script>
+</body>
+</html>

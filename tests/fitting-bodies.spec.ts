@@ -1,5 +1,28 @@
 import { test, expect } from '@playwright/test';
 
+test('las camisetas de clanes y las dos gorras conservan sus modelos en el probador', async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  await page.goto('/#/probador?prenda=camiseta-clan-ubuntu');
+  const viewer = page.getByTestId('fitting-viewer');
+  for (const [product, model] of [
+    ['camiseta-clan-ubuntu', 'tee-ubuntu'],
+    ['gorra-commit', 'cap-snapback'],
+    ['gorra-origin', 'cap-baseball'],
+  ]) {
+    await page.getByRole('combobox', { name: /Elige tu prenda/ }).selectOption(product);
+    await expect(viewer).toHaveAttribute('data-model-status', 'ready');
+    await expect(viewer.locator('canvas')).toHaveAttribute(
+      'data-garment-source',
+      new RegExp(`/models/optimized/${model}\\.glb$`),
+    );
+    expect(
+      Number(await viewer.locator('canvas').getAttribute('data-garment-vertex-count')),
+    ).toBeGreaterThan(1000);
+  }
+});
+
 test('los FBX importados cambian entre hombre y mujer y las prendas usan el GLB del catálogo', async ({
   page,
 }) => {

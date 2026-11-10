@@ -346,121 +346,354 @@ body {
   width: 1px;
   background: linear-gradient(transparent, #a78bfa40, transparent);
 }
-/* Compact navigation; the official mark is kept in its original colors. */
+/* Premium Light Glassmorphism Navigation */
 .reborn-header.cyber-header {
-  height: 77px;
+  height: 76px;
   top: 18px;
   margin: 18px 32px -95px;
-  background: linear-gradient(110deg, #16172c99, #0b1020b8);
-  border-color: #e1dbff29;
-  border-radius: 18px;
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
   box-shadow:
-    inset 0 1px 0 #ffffff0f,
-    0 18px 55px #0306104d;
-  gap: 25px;
+    0 20px 45px -12px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(226, 232, 240, 0.85),
+    inset 0 1px 2px #ffffff;
+  gap: 22px;
+  padding: 0 24px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reborn-header.cyber-header.is-scrolled {
+  height: 66px;
+  top: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(226, 232, 240, 0.95);
+  box-shadow:
+    0 25px 50px -12px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(203, 213, 225, 0.9),
+    inset 0 1px 2px #ffffff;
+}
+
+.reborn-header .official-logo {
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.reborn-header .official-logo:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.09);
+}
+
 .reborn-brand-name {
-  font: 8px/1.6 var(--mono);
+  font: 8px/1.5 var(--mono);
   letter-spacing: 0.16em;
-  color: #b6accd;
+  color: #64748b;
   padding-left: 15px;
-  border-left: 1px solid #d6ccff25;
+  border-left: 1px solid rgba(203, 213, 225, 0.7);
+  display: flex;
+  flex-direction: column;
 }
+
 .reborn-brand-name > b {
-  font: 600 13px var(--heading);
+  font: 700 13px var(--heading);
   letter-spacing: 0.14em;
-  color: #eee9ff;
+  color: #0f172a;
 }
+
 .reborn-brand-name > b > span {
-  color: #a78bfa;
+  color: #7c3aed;
+  display: inline-block;
+  animation: cursor-blink 1.2s infinite;
 }
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* System Live Status Badge */
+.reborn-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  background: rgba(241, 245, 249, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
+}
+
+.reborn-status-pill:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.reborn-status-dot-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+}
+
+.reborn-status-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #10b981;
+  opacity: 0.75;
+  animation: ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.reborn-status-dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #059669;
+}
+
+.reborn-status-label {
+  font: 700 8px/1 var(--mono);
+  color: #047857;
+  letter-spacing: 0.08em;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Reborn Navigation Track & Items */
 .reborn-nav {
+  position: relative;
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 23px;
-  height: 100%;
+  gap: 4px;
+  padding: 4px 6px;
+  background: rgba(248, 250, 252, 0.75);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
 }
-.reborn-nav > a,
-.reborn-nav > button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+
+.reborn-nav-item {
   position: relative;
-  padding: 0;
-  min-height: 44px;
-  color: #b0adc7;
-  font: 11px var(--heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  min-height: 38px;
+  color: #475569;
+  font: 500 12px var(--heading);
   white-space: nowrap;
-  transition: color 0.2s;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+  z-index: 1;
 }
-.reborn-nav > a > span {
-  font: 6px var(--mono);
-  padding: 2px 3px;
-  border: 1px solid #c4b5fd44;
-  border-radius: 3px;
-  color: #c4b5fd;
+
+.reborn-nav-item:hover,
+.reborn-nav-item.is-active {
+  color: #0f172a;
 }
-.reborn-nav > button[aria-current='location'],
-.reborn-nav > a:hover,
-.reborn-nav > button:hover {
-  color: #f4efff;
+
+.reborn-nav-text {
+  position: relative;
+  z-index: 2;
 }
-.reborn-nav > button[aria-current='location']:after {
-  content: '';
+
+/* Floating Hover Pill (Framer Motion) */
+.reborn-nav-hover-pill {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 13px;
-  border-radius: 3px;
-  background: #a78bfa;
-  box-shadow: 0 0 12px #8b5cf6;
+  inset: 0;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  z-index: 1;
+  pointer-events: none;
 }
+
+/* Active Bar Indicator */
+.reborn-nav-active-bar {
+  position: absolute;
+  bottom: 0px;
+  left: 14px;
+  right: 14px;
+  height: 2.5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7c3aed, #6366f1);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Badges and Tags */
+.reborn-nav-tag {
+  position: relative;
+  z-index: 2;
+  font: 700 8px/1 var(--mono);
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.35);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.reborn-nav-item:hover .reborn-nav-tag {
+  transform: scale(1.08);
+}
+
+.reborn-nav-badge {
+  position: relative;
+  z-index: 2;
+  font: 700 7px/1 var(--mono);
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.reborn-nav-item:hover .reborn-nav-badge {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+/* Header Actions */
 .reborn-header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
+
 .reborn-search {
   display: flex;
   align-items: center;
-  gap: 9px;
-  min-width: 28px;
-  min-height: 40px;
-  color: #bcb4d1;
+  gap: 8px;
+  padding: 7px 12px;
+  min-height: 38px;
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 11px;
+  color: #475569;
+  font: 500 11px var(--heading);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reborn-search:hover {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
 .reborn-search > kbd {
-  border: 1px solid #d4c9fa26;
-  padding: 4px;
-  font: 7px var(--mono);
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 3px 6px;
+  font: 600 8px/1 var(--mono);
   border-radius: 5px;
-  color: #a398bc;
+  color: #64748b;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
+
 .reborn-motion {
   display: grid;
   place-items: center;
-  min-width: 28px;
-  min-height: 40px;
-  color: #a59abd;
+  width: 38px;
+  height: 38px;
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 11px;
+  color: #475569;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reborn-motion:hover {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
 .reborn-bag {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-left: 16px;
-  border-left: 1px solid #ded3ff2b;
-  min-height: 31px;
-  color: #ded5f0;
-  font: 9px var(--mono);
+  padding: 7px 14px;
+  min-height: 38px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 11px;
+  color: #ffffff;
+  font: 600 11px var(--mono);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reborn-bag:hover {
+  background: #1e293b;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  transform: translateY(-1px);
+}
+
+.reborn-bag-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: #ffffff;
+  font: 700 9px/1 var(--mono);
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+}
+
 .reborn-menu {
   display: none;
-  min-height: 40px;
-  min-width: 32px;
   place-items: center;
-  color: #d3c7e8;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reborn-menu:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
 /* First screen: clear headline, independent character and a real tech ecosystem. */
 .reborn-hero {
@@ -1270,6 +1503,19 @@ body {
   padding-bottom: 0;
   background: linear-gradient(0deg, #07091180, transparent);
 }
+.reborn-footer .reborn-brand-name {
+  color: #b6accd;
+  border-left-color: #d6ccff25;
+}
+.reborn-footer .reborn-brand-name > b {
+  color: #eee9ff;
+}
+.reborn-footer .reborn-brand-name > b > span {
+  color: #a78bfa;
+}
+.reborn-footer .reborn-status-pill {
+  display: none;
+}
 .reborn-footer-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr 0.9fr;
@@ -1658,11 +1904,11 @@ body {
     margin-inline: 24px;
   }
   .reborn-nav {
-    gap: 17px;
+    gap: 2px;
   }
-  .reborn-nav > a,
-  .reborn-nav > button {
-    font-size: 10px;
+  .reborn-nav-item {
+    font-size: 11px;
+    padding: 6px 10px;
   }
   .reborn-brand-name {
     padding-left: 11px;
@@ -1771,11 +2017,11 @@ body {
     gap: 16px;
   }
   .reborn-nav {
-    gap: 13px;
+    gap: 2px;
   }
-  .reborn-nav > a,
-  .reborn-nav > button {
-    font-size: 9px;
+  .reborn-nav-item {
+    font-size: 10px;
+    padding: 5px 8px;
   }
   .reborn-header-actions {
     gap: 6px;
@@ -2021,35 +2267,49 @@ body {
   .reborn-nav {
     display: none;
     position: absolute;
-    top: 75px;
+    top: calc(100% + 10px);
     left: 0;
     right: 0;
     height: auto;
-    background: #101426f2;
-    backdrop-filter: blur(20px);
-    border: 1px solid #c4b5fd55;
-    border-radius: 16px;
-    padding: 18px 22px;
-    box-shadow: 0 20px 60px #030512a0;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: 18px;
+    padding: 14px 16px;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.16);
   }
   .reborn-nav.is-open {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 4px;
   }
-  .reborn-nav > a,
-  .reborn-nav > button {
-    min-height: 51px;
+  .reborn-nav-item {
+    min-height: 46px;
     text-align: left;
-    font-size: 15px;
-    border-bottom: 1px solid #c4b5fd18;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 8px;
+    padding: 10px 14px;
+    justify-content: flex-start;
   }
-  .reborn-nav > a:last-child {
+  .reborn-nav-item:last-child {
     border-bottom: 0;
   }
-  .reborn-nav > button[aria-current='location']:after {
+  .reborn-nav-item:hover,
+  .reborn-nav-item.is-active {
+    background: rgba(241, 245, 249, 0.9);
+    color: #0f172a;
+  }
+  .reborn-nav-active-bar {
+    left: 4px;
     bottom: 8px;
+    top: 8px;
+    width: 3px;
+    height: auto;
+    border-radius: 2px;
   }
   .reborn-header-actions {
     margin-left: auto;
@@ -3818,30 +4078,49 @@ body {
   .reborn-nav {
     display: none;
     position: absolute;
-    top: 88px;
+    top: calc(100% + 12px);
     left: 0;
     right: 0;
     height: auto;
-    padding: 18px 24px;
-    border: 1px solid #c4b5fd55;
+    padding: 16px 20px;
+    border: 1px solid rgba(226, 232, 240, 0.95);
     border-radius: 18px;
-    background: #101426f5;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.16);
   }
   .reborn-nav.is-open {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 4px;
   }
-  .reborn-nav > a,
-  .reborn-nav > button {
-    min-height: 52px;
+  .reborn-nav-item {
+    min-height: 48px;
     text-align: left;
-    font-size: 16px;
-    border-bottom: 1px solid #c4b5fd18;
+    font-size: 15px;
+    color: #334155;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 8px;
+    padding: 10px 14px;
+    justify-content: flex-start;
   }
-  .reborn-nav > button[aria-current='location']:after {
+  .reborn-nav-item:last-child {
+    border-bottom: 0;
+  }
+  .reborn-nav-item:hover,
+  .reborn-nav-item.is-active {
+    background: rgba(241, 245, 249, 0.9);
+    color: #0f172a;
+  }
+  .reborn-nav-active-bar {
+    left: 4px;
     bottom: 8px;
+    top: 8px;
+    width: 3px;
+    height: auto;
+    border-radius: 2px;
   }
   .reborn-menu {
     display: grid;

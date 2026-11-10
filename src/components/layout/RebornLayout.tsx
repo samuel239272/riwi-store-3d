@@ -19,12 +19,35 @@ import { CommandPalette } from '../cyber/CommandPalette';
 import { assetUrl } from '../../utils/assets';
 import { DeveloperWorkspace } from '../rewards/DeveloperWorkspace';
 
-const sections = [
-  { id: 'system-online', label: 'Universo' },
-  { id: 'select-loadout', label: 'Loadout' },
-  { id: 'code-collection', label: 'Drop 001' },
-  { id: 'built-by-coders', label: 'Terminal' },
+interface NavItem {
+  id: string;
+  label: string;
+  type: 'section' | 'link';
+  to?: string;
+  badge?: string;
+  tag?: string;
+  ariaLabel?: string;
+}
+
+const navItems: NavItem[] = [
+  { id: 'system-online', label: 'Universo', type: 'section' },
+  { id: 'select-loadout', label: 'Loadout', type: 'section' },
+  { id: 'code-collection', label: 'Drop 001', type: 'section', badge: '001' },
+  { id: 'built-by-coders', label: 'Terminal', type: 'section' },
+  {
+    id: 'experiencia',
+    label: 'Estudio',
+    type: 'link',
+    to: '/experiencia',
+    tag: '3D',
+    ariaLabel: 'Estudio 360°',
+  },
+  { id: 'probador', label: 'Probador virtual', type: 'link', to: '/probador' },
+  { id: 'retos', label: 'Code Arcade', type: 'link', to: '/retos', tag: 'PLAY' },
 ];
+
+const sections = navItems.filter((item) => item.type === 'section');
+
 export function RebornBrand() {
   const { stopped } = useExperience();
   return (
@@ -47,19 +70,36 @@ export function RebornBrand() {
           REBORN<span>_</span>
         </b>
       </span>
+      <div className="reborn-status-pill" title="Sistema Online">
+        <span className="reborn-status-dot-wrap">
+          <span className="reborn-status-ping" />
+          <span className="reborn-status-dot" />
+        </span>
+        <span className="reborn-status-label">ONLINE</span>
+      </div>
     </Link>
   );
 }
+
 export function Layout() {
   const [menu, setMenu] = useState(false);
   const [command, setCommand] = useState(false);
   const [active, setActive] = useState('system-online');
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const { state, ready, replay } = useReborn();
   const { stopped, systemReduced, toggleMotion } = useExperience();
   const { count, notice } = useCart();
   const location = useLocation();
   const navigate = useNavigate();
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    return scrollY.on('change', (latest) => {
+      setScrolled(latest > 25);
+    });
+  }, [scrollY]);
+
   const go = (id: string) => {
     setMenu(false);
     setActive(id);
@@ -67,12 +107,14 @@ export function Layout() {
       document.getElementById(id)?.scrollIntoView({ behavior: stopped ? 'instant' : 'smooth' });
     else navigate('/', { state: { section: id } });
   };
+
   useEffect(() => {
     setMenu(false);
     window.scrollTo({ top: 0, behavior: 'instant' });
     if (location.pathname !== '/')
       document.getElementById('main-content')?.focus({ preventScroll: true });
   }, [location.pathname]);
+
   useEffect(() => {
     if (location.pathname !== '/' || !ready) return;
     const observer = new IntersectionObserver(
@@ -88,6 +130,7 @@ export function Layout() {
     });
     return () => observer.disconnect();
   }, [location.pathname, ready]);
+
   useEffect(() => {
     const key = (event: KeyboardEvent) => {
       if (state === 'BOOT' || state === 'INTRO_PLAYING') return;
@@ -100,6 +143,7 @@ export function Layout() {
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
   }, [state]);
+
   return (
     <div className={`cyber-shell reborn-shell ${location.pathname === '/' ? 'is-home' : ''}`}>
       <a
@@ -117,49 +161,91 @@ export function Layout() {
         style={{ scaleX: scrollYProgress }}
         aria-hidden="true"
       />
-      <header className="cyber-header reborn-header">
+      <header className={`cyber-header reborn-header ${scrolled ? 'is-scrolled' : ''}`}>
         <RebornBrand />
         <nav
           className={`reborn-nav ${menu ? 'is-open' : ''}`}
           id="main-navigation"
           aria-label="Navegación principal"
+          onMouseLeave={() => setHovered(null)}
         >
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => go(section.id)}
-              aria-current={
-                location.pathname === '/' && active === section.id ? 'location' : undefined
-              }
-            >
-              {section.label}
-            </button>
-          ))}
-          <Link to="/experiencia" aria-label="Estudio 360°">
-            Estudio <span>3D</span>
-          </Link>
-          <Link to="/probador">Probador virtual</Link>
-          <Link
-            className="arcade-nav-link"
-            to="/retos"
-            aria-current={location.pathname === '/retos' ? 'page' : undefined}
-          >
-            Code Arcade <span>PLAY</span>
-          </Link>
+          {navItems.map((item) => {
+            const isCurrent =
+              item.type === 'section'
+                ? location.pathname === '/' && active === item.id
+                : location.pathname === item.to;
+
+            const content = (
+              <>
+                {hovered === item.id && (
+                  <motion.span
+                    layoutId="reborn-nav-hover-pill"
+                    className="reborn-nav-hover-pill"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 450, damping: 30 }}
+                  />
+                )}
+                <span className="reborn-nav-text">{item.label}</span>
+                {item.tag && <span className="reborn-nav-tag">{item.tag}</span>}
+                {item.badge && <span className="reborn-nav-badge">{item.badge}</span>}
+                {isCurrent && (
+                  <motion.span
+                    layoutId="reborn-nav-active-bar"
+                    className="reborn-nav-active-bar"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </>
+            );
+
+            if (item.type === 'section') {
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => go(item.id)}
+                  onMouseEnter={() => setHovered(item.id)}
+                  className={`reborn-nav-item ${isCurrent ? 'is-active' : ''}`}
+                  aria-current={isCurrent ? 'location' : undefined}
+                >
+                  {content}
+                </button>
+              );
+            }
+
+            return (
+              <Link
+                key={item.id}
+                to={item.to!}
+                onClick={() => setMenu(false)}
+                onMouseEnter={() => setHovered(item.id)}
+                className={`reborn-nav-item ${isCurrent ? 'is-active' : ''} ${item.id === 'retos' ? 'arcade-nav-link' : ''}`}
+                aria-label={item.ariaLabel}
+                aria-current={isCurrent ? 'page' : undefined}
+              >
+                {content}
+              </Link>
+            );
+          })}
         </nav>
         <div className="reborn-header-actions">
-          <button
+          <motion.button
             className="reborn-search"
             onClick={() => setCommand(true)}
             aria-label="Abrir búsqueda y comandos"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
           >
-            <Search size={18} />
+            <Search size={16} />
             <kbd>Ctrl K</kbd>
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             className="reborn-motion"
             onClick={toggleMotion}
             disabled={systemReduced}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             aria-label={
               systemReduced
                 ? 'Movimiento reducido activado'
@@ -169,12 +255,22 @@ export function Layout() {
             }
             aria-pressed={stopped}
           >
-            {stopped ? <Play size={15} /> : <Pause size={15} />}
-          </button>
-          <Link className="reborn-bag" to="/carrito" aria-label={`Carrito, ${count} artículos`}>
-            <ShoppingBag size={17} />
-            <span>{String(count).padStart(2, '0')}</span>
-          </Link>
+            {stopped ? <Play size={14} /> : <Pause size={14} />}
+          </motion.button>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <Link className="reborn-bag" to="/carrito" aria-label={`Carrito, ${count} artículos`}>
+              <ShoppingBag size={16} />
+              <motion.span
+                key={count}
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+                className="reborn-bag-count"
+              >
+                {String(count).padStart(2, '0')}
+              </motion.span>
+            </Link>
+          </motion.div>
           <button
             className="reborn-menu"
             onClick={() => setMenu((value) => !value)}
@@ -182,7 +278,7 @@ export function Layout() {
             aria-expanded={menu}
             aria-controls="main-navigation"
           >
-            {menu ? <X size={23} /> : <Menu size={23} />}
+            {menu ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>

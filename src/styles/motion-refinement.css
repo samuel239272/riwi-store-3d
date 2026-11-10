@@ -327,14 +327,11 @@
 .system-button:active {
   transform: translateY(0) scale(0.985);
 }
-.reborn-nav > a,
-.reborn-nav > button {
+.reborn-nav-item {
   transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reborn-nav > a:hover,
-.reborn-nav > button:hover {
-  color: #f2eaff;
-  text-shadow: 0 0 14px #a78bfa66;
+.reborn-nav-item:hover {
+  color: #0f172a;
 }
 .reborn-footer-links > a {
   text-underline-offset: 5px;

@@ -204,7 +204,7 @@ export function registerGarment(group: Group, category: CategoryId, model: BodyM
         const legX = sign * 0.22 + (x - sign * 0.22) * 0.86 + sign * splay;
         x = legX * leg + x * 0.84 * (1 - leg);
         z -= 0.06 + 0.12 * leg;
-      } else if (category === 'camisetas' || category === 'chaquetas') {
+      } else if (category === 'camisetas' || category === 'clanes' || category === 'chaquetas') {
         const weight = smooth(0.29, 0.49, Math.abs(x)) * (1 - smooth(1.06, 1.2, y));
         const sign = Math.sign(x),
           angle = 0.38 * sign;

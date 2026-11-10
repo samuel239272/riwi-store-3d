@@ -8,5 +8,6 @@ export const categories: { id: CategoryId; name: string; description: string; nu
   { id: 'sudaderas', name: 'Sudaderas', description: 'Encuentra tu estado de flow.', number: '06' },
   { id: 'chaquetas', name: 'Chaquetas', description: 'Estructura técnica para cualquier entorno.', number: '07' },
   { id: 'accesorios', name: 'Accesorios', description: 'Pequeños detalles. Mucha identidad.', number: '08' },
+  { id: 'clanes', name: 'Clanes', description: 'Edición especial inspirada en los clanes y leyendas de la programación.', number: '09' },
 ];
 export const categoryName = (id: CategoryId) => categories.find(category => category.id === id)?.name ?? id;

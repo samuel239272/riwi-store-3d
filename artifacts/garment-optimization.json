@@ -1,10 +1,17 @@
 [
   {
-    "name": "cap.glb",
-    "sourceBytes": 5723132,
-    "optimizedBytes": 3167064,
-    "imagesReencoded": 1,
-    "meshoptViews": 21
+    "name": "cap-baseball.glb",
+    "sourceBytes": 11748372,
+    "optimizedBytes": 5456100,
+    "imagesReencoded": 2,
+    "meshoptViews": 24
+  },
+  {
+    "name": "cap-snapback.glb",
+    "sourceBytes": 3218416,
+    "optimizedBytes": 716188,
+    "imagesReencoded": 2,
+    "meshoptViews": 6
   },
   {
     "name": "hoodie.glb",
@@ -47,6 +54,55 @@
     "optimizedBytes": 8244400,
     "imagesReencoded": 1,
     "meshoptViews": 78
+  },
+  {
+    "name": "tee-gosling.glb",
+    "sourceBytes": 2668672,
+    "optimizedBytes": 2257408,
+    "imagesReencoded": 1,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-nakamoto.glb",
+    "sourceBytes": 1672084,
+    "optimizedBytes": 1259400,
+    "imagesReencoded": 2,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-ritchie.glb",
+    "sourceBytes": 1895512,
+    "optimizedBytes": 1485128,
+    "imagesReencoded": 2,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-tesla.glb",
+    "sourceBytes": 1948004,
+    "optimizedBytes": 1535944,
+    "imagesReencoded": 1,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-turing.glb",
+    "sourceBytes": 2602028,
+    "optimizedBytes": 2191076,
+    "imagesReencoded": 2,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-ubuntu.glb",
+    "sourceBytes": 2298324,
+    "optimizedBytes": 1887184,
+    "imagesReencoded": 2,
+    "meshoptViews": 9
+  },
+  {
+    "name": "tee-vanrossum.glb",
+    "sourceBytes": 2821680,
+    "optimizedBytes": 2410860,
+    "imagesReencoded": 2,
+    "meshoptViews": 9
   },
   {
     "name": "tee.glb",

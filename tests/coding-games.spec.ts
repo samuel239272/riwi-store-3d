@@ -217,6 +217,9 @@ test('navegación, teclado, concentración y tamaños pequeños', async ({ page 
   await page.keyboard.press('Enter');
   await expect(page.locator('.pipeline-lines li').nth(1)).toHaveAttribute('data-line-id', '0');
   await page.setViewportSize({ width: 320, height: 740 });
+  const header = await page.locator('.reborn-header').boundingBox();
+  const actions = await page.locator('.reborn-header-actions').boundingBox();
+  expect(actions!.x + actions!.width).toBeLessThanOrEqual(header!.x + header!.width);
   await expect
     .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
     .toBe(true);

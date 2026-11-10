@@ -1,5 +1,5 @@
 export type Vector3Tuple = [number, number, number];
-export type CategoryId = 'camisetas' | 'camisas' | 'jeans' | 'buzos' | 'hoodies' | 'sudaderas' | 'accesorios' | 'chaquetas';
+export type CategoryId = 'camisetas' | 'camisas' | 'jeans' | 'buzos' | 'hoodies' | 'sudaderas' | 'accesorios' | 'chaquetas' | 'clanes';
 export interface ProductComponent { id: string; name: string; description: string; position: Vector3Tuple; image?: string; technicalInfo?: string }
 export interface Product {
   id: string; name: string; reference: string; category: CategoryId; description: string; shortDescription: string;
