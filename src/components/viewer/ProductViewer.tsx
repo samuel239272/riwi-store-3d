@@ -26,6 +26,7 @@ import { IconButton } from '../ui/Button';
 import { useVisibility } from '../../hooks/useVisibility';
 import { useHotspots } from '../../hooks/useHotspots';
 import { supportsWebGL } from '../../utils/webgl';
+import { StudioCodeBackdrop } from './StudioCodeBackdrop';
 import '../../styles/viewer.css';
 
 const ProductScene = lazy(() => import('../../scenes/ProductScene'));
@@ -118,9 +119,13 @@ export function ProductViewer({
         </span>
         <span>{product.reference}</span>
       </div>
-      <div className="viewer-watermark" aria-hidden="true">
-        360<span>°</span>
-      </div>
+      {!compact && !fallback ? (
+        <StudioCodeBackdrop />
+      ) : (
+        <div className="viewer-watermark" aria-hidden="true">
+          360<span>°</span>
+        </div>
+      )}
       <div
         className="scene-container"
         tabIndex={fallback ? -1 : 0}

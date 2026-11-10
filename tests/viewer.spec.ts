@@ -48,7 +48,7 @@ test('los siete tipos de geometría cargan sin errores de ejecución', async ({ 
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  for (const id of ['hoodie-compile', 'camiseta-source', 'camisa-runtime', 'jeans-branch', 'buzo-loop', 'sudadera-flow', 'gorra-commit', 'gorra-origin', 'chaqueta-deploy', 'camiseta-clan-ubuntu']) {
+  for (const id of ['hoodie-compile', 'camiseta-source', 'buzo-loop', 'gorra-commit', 'gorra-origin', 'chaqueta-deploy', 'camiseta-clan-ubuntu']) {
     await page.goto(`/#/producto/${id}`);
     await expect(page.getByTestId('product-viewer')).toHaveAttribute('data-model-status', 'ready');
     await expect(page.getByTestId('product-viewer').locator('canvas')).toBeVisible();

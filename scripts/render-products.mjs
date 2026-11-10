@@ -3,10 +3,7 @@ import { withStudio } from './studio-runner.mjs';
 const products=[
   ['hoodie-compile','hoodie','#e8e5da'],
   ['camiseta-source','tee','#e8e5da'],
-  ['camisa-runtime','shirt','#e8e5da'],
-  ['jeans-branch','jeans','#405473'],
   ['buzo-loop','sweatshirt','#e8e5da'],
-  ['sudadera-flow','joggers','#e8e5da'],
   ['camiseta-hello','tee','#a99aff'],
   ['gorra-commit','cap-snapback','#a99aff'],
   ['gorra-origin','cap-baseball','#e8e5da'],

@@ -34,22 +34,26 @@ const startingOrders = [
 function Challenge({ game, index, next }: { game: GameId; index: number; next: () => void }) {
   const level = gameLevels[game][index];
   const { solve, apply, completed } = useRewards();
-  const [answer, setAnswer] = useState('');
-  const initialOrder = startingOrders[index];
+  const reward = rewards.find((r) => r.id === levelId(game, index))!;
+  const isAlreadyWon = completed.includes(reward.id);
+  const [answer, setAnswer] = useState(() => (isAlreadyWon && game === 'debug' ? level.answers![0] : ''));
+  const initialOrder = isAlreadyWon && game === 'pipeline' ? level.lines!.map((_, i) => i) : startingOrders[index];
   const [order, setOrder] = useState(initialOrder);
+  const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const [status, setStatus] = useState<'idle' | 'wrong' | 'won'>('idle');
   const [hint, setHint] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [copyStatus, setCopyStatus] = useState('');
-  const reward = rewards.find((r) => r.id === levelId(game, index))!;
   const navigate = useNavigate();
   const input = useRef<HTMLInputElement>(null);
+
   const submit = () => {
     const correct = solve(game, index, game === 'debug' ? answer : order);
     setStatus(correct ? 'won' : 'wrong');
     setAttempts((n) => n + 1);
     if (!correct && attempts >= 1) setHint(true);
   };
+
   const move = (position: number, direction: number) => {
     const target = position + direction;
     if (target < 0 || target >= order.length) return;
@@ -58,8 +62,27 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
       [changed[position], changed[target]] = [changed[target], changed[position]];
       return changed;
     });
+    setSelectedLine(null);
     setStatus('idle');
   };
+
+  const handleLineClick = (position: number) => {
+    if (status === 'won') return;
+    if (selectedLine === null) {
+      setSelectedLine(position);
+    } else if (selectedLine === position) {
+      setSelectedLine(null);
+    } else {
+      setOrder((items) => {
+        const changed = [...items];
+        [changed[selectedLine], changed[position]] = [changed[position], changed[selectedLine]];
+        return changed;
+      });
+      setSelectedLine(null);
+      setStatus('idle');
+    }
+  };
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(reward.code);
@@ -94,7 +117,12 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
           <span>JAVASCRIPT</span>
         </div>
         {game === 'debug' ? (
-          <div className="challenge-source" aria-label="Código del reto">
+          <div
+            className="challenge-source"
+            aria-label="Código del reto"
+            onClick={() => input.current?.focus()}
+            style={{ cursor: 'text' }}
+          >
             {level
               .code!.replace('___', () => answer || '___')
               .split('\n')
@@ -108,7 +136,17 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
         ) : (
           <ol className="pipeline-lines" aria-label="Líneas del programa">
             {order.map((id, position) => (
-              <li key={id} data-line-id={id}>
+              <li
+                key={id}
+                data-line-id={id}
+                className={selectedLine === position ? 'is-selected' : ''}
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('.line-moves')) return;
+                  handleLineClick(position);
+                }}
+                style={{ cursor: status === 'won' ? 'default' : 'pointer' }}
+                title="Haz clic para seleccionar y cambiar de posición, o usa las flechas"
+              >
                 <span className="line-position" aria-hidden="true">
                   {String(position + 1).padStart(2, '0')}
                 </span>
@@ -118,7 +156,10 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
                     type="button"
                     aria-label={`Subir línea ${position + 1}`}
                     disabled={position === 0 || status === 'won'}
-                    onClick={() => move(position, -1)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      move(position, -1);
+                    }}
                   >
                     <ArrowUp size={15} />
                   </button>
@@ -126,7 +167,10 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
                     type="button"
                     aria-label={`Bajar línea ${position + 1}`}
                     disabled={position === order.length - 1 || status === 'won'}
-                    onClick={() => move(position, 1)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      move(position, 1);
+                    }}
                   >
                     <ArrowDown size={15} />
                   </button>
@@ -138,7 +182,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
         <div className="editor-status">
           <span>
             <i />{' '}
-            {game === 'debug' ? 'Completa el espacio ___' : 'Usa las flechas para mover cada línea'}
+            {game === 'debug' ? 'Completa el espacio ___' : 'Usa las flechas o haz clic en las líneas para moverlas'}
           </span>
           <span>UTF-8 · JS</span>
         </div>
@@ -153,6 +197,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
           <label className="answer-field">
             Tu código
             <input
+              ref={input}
               aria-label="Completa el código"
               autoComplete="off"
               autoCapitalize="off"
@@ -190,11 +235,12 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
             aria-label="Reiniciar reto"
             onClick={() => {
               setAnswer('');
-              setOrder(initialOrder);
+              setOrder(startingOrders[index]);
               setStatus('idle');
               setAttempts(0);
               setHint(false);
               setCopyStatus('');
+              setSelectedLine(null);
             }}
           >
             <RotateCcw size={16} />
@@ -202,10 +248,26 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
         </div>
       </form>
       {hint && (
-        <p className="challenge-hint">
-          <Lightbulb size={17} />
-          {level.hint}
-        </p>
+        <div className="challenge-hint-container">
+          <p className="challenge-hint">
+            <Lightbulb size={17} />
+            {level.hint}
+          </p>
+          <button
+            type="button"
+            className="dev-insert-hint-btn"
+            onClick={() => {
+              if (game === 'debug') {
+                setAnswer(level.answers![0]);
+              } else {
+                setOrder(level.lines!.map((_, i) => i));
+              }
+              setStatus('idle');
+            }}
+          >
+            <Check size={14} /> Aplicar solución sugerida
+          </button>
+        </div>
       )}
       <div className={`challenge-feedback ${status}`} role="status" aria-live="polite">
         {status === 'idle' && (
@@ -232,7 +294,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
           </>
         )}
       </div>
-      {status === 'won' && (
+      {(status === 'won' || isAlreadyWon) && (
         <div className="reward-unlocked">
           <div className="reward-unlocked-icon">
             <Trophy size={29} />
