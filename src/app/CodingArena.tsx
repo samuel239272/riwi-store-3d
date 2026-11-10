@@ -36,6 +36,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
   const { solve, apply, completed } = useRewards();
   const reward = rewards.find((r) => r.id === levelId(game, index))!;
   const isAlreadyWon = completed.includes(reward.id);
+  const [retrying, setRetrying] = useState(false);
   const [answer, setAnswer] = useState(() => (isAlreadyWon && game === 'debug' ? level.answers![0] : ''));
   const initialOrder = isAlreadyWon && game === 'pipeline' ? level.lines!.map((_, i) => i) : startingOrders[index];
   const [order, setOrder] = useState(initialOrder);
@@ -52,6 +53,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
     setStatus(correct ? 'won' : 'wrong');
     setAttempts((n) => n + 1);
     if (!correct && attempts >= 1) setHint(true);
+    if (correct) setRetrying(false);
   };
 
   const move = (position: number, direction: number) => {
@@ -295,7 +297,7 @@ function Challenge({ game, index, next }: { game: GameId; index: number; next: (
           </>
         )}
       </div>
-      {(status === 'won' || isAlreadyWon) && (
+      {(status === 'won' || (isAlreadyWon && !retrying)) && (
         <div className="reward-unlocked">
           <div className="reward-unlocked-icon">
             <Trophy size={29} />
