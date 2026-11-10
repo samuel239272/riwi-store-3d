@@ -2,7 +2,6 @@ import type { Product } from '../types/product';
 import { assetUrl } from '../utils/assets';
 const violet = { name: 'Violeta', hex: '#a99aff' };
 const cream = { name: 'Crudo', hex: '#e8e5da' };
-const blue = { name: 'Índigo', hex: '#405473' };
 const dark = { name: 'Negro Azabache', hex: '#16171d' };
 const images = (id: string, name: string) => ['front', 'back'].map((view, index) => ({ src: assetUrl(`/images/products/${id}-${view}.webp`), alt: `${name}: render conceptual ${index ? 'posterior' : 'frontal'} de la prenda 3D` }));
 const model = (name: string) => ({ exterior: assetUrl(`/models/optimized/${name}.glb`), scale: 1 });

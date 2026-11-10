@@ -16,7 +16,7 @@ try {
     await page.addInitScript(() => sessionStorage.setItem('riwi.reborn.intro.v1', 'seen'));
     await page.goto(base);
     await page.evaluate(() => document.fonts.ready);
-    await page.getByRole('combobox', { name: 'Prenda destacada' }).selectOption('camisa-runtime');
+    await page.getByRole('combobox', { name: 'Prenda destacada' }).selectOption('hoodie-compile');
     await page.getByRole('button', { name: 'Seleccionar talla L', exact: true }).click();
     await page.evaluate(() => {
       const node = document.querySelector('.fashion-workbench');
