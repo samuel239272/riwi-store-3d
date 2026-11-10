@@ -129,7 +129,7 @@ export function RebornExperience({ children }: { children: ReactNode }) {
         [
           '/media/riwi-cyber-final.webp',
           '/media/riwi-world-clean.webp',
-          '/media/riwi-mascot-alpha.webp',
+          '/media/riwi-mascot-alpha.avif',
         ].map(async (path) => {
           const image = new Image();
           image.src = assetUrl(path);

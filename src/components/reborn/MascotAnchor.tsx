@@ -111,7 +111,7 @@ export function MascotAnchor() {
         <div className="mascot-ground-light" />
         <div className="mascot-sprite">
           <img
-            src={assetUrl('/media/riwi-mascot-alpha.webp')}
+            src={assetUrl('/media/riwi-mascot-alpha.avif')}
             alt=""
             aria-hidden="true"
             width="1672"
