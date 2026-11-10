@@ -57,50 +57,50 @@
   },
   {
     "name": "tee-gosling.glb",
-    "sourceBytes": 2961908,
-    "optimizedBytes": 2532880,
-    "imagesReencoded": 2,
+    "sourceBytes": 2668672,
+    "optimizedBytes": 2257408,
+    "imagesReencoded": 1,
     "meshoptViews": 9
   },
   {
     "name": "tee-nakamoto.glb",
-    "sourceBytes": 1807888,
-    "optimizedBytes": 1377980,
+    "sourceBytes": 1672084,
+    "optimizedBytes": 1259400,
     "imagesReencoded": 2,
     "meshoptViews": 9
   },
   {
     "name": "tee-ritchie.glb",
-    "sourceBytes": 2198164,
-    "optimizedBytes": 1769856,
+    "sourceBytes": 1895512,
+    "optimizedBytes": 1485128,
     "imagesReencoded": 2,
     "meshoptViews": 9
   },
   {
     "name": "tee-tesla.glb",
-    "sourceBytes": 2174560,
-    "optimizedBytes": 1744668,
-    "imagesReencoded": 2,
+    "sourceBytes": 1948004,
+    "optimizedBytes": 1535944,
+    "imagesReencoded": 1,
     "meshoptViews": 9
   },
   {
     "name": "tee-turing.glb",
-    "sourceBytes": 2928568,
-    "optimizedBytes": 2500312,
-    "imagesReencoded": 1,
+    "sourceBytes": 2602028,
+    "optimizedBytes": 2191076,
+    "imagesReencoded": 2,
     "meshoptViews": 9
   },
   {
     "name": "tee-ubuntu.glb",
-    "sourceBytes": 2690328,
-    "optimizedBytes": 2261312,
-    "imagesReencoded": 1,
+    "sourceBytes": 2298324,
+    "optimizedBytes": 1887184,
+    "imagesReencoded": 2,
     "meshoptViews": 9
   },
   {
     "name": "tee-vanrossum.glb",
-    "sourceBytes": 3173936,
-    "optimizedBytes": 2745312,
+    "sourceBytes": 2821680,
+    "optimizedBytes": 2410860,
     "imagesReencoded": 2,
     "meshoptViews": 9
   },

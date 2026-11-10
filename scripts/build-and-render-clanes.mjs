@@ -13,13 +13,13 @@ const server = await createServer({
 await server.listen();
 
 const clanes = [
-  { clan: 'ubuntu', targetH: 0.80, crop: { cropW: 857, cropH: 959, minX: 83, minY: 37 } },
-  { clan: 'ritchie', targetH: 0.76, crop: { cropW: 692, cropH: 678, minX: 168, minY: 45 } },
-  { clan: 'nakamoto', targetH: 0.82, crop: { cropW: 422, cropH: 552, minX: 300, minY: 16 } },
-  { clan: 'turing', targetH: 0.80, crop: { cropW: 950, cropH: 1011, minX: 51, minY: 13 } },
-  { clan: 'vanrossum', targetH: 0.80, crop: { cropW: 918, cropH: 978, minX: 52, minY: 10 } },
-  { clan: 'gosling', targetH: 0.80, crop: { cropW: 863, cropH: 979, minX: 81, minY: 5 } },
-  { clan: 'tesla', targetH: 0.80, crop: { cropW: 594, cropH: 711, minX: 213, minY: 23 } },
+  { clan: 'ubuntu', targetH: 0.82 },
+  { clan: 'ritchie', targetH: 0.80 },
+  { clan: 'nakamoto', targetH: 0.84 },
+  { clan: 'turing', targetH: 0.82 },
+  { clan: 'vanrossum', targetH: 0.82 },
+  { clan: 'gosling', targetH: 0.82 },
+  { clan: 'tesla', targetH: 0.82 },
 ];
 
 let browser;
@@ -34,8 +34,8 @@ try {
   for (const item of clanes) {
     console.log(`[1/3] Building tee-${item.clan}.glb...`);
     const glbDataUrl = await page.evaluate(
-      ({ c, crop, targetH }) => window.buildClanTee(c, crop, targetH),
-      { c: item.clan, crop: item.crop, targetH: item.targetH }
+      ({ c, targetH }) => window.buildClanTee(c, { targetH }),
+      { c: item.clan, targetH: item.targetH }
     );
     const glbBuffer = Buffer.from(glbDataUrl.split(',')[1], 'base64');
     await writeFile(`public/models/garments/tee-${item.clan}.glb`, glbBuffer);
@@ -53,9 +53,8 @@ try {
     }
   }
 
-  console.log('All 7 Clan T-Shirts built and rendered successfully!');
+  console.log('All 7 Clan T-Shirts built and rendered successfully with auto-cropped transparent graphics!');
 } finally {
   await browser?.close();
   await server.close();
 }
-
