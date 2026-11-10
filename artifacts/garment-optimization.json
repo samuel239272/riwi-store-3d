@@ -1,10 +1,17 @@
 [
   {
-    "name": "cap.glb",
-    "sourceBytes": 5723132,
-    "optimizedBytes": 3167064,
-    "imagesReencoded": 1,
-    "meshoptViews": 21
+    "name": "cap-baseball.glb",
+    "sourceBytes": 11748372,
+    "optimizedBytes": 5456100,
+    "imagesReencoded": 2,
+    "meshoptViews": 24
+  },
+  {
+    "name": "cap-snapback.glb",
+    "sourceBytes": 3218416,
+    "optimizedBytes": 716188,
+    "imagesReencoded": 2,
+    "meshoptViews": 6
   },
   {
     "name": "hoodie.glb",

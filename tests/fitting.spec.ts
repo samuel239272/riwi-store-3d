@@ -37,7 +37,7 @@ test('cada prenda se puede vestir y se conserva el color desde la ficha', async 
   await page.getByRole('link',{name:/Probar en mi cuerpo/}).click();
   await expect(page.getByRole('button',{name:'Probar color Violeta'})).toHaveAttribute('aria-pressed','true');
   const viewer=page.getByTestId('fitting-viewer');
-  for(const id of ['hoodie-compile','camiseta-source','camisa-runtime','jeans-branch','buzo-loop','sudadera-flow','gorra-commit','chaqueta-deploy']){
+  for(const id of ['hoodie-compile','camiseta-source','camisa-runtime','jeans-branch','buzo-loop','sudadera-flow','gorra-commit','gorra-origin','chaqueta-deploy']){
     await page.getByRole('combobox',{name:/Elige tu prenda/}).selectOption(id);
     await expect(viewer).toHaveAttribute('data-model-status','ready');
     await expect(viewer.locator('canvas')).toHaveAttribute('data-garment',id);

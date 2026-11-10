@@ -69,10 +69,12 @@ export function ModelLoader({
         if (material instanceof MeshStandardMaterial && material.name === 'fabric') {
           if (color) material.color.set(color);
           if (bundle) {
-            if (!material.normalMap) material.normalMap = bundle.normalMap;
+            if (!material.normalMap) {
+              material.normalMap = bundle.normalMap;
+              material.normalScale = new Vector2(0.42, 0.42);
+            }
             if (!material.roughnessMap) material.roughnessMap = bundle.roughnessMap;
             if (!material.map) material.map = bundle.diffuseMap;
-            material.normalScale = new Vector2(0.42, 0.42);
           }
           material.roughness = isJeans ? 0.88 : 0.8;
           material.metalness = 0.02;

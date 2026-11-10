@@ -4,7 +4,7 @@ test('catálogo RIWI: búsqueda, categoría, filtros combinados y orden', async 
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/#/catalogo');
-  await expect(page.locator('.product-card')).toHaveCount(9);
+  await expect(page.locator('.product-card')).toHaveCount(10);
   const search = page.getByRole('textbox', { name: 'Buscar por nombre o referencia' });
   await search.fill('hoodie');
   await expect(page.locator('.product-card h3')).toHaveText('Hoodie Compile');

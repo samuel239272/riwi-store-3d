@@ -8,7 +8,8 @@ const products=[
   ['buzo-loop','sweatshirt','#e8e5da'],
   ['sudadera-flow','joggers','#e8e5da'],
   ['camiseta-hello','tee','#a99aff'],
-  ['gorra-commit','cap','#a99aff'],
+  ['gorra-commit','cap-snapback','#a99aff'],
+  ['gorra-origin','cap-baseball','#e8e5da'],
   ['chaqueta-deploy','jacket','#e8e5da']
 ];
 await mkdir('public/images/products',{recursive:true});
