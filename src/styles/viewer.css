@@ -16,3 +16,247 @@
 .product-viewer.is-fullscreen{position:fixed;inset:0;z-index:1000;border-radius:0;height:100dvh;background:#e6def2}.product-viewer.is-fullscreen .scene-container{height:calc(100dvh - 100px)}
 @media(max-width:700px){.product-viewer{min-height:540px}.scene-container{height:425px}.product-viewer.compact,.compact .scene-container{min-height:390px}.viewer-top{left:16px;right:16px;top:18px;font-size:8px}.viewer-tools{right:12px}.viewer-options{gap:9px}.viewer-options button{font-size:9px}.camera-presets button{padding:8px 11px}.model-note{font-size:8px}.component-selector{font-size:10px;bottom:132px}.viewer-watermark{font-size:150px}}
 @media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+
+
+/* Studio Code Backdrop & Gradient RIWI Logo */
+.studio-code-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.studio-center-logo-container {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.studio-logo-glow-halo {
+  position: absolute;
+  width: 120%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.18) 45%, rgba(6, 182, 212, 0.08) 70%, transparent 85%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.studio-center-riwi-logo {
+  width: clamp(280px, 46vw, 640px);
+  height: auto;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+  animation: studioLogoGlow 7s ease-in-out infinite alternate;
+}
+
+@keyframes studioLogoGlow {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.35)) drop-shadow(0 0 45px rgba(168, 85, 247, 0.2));
+    transform: scale(0.98);
+    opacity: 0.52;
+  }
+  100% {
+    filter: drop-shadow(0 0 35px rgba(236, 72, 153, 0.55)) drop-shadow(0 0 75px rgba(6, 182, 212, 0.35));
+    transform: scale(1.02);
+    opacity: 0.72;
+  }
+}
+
+.studio-code-window {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(250px, 26vw, 340px);
+  background: rgba(13, 10, 26, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(5, 3, 14, 0.45);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  font-family: 'IBM Plex Mono', monospace;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.studio-code-ts {
+  left: 24px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 16px 36px rgba(5, 3, 14, 0.45), 0 0 25px rgba(56, 189, 248, 0.12);
+}
+
+.studio-code-js {
+  right: 68px;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  box-shadow: 0 16px 36px rgba(5, 3, 14, 0.45), 0 0 25px rgba(250, 204, 21, 0.12);
+}
+
+.studio-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(22, 17, 40, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+}
+
+.studio-window-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.window-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-red { background: #ef4444; box-shadow: 0 0 6px #ef444466; }
+.dot-yellow { background: #f59e0b; box-shadow: 0 0 6px #f59e0b66; }
+.dot-green { background: #10b981; box-shadow: 0 0 6px #10b98166; }
+
+.studio-window-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.studio-lang-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
+.studio-filename {
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+.studio-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.studio-status-pill.is-typing { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.studio-status-pill.is-ready { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+.studio-status-pill.is-erasing { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.studio-status-pill.is-sync { background: rgba(148, 163, 184, 0.12); color: #94a3b8; }
+
+.status-indicator-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  animation: studioDotPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes studioDotPulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.studio-window-body {
+  padding: 11px 12px;
+  height: 215px;
+  max-height: 215px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.studio-code-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.studio-code-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: pre;
+}
+
+.line-num {
+  width: 18px;
+  text-align: right;
+  color: #64748b;
+  font-size: 9.5px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.line-code {
+  flex: 1;
+  color: #e2e8f0;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+/* Syntax Highlighting */
+.token-kw { color: #c084fc; font-weight: 600; }
+.token-typ { color: #38bdf8; font-weight: 600; }
+.token-ident { color: #f1f5f9; }
+.token-str { color: #34d399; }
+.token-num { color: #fb923c; }
+.token-op { color: #a78bfa; }
+.token-com { color: #94a3b8; font-style: italic; }
+.token-space { white-space: pre; }
+
+/* Blinking Cursor */
+.studio-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 13px;
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: studioCursorBlink 0.9s steps(2, start) infinite;
+}
+.cursor-ts { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+.cursor-js { background: #facc15; box-shadow: 0 0 8px #facc15; }
+
+@keyframes studioCursorBlink {
+  to { visibility: hidden; }
+}
+
+/* Responsive */
+@media (max-width: 1180px) {
+  .studio-code-window { width: clamp(210px, 24vw, 260px); }
+  .studio-code-ts { left: 16px; }
+  .studio-code-js { right: 58px; }
+  .studio-window-body { height: 190px; max-height: 190px; font-size: 9.5px; line-height: 1.45; }
+  .studio-center-riwi-logo { width: clamp(240px, 40vw, 480px); }
+}
+
+@media (max-width: 860px) {
+  .studio-code-window { width: 190px; opacity: 0.8; }
+  .studio-code-ts { left: 10px; }
+  .studio-code-js { right: 52px; }
+  .studio-window-body { height: 160px; max-height: 160px; font-size: 8.5px; }
+  .studio-center-riwi-logo { width: clamp(200px, 50vw, 360px); opacity: 0.48; }
+}
+
+@media (max-width: 640px) {
+  .studio-code-window { display: none; }
+  .studio-center-riwi-logo { width: clamp(220px, 68vw, 320px); opacity: 0.55; }
+}
