@@ -1,0 +1,3879 @@
+/* SYSTEM REBORN — one cinematic world, five chapters and a persistent guide. */
+:root {
+  --obsidian: #070911;
+  --midnight: #101426;
+  --electric-violet: #8b5cf6;
+  --deep-purple: #5b21b6;
+  --digital-cyan: #22d3ee;
+  --signal-green: #a3e635;
+  --cold-white: #f4f4f5;
+  --secondary-text: #b4b8ca;
+  --background: #070911;
+  --surface: #101426;
+  --text: #f4f4f5;
+  --text-secondary: #b4b8ca;
+  --border: #d4ddff29;
+  --signal: #8b5cf6;
+  --sand: #a78bfa;
+  --glass-fill: rgba(10, 14, 30, 0.48);
+  --glass-border: rgba(218, 226, 255, 0.17);
+  --glass-blur: 18px;
+  --glass-radius: 24px;
+  --mascot-rail: 280px;
+}
+body {
+  background: var(--obsidian);
+}
+::selection {
+  background: #8b5cf6;
+  color: white;
+}
+:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 5px;
+}
+.system-reborn {
+  isolation: isolate;
+  min-height: 100vh;
+}
+.reborn-world {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #070911;
+  pointer-events: none;
+}
+.reborn-world > img,
+.reborn-intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.world-color-grade {
+  position: absolute;
+  inset: 0;
+  background: #070911;
+}
+.world-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #0709119c, transparent 75%),
+    radial-gradient(ellipse at 80% 30%, #7132ac12, transparent 55%),
+    linear-gradient(0deg, #07091166, transparent 40%);
+  pointer-events: none;
+}
+.world-atmosphere:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#c5c1ff06 1px, transparent 1px),
+    linear-gradient(90deg, #c5c1ff06 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: linear-gradient(90deg, black, transparent 75%);
+}
+.world-final-plate {
+  z-index: 2;
+}
+.reborn-intro-video {
+  z-index: 3;
+}
+.reborn-intro-video.is-holding {
+  animation: reborn-video-out 0.42s 0.4s both;
+}
+.world-boot-plate {
+  z-index: 4;
+}
+.reborn-interface {
+  position: relative;
+  z-index: 3;
+  transform: none;
+}
+.state-BOOT .reborn-interface,
+.state-INTRO_PLAYING .reborn-interface {
+  visibility: hidden;
+}
+.reborn-shell.cyber-shell {
+  background: transparent;
+  overflow-x: clip;
+}
+.reborn-reading-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+  transform-origin: left;
+  z-index: 90;
+}
+.reborn-section,
+.reborn-footer {
+  padding-right: var(--mascot-rail);
+}
+.reborn-container {
+  width: min(calc(100% - 112px), 1240px);
+  margin-inline: auto;
+}
+.reborn-section {
+  padding-block: 105px;
+  scroll-margin-top: 110px;
+}
+.reborn-section-heading {
+  margin-bottom: 35px;
+}
+.system-eyebrow {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  font: 9px/1.7 var(--mono);
+  letter-spacing: 0.13em;
+  color: #c4b9df;
+}
+.system-eyebrow:before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: #a78bfa;
+  box-shadow: 0 0 10px #8b5cf6;
+}
+.reborn-section-heading h2 {
+  font: 600 clamp(41px, 5vw, 77px) / 0.98 var(--heading);
+  letter-spacing: -0.065em;
+  color: #f4f4f5;
+  margin-top: 22px;
+  text-shadow: 0 5px 35px #07091180;
+}
+.reborn-section-heading h2 em,
+.reborn-finale h2 em {
+  font-style: normal;
+  color: #c4b5fd;
+}
+.reborn-section-heading p {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #b4b8ca;
+  margin-top: 22px;
+}
+.system-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 53px;
+  padding: 17px 20px;
+  color: white;
+  background: linear-gradient(130deg, #7950d4, #5b32b4);
+  border: 1px solid #c2a6ff5c;
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 #ffffff24,
+    0 8px 28px #5b21b630;
+  cursor: pointer;
+  font: 600 10px var(--mono);
+  letter-spacing: 0.04em;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+.system-button:hover {
+  transform: translateY(-2px);
+  border-color: #d8c8ff9c;
+  box-shadow:
+    inset 0 1px 0 #ffffff30,
+    0 12px 36px #8b5cf644;
+}
+.system-button > svg {
+  color: #d9ceff;
+}
+.system-live-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  background: #a3e635;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #a3e63566;
+}
+/* Reusable glass variants. Local pointer light never updates React state. */
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: linear-gradient(130deg, #c7ccff0c, transparent 48%), var(--glass-fill);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow:
+    inset 0 1px 0 #ffffff0c,
+    0 20px 60px #0305123b;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+.glass-panel:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #ffffff0c, transparent 28%);
+  pointer-events: none;
+  z-index: -1;
+}
+.glass-panel:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    350px circle at var(--glow-x, 50%) var(--glow-y, 0px),
+    #a78bfa1c,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+  z-index: -1;
+}
+.glass-panel:hover {
+  border-color: #c9bbff55;
+  box-shadow:
+    inset 0 1px 0 #ffffff14,
+    0 22px 65px #07041866;
+}
+.glass-panel:hover:after {
+  opacity: 1;
+}
+.glass-product {
+  --glass-fill: rgba(16, 20, 38, 0.42);
+}
+.glass-featured {
+  --glass-fill: rgba(11, 15, 33, 0.64);
+}
+.glass-hologram {
+  --glass-fill: rgba(8, 13, 30, 0.76);
+  border-color: #a4adff40;
+  box-shadow:
+    inset 0 1px 0 #d8cdff24,
+    0 25px 75px #07041873,
+    0 0 60px #5b21b60d;
+}
+/* Persistent mascot: transparent sprite, reserved side rail and GPU transforms. */
+.mascot-anchor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+  isolation: isolate;
+}
+.mascot-sprite {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  animation: mascot-breathe 7.8s ease-in-out infinite;
+  filter: drop-shadow(0 12px 16px #03040bb3);
+}
+.mascot-sprite > img {
+  position: absolute;
+  max-width: none;
+  object-fit: fill;
+  display: block;
+}
+.mascot-ambient-glow {
+  position: absolute;
+  inset: 12% -10% -2%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 55%, #8b5cf62b, transparent 64%);
+  filter: blur(22px);
+}
+.mascot-ground-light {
+  position: absolute;
+  bottom: -1%;
+  left: 3%;
+  right: 3%;
+  height: 5%;
+  border: 1px solid #a28aff60;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #8b5cf642, transparent 70%);
+  box-shadow: 0 0 25px #8b5cf62b;
+  transform: rotate(-4deg);
+}
+.mascot-dock-caption {
+  position: absolute;
+  bottom: -25px;
+  left: -20%;
+  right: -20%;
+  text-align: center;
+  color: #b8a9db;
+  font: 9px var(--mono);
+  letter-spacing: 0.13em;
+  white-space: nowrap;
+}
+.mascot-anchor.is-still .mascot-sprite {
+  animation: none;
+}
+.mascot-rail {
+  position: fixed;
+  right: 22px;
+  top: 130px;
+  bottom: 30px;
+  width: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  z-index: 1;
+  pointer-events: none;
+  font: 7px var(--mono);
+  letter-spacing: 0.15em;
+  color: #9d8fbe;
+}
+.mascot-rail > span {
+  writing-mode: vertical-rl;
+}
+.mascot-rail > i {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(transparent, #a78bfa40, transparent);
+}
+/* Compact navigation; the official mark is kept in its original colors. */
+.reborn-header.cyber-header {
+  height: 77px;
+  top: 18px;
+  margin: 18px 32px -95px;
+  background: linear-gradient(110deg, #16172c99, #0b1020b8);
+  border-color: #e1dbff29;
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 #ffffff0f,
+    0 18px 55px #0306104d;
+  gap: 25px;
+}
+.reborn-brand-name {
+  font: 8px/1.6 var(--mono);
+  letter-spacing: 0.16em;
+  color: #b6accd;
+  padding-left: 15px;
+  border-left: 1px solid #d6ccff25;
+}
+.reborn-brand-name > b {
+  font: 600 13px var(--heading);
+  letter-spacing: 0.14em;
+  color: #eee9ff;
+}
+.reborn-brand-name > b > span {
+  color: #a78bfa;
+}
+.reborn-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  height: 100%;
+}
+.reborn-nav > a,
+.reborn-nav > button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  padding: 0;
+  min-height: 44px;
+  color: #b0adc7;
+  font: 11px var(--heading);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.reborn-nav > a > span {
+  font: 6px var(--mono);
+  padding: 2px 3px;
+  border: 1px solid #c4b5fd44;
+  border-radius: 3px;
+  color: #c4b5fd;
+}
+.reborn-nav > button[aria-current='location'],
+.reborn-nav > a:hover,
+.reborn-nav > button:hover {
+  color: #f4efff;
+}
+.reborn-nav > button[aria-current='location']:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 13px;
+  border-radius: 3px;
+  background: #a78bfa;
+  box-shadow: 0 0 12px #8b5cf6;
+}
+.reborn-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reborn-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 28px;
+  min-height: 40px;
+  color: #bcb4d1;
+}
+.reborn-search > kbd {
+  border: 1px solid #d4c9fa26;
+  padding: 4px;
+  font: 7px var(--mono);
+  border-radius: 5px;
+  color: #a398bc;
+}
+.reborn-motion {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  min-height: 40px;
+  color: #a59abd;
+}
+.reborn-bag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 16px;
+  border-left: 1px solid #ded3ff2b;
+  min-height: 31px;
+  color: #ded5f0;
+  font: 9px var(--mono);
+}
+.reborn-menu {
+  display: none;
+  min-height: 40px;
+  min-width: 32px;
+  place-items: center;
+  color: #d3c7e8;
+}
+/* First screen: clear headline, independent character and a real tech ecosystem. */
+.reborn-hero {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+  overflow: clip;
+}
+.reborn-hero-inner {
+  position: relative;
+  width: min(calc(100% - 112px), 1600px);
+  margin: auto;
+  min-height: 100svh;
+  padding-top: 146px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-system-grid {
+  position: absolute;
+  inset: 90px 4% 30px;
+  z-index: -1;
+  background-image: linear-gradient(90deg, transparent 49.92%, #c9bdff12 50%, transparent 50.08%);
+  pointer-events: none;
+}
+.system-transmission {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font: 8px var(--mono);
+  letter-spacing: 0.11em;
+  color: #b4a9d0;
+}
+.system-transmission > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reborn-hero-copy {
+  position: relative;
+  z-index: 4;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  width: 60%;
+  max-width: 790px;
+}
+.reborn-hero-copy > .system-eyebrow {
+  font-size: 8px;
+}
+.reborn-hero h1 {
+  font: 600 clamp(84px, 9.1vw, 154px) / 0.87 var(--heading);
+  letter-spacing: -0.075em;
+  color: #f4f4f5;
+  margin: 26px 0 27px;
+  text-shadow: 0 5px 40px #03051240;
+}
+.reborn-hero h1 > span {
+  font-size: 0.77em;
+  white-space: nowrap;
+}
+.violet-period {
+  color: #ab88fc;
+}
+.reborn-hero-copy > p {
+  font: 15px/1.75 var(--body);
+  color: #c2bed4;
+  margin-top: 24px;
+}
+.reborn-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 33px;
+}
+.reborn-hero-actions > span {
+  font: 7px/1.9 var(--mono);
+  letter-spacing: 0.08em;
+  color: #a19abb;
+}
+.reborn-hero-actions > span > b {
+  font-weight: 400;
+  color: #d0c5e9;
+}
+.hero-source-signature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8a84a5;
+  font: 9px var(--mono);
+  margin-top: 38px;
+}
+.hero-source-signature > svg {
+  color: #b296ed;
+}
+.reborn-hero-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: auto;
+  padding: 22px 0 30px;
+  border-top: 1px solid #d0c5ef24;
+  font: 7px var(--mono);
+  letter-spacing: 0.12em;
+  color: #9d91b6;
+}
+.reborn-hero-bottom > button {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  font: inherit;
+  letter-spacing: inherit;
+  color: #c3b7da;
+  min-height: 28px;
+}
+.reborn-hero-bottom > button > svg {
+  color: #b99af5;
+}
+/* Capsules grow from the icon itself. Positions and motion phases are deterministic. */
+.tech-orbit {
+  position: absolute;
+  left: 57%;
+  right: 0;
+  top: 34%;
+  height: 52%;
+  z-index: 6;
+  pointer-events: none;
+}
+.orbit-caption {
+  position: absolute;
+  right: 8px;
+  top: -35px;
+  font: 6px var(--mono);
+  letter-spacing: 0.11em;
+  color: #a194bd;
+}
+.tech-orb {
+  position: absolute;
+  width: 64px;
+  pointer-events: auto;
+  z-index: 1;
+  animation: orb-drift var(--float-duration) var(--float-delay) ease-in-out infinite;
+}
+.tech-orb.is-open {
+  z-index: 10;
+  animation-play-state: paused;
+}
+.orb-javascript {
+  left: 0;
+  top: 0;
+}
+.orb-typescript {
+  right: 0;
+  top: 12%;
+}
+.orb-python {
+  left: -20px;
+  top: 47%;
+}
+.orb-html {
+  right: -15px;
+  top: 58%;
+}
+.orb-css {
+  left: 33px;
+  top: 87%;
+}
+.orb-sql {
+  right: 20px;
+  top: 100%;
+}
+.tech-capsule {
+  position: relative;
+  display: flex;
+  align-items: start;
+  width: 64px;
+  min-height: 68px;
+  background: linear-gradient(135deg, #b9a0ff12, #0a0e1ebf);
+  border: 1px solid #c6b7ff40;
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 1px 0 #ffffff14,
+    0 12px 32px #03071470,
+    0 0 18px color-mix(in srgb, var(--tech-color) 12%, transparent);
+  transition:
+    width 0.33s cubic-bezier(0.2, 0.8, 0.3, 1),
+    border-color 0.25s,
+    box-shadow 0.3s;
+  overflow: hidden;
+}
+.tech-trigger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 62px;
+  height: 66px;
+  flex-shrink: 0;
+  color: var(--tech-color);
+  border-radius: 19px;
+  z-index: 3;
+}
+.tech-glyph {
+  display: block;
+  width: 27px;
+  height: 27px;
+  background: var(--tech-color);
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--tech-color) 25%, transparent));
+}
+.tech-trigger-label {
+  font: 6px var(--mono);
+  letter-spacing: 0.04em;
+  color: #c6bed9;
+}
+.tech-details {
+  width: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    max-height 0.3s,
+    width 0.3s;
+  padding: 0;
+  pointer-events: none;
+}
+.tech-orb.is-open .tech-capsule {
+  width: 330px;
+  border-color: color-mix(in srgb, var(--tech-color) 50%, #d7ccff55);
+  box-shadow:
+    inset 0 1px 0 #ffffff1c,
+    0 15px 45px #030512b3,
+    0 0 30px color-mix(in srgb, var(--tech-color) 12%, transparent);
+}
+.tech-orb.is-open .tech-details {
+  width: 264px;
+  max-height: 250px;
+  padding: 16px 17px 18px 0;
+  opacity: 1;
+  transition-delay: 0.12s, 0s, 0s;
+  pointer-events: auto;
+}
+.tech-orb.align-right .tech-capsule {
+  position: absolute;
+  right: 0;
+  flex-direction: row-reverse;
+}
+.tech-orb.align-right.is-open .tech-details {
+  padding: 16px 0 18px 17px;
+}
+.tech-info-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  color: #f2edff;
+  font: 600 13px var(--heading);
+  letter-spacing: -0.01em;
+}
+.tech-info-heading > button {
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  color: #b6accb;
+}
+.tech-category {
+  display: block;
+  color: var(--tech-color);
+  font: 8px var(--mono);
+  margin-top: 3px;
+}
+.tech-details > p {
+  font: 11px/1.65 var(--body);
+  color: #bdb7d2;
+  margin-top: 12px;
+  min-width: 230px;
+}
+.tech-application {
+  display: block;
+  font: 7px/1.8 var(--mono);
+  color: #8f88ac;
+  margin-top: 11px;
+  min-width: 230px;
+}
+.tech-pinned {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  font: 6px var(--mono);
+  letter-spacing: 0.07em;
+  color: #a6d96a;
+}
+/* An editorial loadout: one tall composition and two supporting pieces. */
+.loadout-editorial {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 22px;
+}
+.loadout-01 {
+  grid-row: span 2;
+}
+.loadout-link {
+  display: block;
+  height: 100%;
+}
+.loadout-card {
+  height: 100%;
+  min-height: 285px;
+  position: relative;
+}
+.loadout-01 .loadout-card {
+  min-height: 595px;
+}
+.loadout-card-head {
+  position: absolute;
+  z-index: 3;
+  top: 24px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 7px var(--mono);
+  letter-spacing: 0.09em;
+  color: #c3b6dc;
+}
+.loadout-card-head > svg {
+  color: #9d89cc;
+}
+.loadout-card > img {
+  position: absolute;
+  width: 78%;
+  height: 85%;
+  object-fit: contain;
+  right: -3%;
+  top: -2%;
+  filter: drop-shadow(0 24px 20px #03051280);
+  transform: rotate(-7deg);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1);
+  z-index: 1;
+}
+.loadout-01 .loadout-card > img {
+  width: 98%;
+  height: 90%;
+  right: -6%;
+  top: 0;
+}
+.loadout-02 .loadout-card > img {
+  right: -9%;
+  top: -1%;
+  transform: rotate(9deg);
+  width: 72%;
+  height: 104%;
+}
+.loadout-03 .loadout-card > img {
+  width: 70%;
+  height: 95%;
+  right: -9%;
+  top: 5%;
+  transform: rotate(-12deg);
+}
+.loadout-card-copy {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 60px 27px 27px;
+  background: linear-gradient(0deg, #0a0d1de6, transparent);
+}
+.loadout-card-copy > h3 {
+  font: 500 clamp(29px, 3vw, 47px) / 1 var(--heading);
+  letter-spacing: -0.055em;
+  color: #f0eaff;
+}
+.loadout-card-copy > p {
+  font-size: 11px;
+  color: #b1a6c7;
+  margin-top: 10px;
+}
+.loadout-card-copy > span {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 16px;
+  font: 8px var(--mono);
+  letter-spacing: 0.1em;
+  color: #c4b0f4;
+}
+.loadout-big-code {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  z-index: -1;
+  font: 500 155px/0.9 var(--heading);
+  letter-spacing: -0.08em;
+  color: #bdb0ef08;
+}
+.loadout-01 .loadout-big-code {
+  font-size: 260px;
+}
+.loadout-link:hover .loadout-card {
+  transform: translateY(-4px);
+}
+.loadout-link:hover .loadout-card > img {
+  transform: rotate(-3deg) scale(1.04);
+}
+/* Demonstration commerce, built on the existing validated cart provider. */
+.featured-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+.featured-product-stage {
+  min-height: 620px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 42%, #8b5cf615, transparent 65%);
+}
+.featured-product-id {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  font: 7px var(--mono);
+  letter-spacing: 0.09em;
+  color: #b8a9d0;
+  z-index: 2;
+}
+.featured-ghost-word {
+  position: absolute;
+  top: 20%;
+  left: -10px;
+  right: 0;
+  text-align: center;
+  z-index: -1;
+  font: 500 clamp(70px, 10vw, 150px) / 1 var(--heading);
+  letter-spacing: -0.07em;
+  color: #cbb9ff08;
+}
+.featured-product-stage > img {
+  position: absolute;
+  inset: 4% 3% 11%;
+  width: 94%;
+  height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(12px 28px 22px #0204118c);
+  animation: featured-reveal 0.5s both;
+}
+.featured-view-buttons {
+  position: absolute;
+  left: 24px;
+  bottom: 25px;
+  display: flex;
+  gap: 7px;
+  z-index: 3;
+}
+.featured-view-buttons > button {
+  padding: 10px 12px;
+  background: #0b102280;
+  border: 1px solid #c5b5ef2b;
+  border-radius: 8px;
+  color: #9e92b8;
+  font: 8px var(--mono);
+  min-height: 36px;
+}
+.featured-view-buttons > button[aria-pressed='true'] {
+  background: #8b5cf621;
+  border-color: #b499ef6b;
+  color: #e3d4ff;
+}
+.featured-open-3d {
+  position: absolute;
+  right: 23px;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 9px var(--heading);
+  color: #cbb8ed;
+  min-height: 36px;
+  z-index: 3;
+}
+.featured-product-info {
+  padding: 38px 30px 30px;
+  border-left: 1px solid #d7c7ff24;
+  background: linear-gradient(120deg, #151a2d37, #0a0d1d40);
+}
+.featured-product-info > .system-eyebrow {
+  font-size: 7px;
+}
+.featured-product-info > h3 {
+  font: 500 clamp(28px, 3vw, 43px) / 1.06 var(--heading);
+  letter-spacing: -0.05em;
+  color: #f4f0ff;
+  margin-top: 23px;
+}
+.featured-product-info > p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #b5aacb;
+  margin-top: 13px;
+}
+.featured-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px 12px;
+  margin: 25px 0;
+}
+.featured-price > strong {
+  font: 500 20px var(--heading);
+  letter-spacing: -0.03em;
+  color: #e3d6ff;
+}
+.featured-price > span {
+  font: 6px var(--mono);
+  letter-spacing: 0.05em;
+  color: #9182a9;
+}
+.featured-product-selector {
+  display: block;
+  font: 7px var(--mono);
+  color: #9c8fb7;
+  letter-spacing: 0.07em;
+}
+.featured-product-selector > select {
+  width: 100%;
+  display: block;
+  padding: 11px 10px;
+  background: #101426aa;
+  color: #dcd1f1;
+  border: 1px solid #c6b6ee33;
+  border-radius: 9px;
+  font: 11px var(--heading);
+  margin-top: 9px;
+}
+.featured-sizes,
+.featured-colors {
+  padding: 0;
+  border: 0;
+  margin: 23px 0 0;
+}
+.featured-sizes > legend,
+.featured-colors > legend {
+  font: 7px var(--mono);
+  letter-spacing: 0.08em;
+  color: #aaa0c2;
+  margin-bottom: 12px;
+}
+.featured-sizes > button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 35px;
+  height: 35px;
+  margin-right: 7px;
+  background: #10142680;
+  border: 1px solid #bca7ea30;
+  border-radius: 8px;
+  color: #b2a4c9;
+  font: 10px var(--mono);
+}
+.featured-sizes > button[aria-pressed='true'] {
+  background: #8b5cf625;
+  color: #e9dfff;
+  border-color: #a78bfa80;
+}
+.featured-colors > button {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 14px;
+  border: 2px solid #ffffff2b;
+  border-radius: 50%;
+  color: #18162a;
+}
+.featured-colors > button[aria-pressed='true'] {
+  outline: 1px solid #a78bfa;
+  outline-offset: 4px;
+}
+.add-to-loadout {
+  width: 100%;
+  margin-top: 31px;
+}
+.add-to-loadout.is-added {
+  background: linear-gradient(130deg, #375c38, #244430);
+  border-color: #a3e63566;
+}
+.featured-cart-feedback {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font: 8px var(--heading);
+  color: #a495bc;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.featured-cart-feedback > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #c7b1f3;
+  margin-left: auto;
+}
+.featured-product-info > small {
+  display: block;
+  color: #817493;
+  font: 8px/1.9 var(--heading);
+  margin-top: 20px;
+}
+/* The terminal executes local navigation and content commands, never arbitrary code. */
+.terminal-section .reborn-section-heading h2 {
+  font-size: clamp(37px, 4.4vw, 65px);
+}
+.reborn-terminal {
+  margin-top: 35px;
+}
+.terminal-chrome {
+  height: 55px;
+  border-bottom: 1px solid #c7bdff25;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  gap: 17px;
+  background: linear-gradient(90deg, #a795f10a, transparent);
+  font: 9px var(--mono);
+  color: #a599c1;
+}
+.terminal-chrome > span:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+.terminal-dots > i {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8c74b6;
+}
+.terminal-dots > i:first-child {
+  background: #b897fa;
+}
+.terminal-connected {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 6px var(--mono);
+  letter-spacing: 0.08em;
+  color: #9183ac;
+}
+.terminal-connected > i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #a3e635;
+  box-shadow: 0 0 8px #a3e63550;
+}
+.terminal-output {
+  height: 225px;
+  overflow: auto;
+  padding: 26px 23px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #7d58a555 transparent;
+}
+.terminal-line {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  font: 11px/1.9 var(--mono);
+  color: #b5a8cd;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+.terminal-line > span:first-child {
+  color: #756188;
+  user-select: none;
+  flex-shrink: 0;
+}
+.terminal-success {
+  color: #a9d88e;
+}
+.terminal-success > span:first-child {
+  color: #a3e635;
+}
+.terminal-command {
+  color: #d1b6ff;
+}
+.terminal-command > span:first-child {
+  color: #a78bfa;
+}
+.terminal-command-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  background: #080c1b66;
+  border-top: 1px solid #b8abec1f;
+}
+.terminal-command-form > label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  color: #b190ef;
+  font: 14px var(--mono);
+}
+.terminal-command-form input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #e5d8ff;
+  font: 11px var(--mono);
+  outline-offset: 5px;
+  padding: 6px 0;
+}
+.terminal-command-form input::placeholder {
+  color: #756887;
+}
+.terminal-command-form > button {
+  display: grid;
+  place-items: center;
+  min-width: 35px;
+  min-height: 35px;
+  border: 1px solid #a88ade40;
+  border-radius: 8px;
+  background: #8b5cf612;
+  color: #bca0ed;
+}
+.terminal-quick-commands {
+  display: flex;
+  gap: 9px;
+  padding: 15px 22px;
+  border-top: 1px solid #b8abec13;
+}
+.terminal-quick-commands > button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 32px;
+  border: 1px solid #b8abec20;
+  border-radius: 6px;
+  padding: 6px 11px;
+  font: 9px var(--mono);
+  color: #9987b4;
+}
+.terminal-quick-commands > button:hover {
+  color: #d0b7ff;
+  border-color: #b8abec66;
+}
+.reborn-finale {
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+  padding-top: 115px;
+  padding-bottom: 110px;
+}
+.reborn-finale h2 {
+  font: 500 clamp(55px, 6.2vw, 101px) / 0.96 var(--heading);
+  letter-spacing: -0.07em;
+  margin: 28px 0;
+  color: #f4f4f5;
+  text-shadow: 0 5px 30px #07091180;
+}
+.reborn-finale h2 em {
+  color: #c4b5fd;
+}
+.reborn-finale p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #bdb4d1;
+  margin-bottom: 28px;
+}
+.finale-code {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 7px var(--mono);
+  letter-spacing: 0.08em;
+  color: #87759f;
+  margin-top: 35px;
+}
+.finale-code > code {
+  font-size: 8px;
+  color: #b19acb;
+}
+.reborn-footer {
+  border-top: 1px solid #d1c2ff20;
+  padding-top: 35px;
+  padding-bottom: 0;
+  background: linear-gradient(0deg, #07091180, transparent);
+}
+.reborn-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.9fr;
+  gap: 30px;
+  padding-bottom: 34px;
+}
+.reborn-footer-grid > div > p {
+  font: 10px var(--heading);
+  color: #9382a9;
+  margin-top: 19px;
+}
+.reborn-footer-links {
+  display: grid;
+  gap: 13px;
+  justify-self: center;
+}
+.reborn-footer-links > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font: 10px var(--heading);
+  color: #af9bc8;
+}
+.reborn-replay {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid #c7aff138;
+  background: #12142950;
+  border-radius: 12px;
+  text-align: left;
+  align-self: start;
+  color: #b1a0c7;
+}
+.reborn-replay > span {
+  font: 7px var(--mono);
+  letter-spacing: 0.08em;
+  color: #b4a0ce;
+}
+.reborn-replay small {
+  display: block;
+  font: 10px var(--heading);
+  letter-spacing: 0;
+  color: #8f7ea6;
+  margin-top: 6px;
+}
+.reborn-replay:hover {
+  border-color: #a78bfa77;
+  background: #8b5cf611;
+}
+.reborn-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #c7aff11c;
+  padding: 21px 0;
+  font: 6px var(--mono);
+  line-height: 1.8;
+  color: #89749f;
+}
+.reborn-footer-bottom > svg {
+  color: #b598dc;
+}
+/* Intro chrome and timed transfer from the source frame to the independent layers. */
+.reborn-intro-controls {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100;
+  background: linear-gradient(#07091160, transparent 20%, transparent 78%, #07091170);
+  padding: 32px 40px;
+  color: #f4f0ff;
+}
+.intro-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 25px;
+}
+.intro-top > span {
+  font: 600 15px var(--heading);
+  letter-spacing: 0.05em;
+}
+.intro-top > span > b {
+  font-weight: 500;
+  color: #c4b5fd;
+}
+.intro-top > span > small {
+  display: block;
+  font: 7px var(--mono);
+  letter-spacing: 0.13em;
+  color: #b0a7c5;
+  margin-top: 8px;
+}
+.intro-top > button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 43px;
+  padding: 12px 15px;
+  background: #0c102680;
+  backdrop-filter: blur(14px);
+  border: 1px solid #e1d7ff4d;
+  border-radius: 11px;
+  color: #e5dcf8;
+  font: 11px var(--heading);
+}
+.intro-bottom {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 21px;
+  font: 7px var(--mono);
+  letter-spacing: 0.1em;
+  color: #c5b9dc;
+}
+.intro-bottom > span:first-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.intro-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #c4b5fd40;
+}
+.intro-progress > span {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+}
+.intro-manual {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #c4b5fd55;
+  background: #0b0e21dc;
+  backdrop-filter: blur(18px);
+  padding: 30px;
+  border-radius: 18px;
+}
+.intro-manual > span {
+  font: 8px var(--mono);
+  letter-spacing: 0.1em;
+  color: #b6a2d0;
+}
+.intro-manual > button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 42px;
+  padding: 11px 17px;
+  border: 1px solid #c4b5fd44;
+  background: #8b5cf62a;
+  border-radius: 9px;
+  font: 11px var(--heading);
+  color: #decdf6;
+}
+.state-INTRO_TRANSITION .reborn-header {
+  animation: reborn-enter 0.6s 0.7s both;
+}
+.state-INTRO_TRANSITION .reborn-hero-copy {
+  animation: reborn-enter 0.7s 0.95s both;
+}
+.state-INTRO_TRANSITION .tech-orbit {
+  animation: reborn-enter 0.6s 1.1s both;
+}
+.state-INTRO_TRANSITION .reborn-hero-bottom {
+  animation: reborn-enter 0.5s 1.25s both;
+}
+/* Existing commerce routes share the new palette and preserve their tested controls. */
+.reborn-shell .page-width {
+  width: min(calc(100% - var(--mascot-rail) - 112px), 1440px);
+  margin-left: max(56px, calc((100% - var(--mascot-rail) - 1440px) / 2));
+  margin-right: auto;
+}
+.reborn-shell .button.primary,
+.reborn-shell .camera-presets button[aria-pressed='true'],
+.reborn-shell .product-page .size-options button[aria-pressed='true'],
+.reborn-shell .fit-views button[aria-pressed='true'],
+.reborn-shell .fit-choice button[aria-pressed='true'],
+.reborn-shell .fallback-message button {
+  background: #6840ce;
+  border-color: #a78bfa66;
+  color: white;
+  border-radius: 9px;
+}
+.reborn-shell .button.primary:hover {
+  background: #7548da;
+}
+.reborn-shell .catalog-page .commerce-intro em,
+.reborn-shell .collections-page h1 span,
+.reborn-shell .experience-page h1 span,
+.reborn-shell .fitting-intro h1 em,
+.reborn-shell .cart-heading h1 span {
+  color: #bba2f0;
+}
+.reborn-shell .catalog-page .catalog-categories button[aria-pressed='true'] {
+  background: #8b5cf629;
+  color: #e3d7fb;
+  border-color: #a78bfa80;
+}
+.reborn-shell .catalog-page .catalog-categories span,
+.reborn-shell .catalog-page .clear-filters,
+.reborn-shell .product-page .breadcrumbs a,
+.reborn-shell .product-page .product-subtitle,
+.reborn-shell .product-page .product-colors strong,
+.reborn-shell .product-page .product-sizes strong,
+.reborn-shell .product-page .size-guide-link {
+  color: #b49be1;
+}
+.reborn-shell .catalog-page .search-field,
+.reborn-shell .catalog-page .sort-field,
+.reborn-shell .catalog-page .catalog-categories button,
+.reborn-shell .cart-summary {
+  background: #10142688;
+  border-color: #c4b5fd38;
+  backdrop-filter: blur(14px);
+  border-radius: 10px;
+}
+.reborn-shell .product-card .card-image {
+  background: linear-gradient(130deg, #1a224866, #10142666);
+  backdrop-filter: blur(14px);
+  border-color: #c4b5fd33;
+  border-radius: 16px;
+}
+.reborn-shell .product-card:hover .card-open {
+  background: #6840ce;
+}
+.reborn-shell .product-detail-grid {
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 32px;
+}
+.reborn-shell .product-page .media-tabs button[aria-pressed='true'] {
+  border-color: #a78bfa;
+}
+.reborn-shell .product-page .color-options button[aria-pressed='true'],
+.reborn-shell .fit-swatches button[aria-pressed='true'] {
+  outline-color: #a78bfa;
+}
+.reborn-shell .try-on-link {
+  background: linear-gradient(120deg, #45226b55, #151a3040);
+  border-color: #b494ea4d;
+}
+.reborn-shell .viewer-badge i,
+.reborn-shell .fitting-stage .status-dot {
+  background: #a3e635;
+  box-shadow: 0 0 10px #a3e63555;
+}
+.reborn-shell .product-viewer {
+  background: radial-gradient(ellipse at 50% 40%, #4b4260aa, #23263d99 70%, #10142688);
+  backdrop-filter: blur(10px);
+}
+.reborn-shell .collections-page .collection-tile {
+  background: linear-gradient(125deg, #201b4080, #10142680);
+  border-radius: 18px;
+}
+.reborn-shell .collections-page .collection-tile:nth-child(2n) {
+  background: linear-gradient(125deg, #25395466, #14132a80);
+}
+.reborn-shell .body-panel,
+.reborn-shell .look-panel {
+  background: linear-gradient(130deg, #261b3e88, #10142688);
+  border-radius: 16px;
+}
+.reborn-shell .fit-views button[aria-pressed='true'],
+.reborn-shell .fit-choice button[aria-pressed='true'] {
+  border-color: #a78bfa66;
+}
+.reborn-shell .lab-step {
+  border-color: #a78bfa55;
+  color: #c6aff1;
+}
+.reborn-shell .cart-line-image {
+  background: radial-gradient(#40335699, #151a3180);
+  border-radius: 12px;
+}
+.reborn-shell .cart-notice {
+  background: #17132aef;
+  border-color: #a78bfa66;
+  color: #e1d5f5;
+  backdrop-filter: blur(16px);
+}
+.reborn-shell .cyber-command {
+  background: #0d1227ed;
+  border-color: #b6a1ec66;
+  border-radius: 18px;
+  backdrop-filter: blur(22px);
+}
+.reborn-shell .cyber-command-results > button:hover {
+  background: #8b5cf620;
+  color: #e3d1ff;
+}
+.reborn-shell .cyber-command-input {
+  color: #b096e0;
+}
+.reborn-shell .cyber-command-results > .cyber-eyebrow:before {
+  background: #a78bfa;
+}
+.reborn-shell .cyber-command-foot {
+  color: #9c86bb;
+}
+@keyframes orb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3px, -7px, 0);
+  }
+}
+@keyframes mascot-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+@keyframes reborn-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes reborn-video-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes featured-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+[data-motion='paused'] .reborn-header,
+[data-motion='paused'] .reborn-hero-copy,
+[data-motion='paused'] .tech-orbit,
+[data-motion='paused'] .reborn-hero-bottom {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+@media (min-width: 1800px) {
+  .reborn-hero-copy {
+    padding-top: 110px;
+  }
+  .tech-orbit {
+    left: 59%;
+    right: 15px;
+  }
+  .reborn-section {
+    padding-block: 125px;
+  }
+  .reborn-hero-copy > p {
+    font-size: 17px;
+  }
+}
+@media (max-width: 1250px) {
+  .reborn-header.cyber-header {
+    gap: 18px;
+    padding-inline: 18px;
+    margin-inline: 24px;
+  }
+  .reborn-nav {
+    gap: 17px;
+  }
+  .reborn-nav > a,
+  .reborn-nav > button {
+    font-size: 10px;
+  }
+  .reborn-brand-name {
+    padding-left: 11px;
+  }
+  .reborn-brand-name > b {
+    font-size: 11px;
+  }
+  .reborn-header-actions {
+    gap: 9px;
+  }
+  .reborn-search > kbd {
+    display: none;
+  }
+  .reborn-hero-copy {
+    padding-top: 75px;
+    width: 64%;
+  }
+  .reborn-hero h1 {
+    font-size: 10vw;
+  }
+  .reborn-hero h1 > span {
+    font-size: 0.73em;
+  }
+  .reborn-hero-actions {
+    gap: 17px;
+  }
+  .reborn-hero-actions > span {
+    font-size: 6px;
+  }
+  .tech-orbit {
+    left: 58%;
+    right: 0;
+  }
+  .tech-orb.is-open .tech-capsule {
+    width: 300px;
+  }
+  .tech-orb.is-open .tech-details {
+    width: 234px;
+  }
+  .tech-details > p,
+  .tech-application {
+    min-width: 200px;
+  }
+  .featured-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+  .featured-product-info {
+    padding: 30px 23px;
+  }
+  .featured-product-stage {
+    min-height: 660px;
+  }
+  .featured-product-info > .system-eyebrow {
+    font-size: 6px;
+  }
+  .featured-sizes > button {
+    min-width: 30px;
+    margin-right: 5px;
+  }
+  .featured-view-buttons {
+    left: 18px;
+    gap: 5px;
+  }
+  .featured-view-buttons > button {
+    font-size: 6px;
+    padding: 9px;
+  }
+  .featured-open-3d {
+    right: 17px;
+    font-size: 8px;
+  }
+  .loadout-card-copy {
+    padding-inline: 22px;
+  }
+  .loadout-card-copy > h3 {
+    font-size: 32px;
+  }
+  .reborn-footer-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .reborn-replay {
+    grid-column: 1/-1;
+    max-width: 260px;
+  }
+  .reborn-shell .product-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1100px) {
+  :root {
+    --mascot-rail: 180px;
+  }
+  .reborn-container {
+    width: calc(100% - 64px);
+  }
+  .reborn-shell .page-width {
+    width: calc(100% - var(--mascot-rail) - 64px);
+    margin-left: 32px;
+  }
+  .reborn-hero-inner {
+    width: calc(100% - 64px);
+    padding-top: 137px;
+  }
+  .reborn-header.cyber-header {
+    margin-inline: 16px;
+    gap: 16px;
+  }
+  .reborn-nav {
+    gap: 13px;
+  }
+  .reborn-nav > a,
+  .reborn-nav > button {
+    font-size: 9px;
+  }
+  .reborn-header-actions {
+    gap: 6px;
+  }
+  .reborn-brand-name {
+    font-size: 6px;
+    padding-left: 9px;
+  }
+  .reborn-brand-name > b {
+    font-size: 9px;
+  }
+  .reborn-brand .official-logo,
+  .reborn-brand .official-logo > img {
+    width: 82px;
+    height: 39px;
+  }
+  .reborn-section {
+    padding-block: 85px;
+  }
+  .reborn-hero h1 {
+    font-size: 10.8vw;
+  }
+  .reborn-hero h1 > span {
+    font-size: 0.69em;
+  }
+  .reborn-hero-copy {
+    width: 65%;
+    padding-top: 85px;
+  }
+  .reborn-hero-copy > .system-eyebrow {
+    font-size: 6px;
+  }
+  .reborn-hero-copy > p {
+    font-size: 13px;
+  }
+  .reborn-hero-actions > span {
+    display: none;
+  }
+  .reborn-hero-actions .system-button {
+    font-size: 9px;
+    gap: 25px;
+  }
+  .hero-source-signature {
+    font-size: 8px;
+  }
+  .tech-orbit {
+    left: 61%;
+    right: 0;
+    top: 36%;
+    height: 47%;
+  }
+  .tech-orb {
+    width: 55px;
+  }
+  .tech-capsule {
+    width: 55px;
+    min-height: 60px;
+    border-radius: 17px;
+  }
+  .tech-trigger {
+    min-width: 53px;
+    height: 58px;
+    border-radius: 16px;
+  }
+  .tech-glyph {
+    width: 23px;
+    height: 23px;
+  }
+  .tech-trigger-label {
+    font-size: 5px;
+  }
+  .tech-orb.is-open .tech-capsule {
+    width: 285px;
+  }
+  .tech-orb.is-open .tech-details {
+    width: 230px;
+  }
+  .tech-info-heading {
+    font-size: 12px;
+  }
+  .tech-details > p {
+    font-size: 10px;
+  }
+  .orb-python {
+    left: -25px;
+  }
+  .orb-html {
+    right: 0;
+  }
+  .orb-css {
+    left: 10px;
+  }
+  .orb-sql {
+    right: 10px;
+  }
+  .reborn-section-heading h2 {
+    font-size: 53px;
+  }
+  .reborn-section-heading p {
+    font-size: 12px;
+  }
+  .loadout-editorial {
+    gap: 17px;
+  }
+  .loadout-01 .loadout-card {
+    min-height: 545px;
+  }
+  .loadout-card {
+    min-height: 264px;
+  }
+  .loadout-card-head {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+    font-size: 6px;
+  }
+  .loadout-card-copy {
+    padding: 65px 20px 24px;
+  }
+  .loadout-card-copy > h3 {
+    font-size: 28px;
+  }
+  .loadout-card-copy > p {
+    font-size: 10px;
+  }
+  .featured-panel {
+    grid-template-columns: 1fr;
+  }
+  .featured-product-stage {
+    min-height: 480px;
+    border-bottom: 1px solid #c7aff124;
+  }
+  .featured-product-info {
+    border-left: 0;
+    padding: 30px;
+  }
+  .featured-product-info > h3 {
+    font-size: 39px;
+  }
+  .featured-product-stage > img {
+    height: 85%;
+    width: 90%;
+    inset: 0 5% 15%;
+  }
+  .featured-sizes > button {
+    min-width: 37px;
+    margin-right: 8px;
+  }
+  .featured-product-info > .system-eyebrow {
+    font-size: 7px;
+  }
+  .featured-open-3d {
+    font-size: 10px;
+    right: 25px;
+  }
+  .featured-view-buttons {
+    left: 25px;
+  }
+  .featured-view-buttons > button {
+    font-size: 8px;
+    padding: 10px 13px;
+  }
+  .featured-price > span {
+    font-size: 7px;
+  }
+  .terminal-section .reborn-section-heading h2 {
+    font-size: 46px;
+  }
+  .terminal-line {
+    font-size: 10px;
+  }
+  .terminal-connected {
+    font-size: 5px;
+  }
+  .terminal-quick-commands > button {
+    gap: 15px;
+  }
+  .reborn-finale h2 {
+    font-size: 69px;
+  }
+  .reborn-shell .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .reborn-shell .cart-layout,
+  .reborn-shell .fitting-studio {
+    grid-template-columns: 1fr;
+  }
+  .reborn-shell .fitting-stage {
+    grid-row: 1;
+  }
+  .reborn-shell .body-panel {
+    grid-row: 2;
+  }
+  .reborn-shell .look-panel {
+    grid-row: 3;
+  }
+  .reborn-footer-bottom > svg {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  :root {
+    --mascot-rail: 88px;
+    --glass-blur: 12px;
+    --glass-radius: 19px;
+  }
+  .reborn-container {
+    width: calc(100% - 36px);
+  }
+  .reborn-section {
+    padding-block: 65px;
+    scroll-margin-top: 105px;
+  }
+  .reborn-shell .page-width {
+    width: calc(100% - var(--mascot-rail) - 36px);
+    margin-left: 18px;
+  }
+  .reborn-header.cyber-header {
+    height: 65px;
+    top: 10px;
+    margin: 10px 12px -75px;
+    padding-inline: 12px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+  .reborn-brand {
+    gap: 9px;
+  }
+  .reborn-brand .official-logo,
+  .reborn-brand .official-logo > img {
+    width: 75px;
+    height: 36px;
+  }
+  .reborn-brand-name {
+    font-size: 5px;
+    padding-left: 9px;
+    letter-spacing: 0.08em;
+  }
+  .reborn-brand-name > b {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .reborn-nav {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    height: auto;
+    background: #101426f2;
+    backdrop-filter: blur(20px);
+    border: 1px solid #c4b5fd55;
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 0 20px 60px #030512a0;
+  }
+  .reborn-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .reborn-nav > a,
+  .reborn-nav > button {
+    min-height: 51px;
+    text-align: left;
+    font-size: 15px;
+    border-bottom: 1px solid #c4b5fd18;
+  }
+  .reborn-nav > a:last-child {
+    border-bottom: 0;
+  }
+  .reborn-nav > button[aria-current='location']:after {
+    bottom: 8px;
+  }
+  .reborn-header-actions {
+    margin-left: auto;
+    gap: 7px;
+  }
+  .reborn-motion {
+    min-width: 25px;
+  }
+  .reborn-search {
+    min-width: 26px;
+  }
+  .reborn-bag {
+    border-left: 0;
+    padding-left: 0;
+    gap: 6px;
+    font-size: 8px;
+  }
+  .reborn-menu {
+    display: grid;
+  }
+  .mascot-rail {
+    right: 13px;
+    top: 125px;
+    bottom: 27px;
+    width: 10px;
+    font-size: 5px;
+    letter-spacing: 0.08em;
+    color: #b49bd9;
+    gap: 16px;
+  }
+  .mascot-dock-caption {
+    font-size: 7px;
+    bottom: -25px;
+    letter-spacing: 0.05em;
+  }
+  .mascot-ambient-glow {
+    filter: blur(12px);
+    inset: 8% -10% -3%;
+  }
+  .reborn-hero {
+    min-height: 100svh;
+  }
+  .reborn-hero-inner {
+    min-height: 100svh;
+    width: calc(100% - 36px);
+    padding-top: 112px;
+  }
+  .system-transmission {
+    font-size: 6px;
+    letter-spacing: 0.08em;
+  }
+  .system-transmission > span:last-child {
+    display: none;
+  }
+  .reborn-hero-copy {
+    padding-top: 55px;
+    padding-bottom: 225px;
+    width: 100%;
+    max-width: none;
+    pointer-events: none;
+  }
+  .reborn-hero-copy > .system-eyebrow {
+    font-size: 5px;
+    letter-spacing: 0.06em;
+  }
+  .reborn-hero h1 {
+    font-size: 21vw;
+    line-height: 0.88;
+    margin: 24px 0 25px;
+  }
+  .reborn-hero h1 > span {
+    font-size: 0.59em;
+  }
+  .reborn-hero-copy > p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #cfc5e0;
+    max-width: 195px;
+    margin-top: 23px;
+  }
+  .reborn-hero-actions {
+    margin-top: 25px;
+    pointer-events: auto;
+  }
+  .reborn-hero-actions .system-button {
+    min-height: 47px;
+    padding: 14px 15px;
+    font-size: 8px;
+    gap: 18px;
+    max-width: 185px;
+  }
+  .hero-source-signature {
+    font-size: 6px;
+    margin-top: 27px;
+    gap: 8px;
+    max-width: 190px;
+    color: #a590bd;
+  }
+  .hero-source-signature > svg {
+    width: 15px;
+  }
+  .reborn-hero-bottom {
+    padding: 18px 0 22px;
+    font-size: 5px;
+    letter-spacing: 0.07em;
+    gap: 15px;
+  }
+  .reborn-hero-bottom > span {
+    max-width: 140px;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .reborn-hero-bottom > button {
+    gap: 14px;
+    min-height: 28px;
+  }
+  .tech-orbit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 90px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 48px);
+    gap: 9px 0;
+    width: calc(100% - 100px);
+    pointer-events: none;
+  }
+  .orbit-caption {
+    top: -20px;
+    left: 0;
+    right: auto;
+    font-size: 5px;
+    letter-spacing: 0.08em;
+  }
+  .tech-orb,
+  .tech-orb.align-right {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 48px;
+    animation: none;
+    transform: none;
+    z-index: auto;
+    pointer-events: none;
+  }
+  .tech-capsule,
+  .tech-orb.align-right .tech-capsule {
+    position: absolute;
+    left: 0;
+    right: auto;
+    top: 0;
+    display: block;
+    width: 45px;
+    min-height: 47px;
+    height: 47px;
+    overflow: visible;
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: auto;
+    transition:
+      left 0.3s,
+      width 0.3s,
+      height 0.3s,
+      border-color 0.3s;
+  }
+  .tech-trigger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 43px;
+    min-width: 43px;
+    height: 45px;
+    gap: 3px;
+    border-radius: 14px;
+    pointer-events: auto;
+    z-index: 40;
+    transition: left 0.3s;
+  }
+  .tech-glyph {
+    width: 19px;
+    height: 19px;
+  }
+  .tech-trigger > svg {
+    width: 22px;
+    height: 22px;
+  }
+  .tech-trigger-label {
+    font-size: 4px;
+  }
+  .tech-orb.is-open .tech-capsule {
+    left: calc(var(--mobile-col) * -1 * (100vw - 136px) / 3);
+    width: calc(100vw - 36px);
+    height: 226px;
+    min-height: 226px;
+    background: linear-gradient(125deg, #1d2149f5, #0c1128f5);
+    border-color: #ad90f580;
+    box-shadow: 0 14px 55px #030512cc;
+  }
+  .tech-orb.is-open .tech-trigger {
+    left: calc(var(--mobile-col) * (100vw - 136px) / 3);
+  }
+  .tech-orb.is-open .tech-details,
+  .tech-orb.align-right.is-open .tech-details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 48px;
+    width: auto;
+    max-height: 170px;
+    padding: 10px 18px 16px;
+    z-index: 30;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .tech-details {
+    position: absolute;
+    z-index: 30;
+  }
+  .tech-details > p,
+  .tech-application {
+    min-width: 0;
+  }
+  .tech-info-heading {
+    font-size: 13px;
+  }
+  .tech-category {
+    font-size: 8px;
+  }
+  .tech-details > p {
+    font-size: 11px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  .tech-application {
+    font-size: 7px;
+    margin-top: 8px;
+  }
+  .tech-pinned {
+    font-size: 5px;
+    margin-top: 8px;
+  }
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-capsule {
+    top: -179px;
+  }
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-trigger {
+    top: 179px;
+  }
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-details {
+    top: 0;
+    padding-top: 14px;
+    max-height: 174px;
+  }
+  .reborn-section-heading {
+    margin-bottom: 25px;
+  }
+  .system-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.08em;
+    gap: 7px;
+  }
+  .system-eyebrow:before {
+    width: 13px;
+  }
+  .reborn-section-heading h2 {
+    font-size: clamp(33px, 8.6vw, 54px);
+    margin-top: 19px;
+    line-height: 1.01;
+  }
+  .reborn-section-heading p {
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 18px;
+  }
+  .loadout-editorial {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+  .loadout-01 {
+    grid-row: auto;
+  }
+  .loadout-card,
+  .loadout-01 .loadout-card {
+    min-height: 350px;
+  }
+  .loadout-01 .loadout-card {
+    min-height: 410px;
+  }
+  .loadout-card-head {
+    top: 19px;
+    left: 19px;
+    right: 19px;
+    font-size: 6px;
+  }
+  .loadout-card-head > svg {
+    width: 14px;
+  }
+  .loadout-card-copy {
+    padding: 65px 20px 23px;
+  }
+  .loadout-card-copy > h3 {
+    font-size: 31px;
+  }
+  .loadout-card-copy > p {
+    font-size: 10px;
+  }
+  .loadout-card-copy > span {
+    font-size: 7px;
+    margin-top: 14px;
+  }
+  .loadout-01 .loadout-card > img {
+    height: 87%;
+    width: 102%;
+    right: -6%;
+  }
+  .loadout-02 .loadout-card > img {
+    height: 90%;
+    width: 93%;
+    right: -15%;
+    top: 2%;
+  }
+  .loadout-03 .loadout-card > img {
+    height: 88%;
+    width: 94%;
+    right: -14%;
+    top: 2%;
+  }
+  .loadout-big-code {
+    font-size: 160px;
+  }
+  .featured-panel {
+    border-radius: 19px;
+  }
+  .featured-product-stage {
+    min-height: 360px;
+  }
+  .featured-product-id {
+    font-size: 5px;
+    top: 20px;
+    left: 18px;
+  }
+  .featured-ghost-word {
+    font-size: 70px;
+    top: 23%;
+  }
+  .featured-product-stage > img {
+    width: 100%;
+    height: 83%;
+    inset: 3% 0 14%;
+  }
+  .featured-view-buttons {
+    left: 14px;
+    bottom: 20px;
+    gap: 5px;
+  }
+  .featured-view-buttons > button {
+    font-size: 5px;
+    padding: 8px 9px;
+    min-height: 32px;
+    border-radius: 7px;
+  }
+  .featured-open-3d {
+    right: 13px;
+    bottom: 20px;
+    font-size: 7px;
+    gap: 4px;
+    min-height: 32px;
+  }
+  .featured-open-3d > svg {
+    width: 13px;
+  }
+  .featured-product-info {
+    padding: 24px 19px;
+  }
+  .featured-product-info > .system-eyebrow {
+    font-size: 5px;
+  }
+  .featured-product-info > h3 {
+    font-size: 31px;
+    margin-top: 20px;
+  }
+  .featured-product-info > p {
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  .featured-price {
+    margin-block: 21px;
+  }
+  .featured-price > strong {
+    font-size: 21px;
+  }
+  .featured-price > span {
+    font-size: 5px;
+  }
+  .featured-product-selector {
+    font-size: 6px;
+  }
+  .featured-product-selector > select {
+    font-size: 11px;
+    min-height: 39px;
+  }
+  .featured-sizes > legend,
+  .featured-colors > legend {
+    font-size: 6px;
+  }
+  .featured-sizes > button {
+    min-width: 31px;
+    height: 33px;
+    margin-right: 6px;
+    font-size: 9px;
+  }
+  .featured-colors > button {
+    width: 23px;
+    height: 23px;
+  }
+  .add-to-loadout {
+    min-height: 47px;
+    margin-top: 27px;
+    font-size: 8px;
+    padding-inline: 14px;
+    gap: 12px;
+  }
+  .featured-cart-feedback {
+    font-size: 7px;
+    line-height: 1.8;
+    gap: 6px;
+  }
+  .featured-cart-feedback > a {
+    margin-left: 0;
+  }
+  .featured-product-info > small {
+    font-size: 8px;
+    line-height: 1.8;
+  }
+  .terminal-section .reborn-section-heading h2 {
+    font-size: clamp(29px, 7.3vw, 44px);
+    line-height: 1.05;
+  }
+  .reborn-terminal {
+    margin-top: 27px;
+  }
+  .terminal-chrome {
+    padding: 0 14px;
+    gap: 10px;
+    height: 47px;
+    font-size: 7px;
+  }
+  .terminal-dots {
+    gap: 4px;
+  }
+  .terminal-dots > i {
+    width: 5px;
+    height: 5px;
+  }
+  .terminal-connected {
+    display: none;
+  }
+  .terminal-output {
+    height: 265px;
+    padding: 20px 15px;
+  }
+  .terminal-line {
+    font-size: 9px;
+    gap: 8px;
+    line-height: 1.9;
+    margin-bottom: 6px;
+  }
+  .terminal-command-form {
+    padding: 13px 14px;
+    gap: 7px;
+  }
+  .terminal-command-form > label {
+    gap: 7px;
+    font-size: 12px;
+  }
+  .terminal-command-form input {
+    font-size: 9px;
+  }
+  .terminal-command-form > button {
+    min-width: 28px;
+    min-height: 31px;
+    border-radius: 7px;
+  }
+  .terminal-command-form > button > svg {
+    width: 15px;
+  }
+  .terminal-quick-commands {
+    padding: 13px 14px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .terminal-quick-commands > button {
+    font-size: 8px;
+    gap: 11px;
+    padding: 6px 9px;
+  }
+  .reborn-finale {
+    min-height: 75svh;
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+  .reborn-finale .system-eyebrow {
+    font-size: 6px;
+  }
+  .reborn-finale h2 {
+    font-size: clamp(40px, 10.2vw, 65px);
+    margin: 24px 0;
+    line-height: 1.01;
+  }
+  .reborn-finale p {
+    font-size: 12px;
+  }
+  .reborn-finale .system-button {
+    font-size: 7px;
+    gap: 17px;
+    padding: 15px;
+    min-height: 47px;
+  }
+  .finale-code {
+    flex-wrap: wrap;
+    font-size: 6px;
+    gap: 9px;
+    margin-top: 28px;
+  }
+  .finale-code > code {
+    font-size: 7px;
+    flex-basis: 100%;
+  }
+  .reborn-footer {
+    padding-top: 28px;
+  }
+  .reborn-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-bottom: 28px;
+  }
+  .reborn-footer-links {
+    justify-self: start;
+    gap: 14px;
+  }
+  .reborn-footer-links > a {
+    font-size: 10px;
+  }
+  .reborn-footer-grid > div > p {
+    font-size: 9px;
+    margin-top: 16px;
+  }
+  .reborn-replay {
+    grid-column: auto;
+    width: 100%;
+    max-width: none;
+    gap: 12px;
+    padding: 14px;
+  }
+  .reborn-footer-bottom {
+    font-size: 5px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-block: 19px;
+  }
+  .reborn-footer-bottom > span:nth-child(2) {
+    font-size: 6px;
+    line-height: 1.8;
+  }
+  .reborn-shell .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .reborn-shell .catalog-grid,
+  .reborn-shell .related-section .product-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .reborn-shell .catalog-page .commerce-intro h1,
+  .reborn-shell .collections-page h1,
+  .reborn-shell .experience-page h1 {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+  .reborn-shell .fitting-intro h1 {
+    font-size: 35px;
+  }
+  .reborn-shell .product-info h1 {
+    font-size: 34px;
+  }
+  .reborn-shell .product-card .card-image {
+    aspect-ratio: 0.88;
+  }
+  .reborn-shell .product-viewer {
+    min-height: 490px;
+  }
+  .reborn-shell .scene-container {
+    height: 375px;
+  }
+  .reborn-shell .viewer-options {
+    gap: 7px;
+    bottom: 47px;
+  }
+  .reborn-shell .viewer-options button {
+    font-size: 6px;
+  }
+  .reborn-shell .camera-presets {
+    left: 8px;
+    right: 8px;
+    bottom: 85px;
+    gap: 3px;
+  }
+  .reborn-shell .camera-presets button {
+    font-size: 6px;
+    padding: 8px;
+  }
+  .reborn-shell .viewer-top {
+    font-size: 6px;
+    left: 12px;
+    right: 12px;
+  }
+  .reborn-shell .viewer-tools {
+    right: 8px;
+  }
+  .reborn-shell .viewer-tools .icon-button {
+    width: 26px;
+    height: 29px;
+  }
+  .reborn-shell .model-note {
+    font-size: 6px;
+  }
+  .reborn-shell .fitting-stage {
+    min-height: 520px;
+  }
+  .reborn-shell .fit-views {
+    gap: 4px;
+  }
+  .reborn-shell .fit-views button {
+    font-size: 8px;
+    padding: 8px;
+  }
+  .reborn-shell .fitting-stage-head {
+    font-size: 6px;
+    left: 15px;
+    right: 15px;
+  }
+  .reborn-shell .body-panel {
+    padding: 20px;
+  }
+  .reborn-shell .look-panel {
+    padding: 20px;
+  }
+  .reborn-shell .panel-heading h2 {
+    font-size: 17px;
+  }
+  .reborn-shell .fit-readout {
+    left: 15px;
+    right: 15px;
+    font-size: 16px;
+  }
+  .reborn-shell .fit-readout small {
+    font-size: 6px;
+  }
+  .reborn-shell .fitting-caption {
+    font-size: 5px;
+  }
+  .reborn-shell .product-page .buy-row {
+    gap: 7px;
+  }
+  .reborn-shell .quantity-control button {
+    width: 24px;
+  }
+  .reborn-shell .quantity-control input {
+    width: 23px;
+  }
+  .reborn-shell .add-to-cart {
+    font-size: 10px;
+    padding: 12px 8px;
+  }
+  .reborn-shell .cart-line {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .reborn-shell .cart-line-title {
+    flex-direction: column;
+    gap: 9px;
+  }
+  .reborn-shell .cart-summary {
+    padding: 20px;
+  }
+  .reborn-shell .catalog-page .catalog-filter-row {
+    gap: 9px;
+  }
+  .reborn-shell .catalog-page .catalog-filter-row select {
+    max-width: 85px;
+    font-size: 8px;
+  }
+  .reborn-intro-controls {
+    padding: 24px 18px;
+  }
+  .intro-top {
+    gap: 14px;
+  }
+  .intro-top > span {
+    font-size: 11px;
+  }
+  .intro-top > span > small {
+    font-size: 5px;
+  }
+  .intro-top > button {
+    font-size: 9px;
+    padding: 10px;
+    gap: 8px;
+    min-height: 40px;
+  }
+  .intro-bottom {
+    font-size: 5px;
+    letter-spacing: 0.04em;
+    gap: 15px;
+    line-height: 1.8;
+  }
+  .intro-bottom > span:first-child {
+    max-width: 135px;
+  }
+  .intro-bottom > span:nth-child(2) {
+    max-width: 130px;
+    text-align: right;
+  }
+  .intro-manual {
+    padding: 23px;
+  }
+  .intro-manual > span {
+    font-size: 7px;
+  }
+  .intro-manual > button {
+    font-size: 10px;
+  }
+}
+@media (max-width: 350px) {
+  .reborn-brand-name {
+    display: none;
+  }
+  .reborn-header-actions {
+    gap: 8px;
+  }
+  .reborn-hero-copy {
+    padding-top: 52px;
+  }
+  .reborn-hero-copy > .system-eyebrow {
+    font-size: 4px;
+  }
+  .reborn-hero-copy > p {
+    font-size: 10px;
+    max-width: 165px;
+  }
+  .reborn-hero-actions .system-button {
+    font-size: 7px;
+    padding: 13px 12px;
+    gap: 10px;
+    max-width: 165px;
+  }
+  .tech-orbit {
+    bottom: 85px;
+  }
+  .reborn-section-heading h2 {
+    font-size: 29px;
+  }
+  .loadout-card-copy > h3 {
+    font-size: 27px;
+  }
+  .featured-product-info {
+    padding: 21px 15px;
+  }
+  .featured-product-info > h3 {
+    font-size: 27px;
+  }
+  .featured-sizes > button {
+    min-width: 26px;
+    height: 30px;
+    margin-right: 4px;
+    font-size: 8px;
+  }
+  .featured-view-buttons > button {
+    padding: 8px 6px;
+    font-size: 4px;
+  }
+  .featured-open-3d {
+    font-size: 6px;
+    right: 10px;
+  }
+  .terminal-section .reborn-section-heading h2 {
+    font-size: 25px;
+  }
+  .terminal-line {
+    font-size: 8px;
+  }
+  .terminal-command-form input {
+    font-size: 8px;
+  }
+  .terminal-quick-commands > button {
+    font-size: 7px;
+    gap: 8px;
+  }
+  .reborn-finale h2 {
+    font-size: 34px;
+  }
+  .reborn-finale .system-button {
+    font-size: 6px;
+    gap: 10px;
+    padding: 14px;
+  }
+  .reborn-shell .viewer-options button {
+    font-size: 5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .system-reborn *,
+  .system-reborn *:before,
+  .system-reborn *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .mascot-sprite {
+    animation: none !important;
+  }
+  .state-INTRO_TRANSITION .reborn-header,
+  .state-INTRO_TRANSITION .reborn-hero-copy,
+  .state-INTRO_TRANSITION .tech-orbit,
+  .state-INTRO_TRANSITION .reborn-hero-bottom {
+    opacity: 1;
+    transform: none;
+  }
+}
+.state-BOOT .mascot-sprite,
+.state-INTRO_PLAYING .mascot-sprite {
+  animation-play-state: paused;
+}
+.orbit-paused .tech-orb {
+  animation-play-state: paused;
+}
+.orb-css .tech-capsule {
+  position: absolute;
+  left: 0;
+  bottom: -68px;
+  align-items: flex-end;
+}
+.orb-sql .tech-capsule {
+  bottom: -68px;
+  align-items: flex-end;
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .orb-css .tech-capsule,
+  .orb-sql .tech-capsule {
+    bottom: -60px;
+  }
+}
+@media (max-width: 760px) {
+  .orb-css .tech-capsule,
+  .orb-sql .tech-capsule {
+    bottom: auto;
+    align-items: start;
+  }
+}
+.mascot-plane {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: clip;
+  pointer-events: none;
+}
+.mascot-plane .mascot-anchor {
+  position: absolute;
+}
+.mascot-sprite {
+  overflow: hidden;
+}
+.mascot-dock-caption {
+  left: 0;
+  right: 0;
+}
+@media (max-width: 760px) {
+  .tech-orbit {
+    width: 132px;
+    grid-template-columns: repeat(2, 66px);
+    grid-template-rows: repeat(3, 48px);
+    height: 162px;
+    bottom: 85px;
+  }
+  .tech-orb,
+  .tech-orb.align-right {
+    z-index: 30;
+  }
+  .tech-orb.is-open {
+    z-index: 20;
+  }
+  .tech-capsule,
+  .tech-orb.align-right .tech-capsule {
+    transition:
+      left 0.3s,
+      top 0.3s,
+      width 0.3s,
+      height 0.3s,
+      border-color 0.3s;
+  }
+  .tech-trigger {
+    transition:
+      left 0.3s,
+      top 0.3s;
+  }
+  .tech-orb.is-open .tech-capsule,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-capsule {
+    left: calc(var(--mobile-col) * -66px);
+    top: calc(-179px - var(--mobile-row) * 57px);
+    height: calc(226px + var(--mobile-row) * 57px);
+    min-height: 226px;
+  }
+  .tech-orb.is-open .tech-trigger,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-trigger {
+    left: calc(var(--mobile-col) * 66px);
+    top: calc(179px + var(--mobile-row) * 57px);
+  }
+  .tech-orb.is-open .tech-details,
+  .tech-orb.align-right.is-open .tech-details,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-details {
+    top: 0;
+    padding: 14px 18px 16px;
+    max-height: 175px;
+  }
+}
+@media (max-width: 760px) {
+  .reborn-hero:has(.tech-orb.is-open) {
+    padding-bottom: 260px;
+  }
+  .tech-orbit {
+    scroll-margin-top: 110px;
+  }
+  .tech-orb.is-open .tech-capsule,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-capsule {
+    top: calc(var(--mobile-row) * -57px);
+    width: calc(100vw - var(--mascot-rail) - 36px);
+    height: 415px;
+    min-height: 415px;
+  }
+  .tech-orb.is-open .tech-trigger,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-trigger {
+    top: calc(var(--mobile-row) * 57px);
+  }
+  .tech-orb.is-open .tech-details,
+  .tech-orb.align-right.is-open .tech-details,
+  .tech-orb.is-open:nth-of-type(n + 4) .tech-details {
+    top: 174px;
+    padding: 12px 15px 18px;
+    max-height: 235px;
+  }
+  .tech-details > p {
+    font-size: 10px;
+  }
+  .tech-info-heading {
+    font-size: 12px;
+  }
+}
+
+/* Persistent centered composition. Motion belongs to the world of technology. */
+:root {
+  --mascot-rail: 0px;
+}
+.mascot-rail,
+.mascot-dock-caption {
+  display: none;
+}
+.mascot-plane {
+  z-index: 1;
+}
+.mascot-sprite {
+  animation: none;
+}
+.reborn-section,
+.reborn-footer {
+  padding-right: 0;
+}
+.reborn-hero-copy {
+  width: 45%;
+}
+.reborn-shell .page-width {
+  width: min(calc(100% - 112px), 1400px);
+  margin-inline: auto;
+}
+.loadout-editorial {
+  max-width: 1140px;
+}
+.featured-panel {
+  grid-template-columns: 1.1fr 1fr;
+}
+.reborn-container {
+  max-width: 1240px;
+}
+.terminal-section .reborn-container {
+  max-width: 1060px;
+}
+.reborn-finale .reborn-container {
+  max-width: 1240px;
+}
+.tech-field {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  overflow: clip;
+  pointer-events: none;
+}
+.tech-field.has-active {
+  z-index: 45;
+}
+.field-orb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  will-change: transform;
+}
+.field-orb.is-open {
+  z-index: 20;
+}
+.field-interaction {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.field-capsule {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #c6b7ff55;
+  border-radius: 19px;
+  background: linear-gradient(135deg, #b9a0ff20, #0a0e1ee6);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 1px 0 #ffffff1a,
+    0 12px 32px #03071460;
+  transition:
+    width 0.28s,
+    height 0.28s,
+    left 0.28s,
+    top 0.28s,
+    border-color 0.25s;
+  pointer-events: none;
+}
+.field-trigger {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  gap: 5px;
+  border-radius: 18px;
+  color: var(--tech-color);
+  pointer-events: auto;
+  cursor: pointer;
+  transition:
+    left 0.28s,
+    top 0.28s;
+}
+.field-details {
+  position: absolute;
+  inset: var(--details-top, 76px) 18px auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s;
+}
+.field-details p {
+  color: #c4bfd5;
+  font: 12px/1.7 var(--body);
+  margin-top: 12px;
+}
+.field-details .tech-application {
+  min-width: 0;
+  color: #aba3c1;
+  font-size: 8px;
+}
+.field-details .tech-info-heading {
+  font-size: 15px;
+}
+.field-details .tech-info-heading button {
+  min-width: 30px;
+  min-height: 30px;
+}
+.field-details .tech-category {
+  font-size: 9px;
+}
+.field-orb.is-open .field-capsule {
+  left: var(--panel-left, 0px);
+  top: var(--panel-top, 0px);
+  width: var(--panel-width, 300px);
+  height: 260px;
+  border-color: var(--tech-color);
+  background: linear-gradient(135deg, #222347f5, #0b1025f5);
+  box-shadow:
+    0 18px 60px #030512a0,
+    0 0 30px color-mix(in srgb, var(--tech-color) 12%, transparent);
+  pointer-events: auto;
+}
+.field-orb.is-open .field-trigger {
+  left: var(--trigger-left, 0px);
+  top: var(--trigger-top, 0px);
+}
+.field-orb.is-open .field-details {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0.12s;
+}
+.state-BOOT .tech-field,
+.state-INTRO_PLAYING .tech-field {
+  visibility: hidden;
+}
+@media (max-width: 1100px) {
+  .reborn-shell .page-width {
+    width: calc(100% - 64px);
+    margin-inline: auto;
+  }
+  .featured-panel {
+    grid-template-columns: 1fr;
+  }
+  .reborn-hero-copy {
+    width: 47%;
+  }
+}
+@media (max-width: 760px) {
+  :root {
+    --mascot-rail: 0px;
+  }
+  .reborn-shell .page-width {
+    width: calc(100% - 36px);
+    margin-inline: auto;
+  }
+  .reborn-hero-copy {
+    width: 100%;
+    padding-top: 330px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+  .reborn-hero-copy > p {
+    max-width: none;
+    margin-inline: auto;
+  }
+  .reborn-hero h1 {
+    font-size: 22vw;
+  }
+  .reborn-hero h1 > span {
+    font-size: 0.64em;
+  }
+  .reborn-hero-actions,
+  .hero-source-signature {
+    justify-content: center;
+  }
+  .hero-source-signature {
+    max-width: none;
+  }
+  .reborn-hero-actions .system-button {
+    max-width: none;
+    font-size: 10px;
+  }
+  .reborn-section-heading h2 {
+    font-size: clamp(38px, 10vw, 60px);
+  }
+  .terminal-section .reborn-section-heading h2 {
+    font-size: clamp(33px, 8.8vw, 52px);
+  }
+  .reborn-section-heading p,
+  .featured-product-info > p {
+    font-size: 13px;
+  }
+  .featured-product-info > h3 {
+    font-size: 36px;
+  }
+  .featured-product-stage {
+    min-height: 440px;
+  }
+  .featured-product-info {
+    padding: 30px 25px;
+  }
+  .featured-product-selector > select {
+    min-height: 45px;
+    font-size: 13px;
+  }
+  .featured-sizes > button {
+    min-width: 40px;
+    height: 40px;
+    font-size: 11px;
+  }
+  .add-to-loadout {
+    font-size: 10px;
+    min-height: 52px;
+  }
+  .featured-cart-feedback {
+    font-size: 9px;
+  }
+  .terminal-line {
+    font-size: 11px;
+  }
+  .terminal-command-form input {
+    font-size: 12px;
+  }
+  .terminal-quick-commands > button {
+    min-height: 38px;
+    font-size: 10px;
+  }
+  .reborn-finale h2 {
+    font-size: clamp(49px, 13vw, 78px);
+  }
+  .field-orb,
+  .field-capsule {
+    width: 46px;
+    height: 46px;
+  }
+  .field-capsule {
+    border-radius: 15px;
+  }
+  .field-trigger {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    gap: 3px;
+  }
+  .field-trigger .tech-glyph {
+    width: 22px;
+    height: 22px;
+  }
+  .field-trigger > svg {
+    width: 23px;
+  }
+  .field-trigger .tech-trigger-label {
+    font-size: 5px;
+  }
+}
+
+/* ASCENSION: the scene is blurred once; transparent UI never blurs the mascot. */
+.reborn-shell .glass-panel,
+.reborn-shell .product-card,
+.reborn-shell .product-info,
+.reborn-shell .cart-summary,
+.reborn-shell .cart-line,
+.reborn-shell .body-panel,
+.reborn-shell .look-panel,
+.field-capsule {
+  backdrop-filter: none;
+}
+.tech-field {
+  z-index: 2;
+}
+.tech-field.has-active {
+  z-index: 45;
+}
+.reborn-interface {
+  pointer-events: none;
+}
+.reborn-interface .reborn-header,
+.reborn-interface .skip-link,
+.reborn-interface .reborn-hero-copy > h1,
+.reborn-interface .reborn-hero-copy > p,
+.reborn-interface .reborn-hero-copy > span,
+.reborn-interface .reborn-hero-actions,
+.reborn-interface .reborn-hero-bottom,
+.reborn-interface .reborn-section-heading,
+.reborn-interface .loadout-link,
+.reborn-interface .featured-panel,
+.reborn-interface .reborn-terminal,
+.reborn-interface .reborn-finale .reborn-container,
+.reborn-interface .reborn-footer .reborn-container,
+.reborn-interface .page-width {
+  pointer-events: auto;
+}
+.field-capsule {
+  transition:
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.field-trigger {
+  transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.field-orb.is-open .field-capsule {
+  animation: capsule-materialize 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.field-orb:has(.field-trigger:focus-visible) .field-capsule {
+  animation: none;
+}
+@keyframes capsule-materialize {
+  from {
+    clip-path: inset(
+      var(--clip-top) var(--clip-right) var(--clip-bottom) var(--clip-left) round 18px
+    );
+  }
+  to {
+    clip-path: inset(0 round 19px);
+  }
+}
+.loadout-card:before {
+  background: linear-gradient(140deg, #e1d8ff12, transparent 30%);
+}
+.loadout-card:after {
+  z-index: 2;
+  inset: -15% 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, #e5faff, #22d3ee, transparent);
+  box-shadow: 0 0 22px #8b5cf688;
+  opacity: 0;
+}
+.loadout-link:is(:hover, :focus-visible) .loadout-card:after {
+  animation: loadout-scan 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+}
+@keyframes loadout-scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(720px);
+    opacity: 0;
+  }
+}
+.featured-product-stage {
+  min-height: 740px;
+}
+.featured-product-id {
+  display: none;
+}
+.code-fashion-stage {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  isolation: isolate;
+}
+.fashion-stage-chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0 28px;
+  border-bottom: 1px solid #c4b5fd24;
+  z-index: 5;
+  font: 8px var(--mono);
+  letter-spacing: 0.08em;
+  color: #ada4c4;
+  pointer-events: none;
+}
+.fashion-stage-chrome > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.fashion-stage-chrome i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a3e635;
+}
+.fashion-source {
+  position: absolute;
+  inset: 62px 0 70px;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(140deg, #191c335c, #0709110d);
+}
+.fashion-file-name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #c4b5fd;
+  font: 10px var(--mono);
+  padding-bottom: 22px;
+}
+.fashion-source-lines {
+  padding-block: 14px;
+  border-block: 1px solid #c4b5fd1a;
+}
+.fashion-source-lines > code {
+  display: flex;
+  gap: 18px;
+  min-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #d2cbe4;
+  font: 11px/1.9 var(--mono);
+}
+.fashion-source-lines > code > i {
+  width: 18px;
+  flex-shrink: 0;
+  font-style: normal;
+  color: #77718d;
+  font-size: 9px;
+  user-select: none;
+}
+.fashion-source-lines > code > span {
+  min-width: 0;
+}
+.fashion-source-lines b,
+.syntax-keyword {
+  color: #b49bff;
+  font-weight: 400;
+}
+.fashion-source-lines em {
+  color: #91d8cc;
+  font-style: normal;
+}
+.fashion-source-action {
+  margin-top: auto;
+  padding-top: 26px;
+}
+.fashion-source-action > span {
+  font: 7px var(--mono);
+  letter-spacing: 0.12em;
+  color: #b3a5ce;
+}
+.fashion-source-action h4 {
+  font: 500 clamp(25px, 2.7vw, 41px) / 1.05 var(--heading);
+  letter-spacing: -0.055em;
+  margin: 15px 0 24px;
+  color: #f4f4f5;
+}
+.fashion-source-action .system-button {
+  width: 100%;
+  min-height: 49px;
+  justify-content: center;
+  font-size: 10px;
+  gap: 12px;
+}
+.fashion-source-action .system-button > span {
+  margin-right: auto;
+}
+.fashion-live {
+  position: absolute;
+  inset: 62px 0 70px;
+}
+.fashion-live .product-viewer.compact,
+.fashion-live .compact .scene-container {
+  height: 100%;
+  min-height: 0 !important;
+  border-radius: 0;
+  background: transparent;
+}
+.fashion-live .viewer-top {
+  top: 15px;
+  font-size: 7px;
+}
+.fashion-live .viewer-options {
+  bottom: 52px;
+}
+.fashion-live .camera-presets {
+  bottom: 85px;
+}
+.fashion-live .viewer-watermark {
+  opacity: 0.04;
+}
+.fashion-live .viewer-hint {
+  bottom: 18px;
+  font-size: 7px;
+}
+.fashion-live .model-note {
+  display: none;
+}
+.fashion-photo {
+  position: absolute;
+  inset: 62px 0 70px;
+}
+.fashion-photo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 15px 20px 60px;
+  position: relative;
+  z-index: 1;
+}
+.fashion-photo-flip {
+  position: absolute;
+  bottom: 15px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  font: 8px var(--mono);
+  color: #d3c3f0;
+  z-index: 2;
+}
+.fashion-mode-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  border-top: 1px solid #c4b5fd24;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 7px;
+  z-index: 6;
+  background: #0c1024bf;
+}
+.fashion-mode-bar > button,
+.fashion-mode-bar > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 43px;
+  padding: 11px 12px;
+  border-radius: 9px;
+  font: 9px var(--mono);
+  color: #b4a8cf;
+  border: 1px solid transparent;
+}
+.fashion-mode-bar > button[aria-pressed='true'] {
+  color: #eee8ff;
+  border-color: #b49bff55;
+  background: #8b5cf61a;
+}
+.fashion-mode-bar > button:hover,
+.fashion-mode-bar > a:hover {
+  color: #fff;
+  background: #8b5cf618;
+}
+.fashion-mode-bar > a {
+  margin-left: auto;
+}
+.fashion-asset-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #c4b5fd;
+  font: 12px var(--mono);
+}
+.fashion-materialize-overlay {
+  position: absolute;
+  inset: 62px 0 70px;
+  pointer-events: none;
+  z-index: 7;
+  background: linear-gradient(135deg, #8b5cf620, transparent);
+  animation: fashion-hologram 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.fashion-materialize-overlay > span {
+  position: absolute;
+  left: 28px;
+  top: 28px;
+  font: 8px var(--mono);
+  color: #d7c4ff;
+}
+.fashion-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22d3ee, #e5faff, #8b5cf6, transparent);
+  box-shadow: 0 0 38px #8b5cf6;
+  animation: fashion-scan 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes fashion-scan {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(590px);
+  }
+}
+@keyframes fashion-hologram {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media (max-width: 1100px) {
+  .featured-product-stage {
+    min-height: 760px;
+  }
+}
+@media (max-width: 760px) {
+  .featured-product-stage {
+    min-height: 710px;
+  }
+  .fashion-stage-chrome {
+    height: 53px;
+    padding-inline: 20px;
+    font-size: 6px;
+  }
+  .fashion-source {
+    inset: 53px 0 67px;
+    padding: 25px 20px;
+  }
+  .fashion-source-lines > code {
+    font-size: 10px;
+    gap: 11px;
+    min-height: 25px;
+  }
+  .fashion-source-action h4 {
+    font-size: 32px;
+  }
+  .fashion-source-action .system-button {
+    font-size: 9px;
+    gap: 9px;
+  }
+  .fashion-mode-bar {
+    height: 67px;
+    padding: 10px 13px;
+    gap: 2px;
+  }
+  .fashion-mode-bar > button,
+  .fashion-mode-bar > a {
+    padding: 9px 10px;
+    min-height: 44px;
+    font-size: 8px;
+    gap: 5px;
+  }
+  .fashion-live,
+  .fashion-photo,
+  .fashion-materialize-overlay {
+    inset: 53px 0 67px;
+  }
+  .fashion-live .viewer-top {
+    font-size: 5px;
+  }
+  .fashion-live .camera-presets button {
+    font-size: 7px;
+    padding: 9px 6px;
+    min-height: 38px;
+  }
+}
+.reborn-interface .modal {
+  pointer-events: auto;
+}
+.reborn-hero h1 > .hero-title-line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.1em;
+}
+.reborn-hero h1 > .hero-title-wear {
+  font-size: 1em;
+}
+.reborn-hero h1 > .hero-title-future {
+  font-size: 0.77em;
+}
+.hero-title-line > span {
+  display: inline-block;
+}
+.state-INTRO_TRANSITION .reborn-hero-copy {
+  animation: none;
+}
+.state-INTRO_TRANSITION .hero-title-wear > span {
+  animation: hero-type-rise 0.68s 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.state-INTRO_TRANSITION .hero-title-future > span {
+  animation: hero-type-rise 0.68s 1.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.state-INTRO_TRANSITION .reborn-hero-copy > p,
+.state-INTRO_TRANSITION .reborn-hero-actions,
+.state-INTRO_TRANSITION .hero-source-signature {
+  animation: reborn-enter 0.5s 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-type-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.fashion-source-lines > code {
+  font-size: 12px;
+}
+@media (max-width: 1250px) {
+  .reborn-hero h1 > .hero-title-future {
+    font-size: 0.73em;
+  }
+}
+@media (max-width: 1100px) {
+  .reborn-hero h1 > .hero-title-future {
+    font-size: 0.69em;
+  }
+}
+@media (max-width: 760px) {
+  .reborn-hero h1 > .hero-title-future {
+    font-size: 0.64em;
+  }
+  .reborn-brand-name {
+    display: none;
+  }
+  .reborn-header.cyber-header {
+    gap: 8px;
+  }
+  .reborn-header-actions {
+    gap: 2px;
+  }
+  .reborn-brand .official-logo,
+  .reborn-brand .official-logo > img {
+    width: 82px;
+    height: 39px;
+  }
+  .reborn-header-actions .reborn-search,
+  .reborn-header-actions .reborn-motion,
+  .reborn-header-actions .reborn-bag,
+  .reborn-header-actions .reborn-menu {
+    min-width: 44px;
+    width: 44px;
+    min-height: 44px;
+  }
+  .featured-sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .featured-sizes > legend {
+    width: 100%;
+  }
+  .featured-sizes > button {
+    min-width: 44px;
+    height: 44px;
+    margin: 0;
+  }
+  .featured-colors > button {
+    width: 44px;
+    height: 44px;
+    margin-right: 10px;
+  }
+  .fashion-source-lines > code {
+    font-size: 12px;
+  }
+  .terminal-command-form input {
+    font-size: 16px;
+  }
+  .terminal-line {
+    font-size: 12px;
+  }
+  .field-details .tech-info-heading button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-line > span {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .reborn-nav {
+    display: none;
+    position: absolute;
+    top: 88px;
+    left: 0;
+    right: 0;
+    height: auto;
+    padding: 18px 24px;
+    border: 1px solid #c4b5fd55;
+    border-radius: 18px;
+    background: #101426f5;
+  }
+  .reborn-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .reborn-nav > a,
+  .reborn-nav > button {
+    min-height: 52px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #c4b5fd18;
+  }
+  .reborn-nav > button[aria-current='location']:after {
+    bottom: 8px;
+  }
+  .reborn-menu {
+    display: grid;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .reborn-header-actions > button,
+  .reborn-header-actions > .reborn-bag {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .reborn-brand-name {
+    font-size: 8px;
+  }
+  .reborn-brand-name > b {
+    font-size: 12px;
+  }
+}
+.reborn-interface {
+  pointer-events: auto;
+}
+.tech-field {
+  z-index: 4;
+}
+.tech-field.has-active {
+  z-index: 45;
+}
+/* Blur belongs exclusively to world-clean, including behind the live viewer. */
+.system-reborn *,
+.system-reborn *::before,
+.system-reborn *::after,
+.system-reborn dialog::backdrop {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}

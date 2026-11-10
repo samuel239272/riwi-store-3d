@@ -1,0 +1,26 @@
+{
+  "errors": [],
+  "status": {
+    "state": "ready",
+    "progress": 100
+  },
+  "frames": [
+    {
+      "requested": 0,
+      "rendered": "0.0000"
+    },
+    {
+      "requested": 0.45,
+      "rendered": "0.4500"
+    },
+    {
+      "requested": 0.75,
+      "rendered": "0.7500"
+    },
+    {
+      "requested": 1,
+      "rendered": "1.0000"
+    }
+  ],
+  "conditions": "Headless installed Chrome, software SwiftShader WebGL, visual shader/correctness check only. External verify_scene exited Target crashed, performance not measured."
+}

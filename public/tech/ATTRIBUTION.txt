@@ -1,0 +1,19 @@
+RIWI — SYSTEM REBORN / Créditos visuales
+
+Los símbolos JavaScript, TypeScript, Python, HTML5 y CSS proceden de Simple Icons 16.35.0. Los SVG se alojan localmente sin modificar sus trazados. Simple Icons se distribuye bajo CC0; las marcas y los símbolos individuales conservan sus condiciones originales.
+
+HTML5 Logo by W3C — https://www.w3.org/html/logo/
+Licencia: Creative Commons Attribution 3.0 — https://creativecommons.org/licenses/by/3.0/
+
+JavaScript: https://github.com/voodootikigod/logo.js — licencia MIT.
+TypeScript: https://www.typescriptlang.org/branding
+Python: https://www.python.org/community/logos/
+CSS: https://github.com/CSS-Next/logo.css
+Simple Icons: https://github.com/simple-icons/simple-icons
+
+SQL se representa mediante el símbolo genérico de base de datos de Lucide (ISC), no mediante una marca oficial de SQL.
+Lucide: https://lucide.dev/license
+
+El logo RIWI y el video de referencia fueron aportados por el usuario. El escenario limpio y el recorte alfa de la mascota son recursos de composición derivados del fotograma final mediante edición asistida; no constituyen archivos oficiales nuevos de RIWI. La aplicación conserva el video y el fotograma originales.
+
+Space Grotesk, Inter e IBM Plex Mono: paquetes Fontsource incluidos en el proyecto; SIL Open Font License.

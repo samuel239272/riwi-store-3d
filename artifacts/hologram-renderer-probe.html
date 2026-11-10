@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="UTF-8"><link rel="icon" href="data:,"><title>Hologram renderer QA</title><style>body{margin:0;background:#060815;color:white;font-family:monospace}#root{width:900px;height:800px;margin:auto}.product-viewer{height:760px}</style></head><body><div id="root"></div><script type="module">
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {motionValue} from 'framer-motion';
+import {ProductViewer} from '/src/components/viewer/ProductViewer.tsx';
+import {products} from '/src/data/products.ts';
+const progress=motionValue(Number(new URLSearchParams(location.search).get('progress')) || 0);
+window.hologramProgress=progress;
+createRoot(document.getElementById('root')).render(React.createElement(ProductViewer,{product:products[1],compact:true,hologram:{progress,active:true},onStatusChange:s=>{window.modelStatus=s;}}));
+</script></body></html>

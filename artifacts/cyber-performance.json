@@ -1,0 +1,53 @@
+{
+  "environment": "Headless Chromium / software WebGL (SwiftShader); diagnostic, not a physical-device benchmark",
+  "widths": [
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": false
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "overflow": false
+    }
+  ],
+  "rendering": {
+    "idle500ms": {
+      "drawCalls": 0,
+      "renderedFrames": 0
+    },
+    "continuousRotation": {
+      "drawCalls": 40,
+      "renderedFrames": 5,
+      "sampleMilliseconds": 1526,
+      "renderedFps": 3.3
+    },
+    "syntheticDrag": {
+      "drawCalls": 256,
+      "renderedFrames": 32,
+      "sampleMilliseconds": 6628
+    },
+    "canvasDpr": 1
+  }
+}

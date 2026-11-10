@@ -1,0 +1,24 @@
+{
+  "mascot": {
+    "width": 1672,
+    "height": 941,
+    "bounds": {
+      "x": 585,
+      "y": 7,
+      "width": 547,
+      "height": 930
+    },
+    "transparentPixels": 1322610
+  },
+  "world": {
+    "width": 1672,
+    "height": 941,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 941
+    },
+    "transparentPixels": 0
+  }
+}

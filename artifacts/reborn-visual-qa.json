@@ -1,0 +1,94 @@
+[
+  {
+    "name": "desktop",
+    "errors": [],
+    "checkpoints": [
+      {
+        "id": "select-loadout",
+        "mascot": {
+          "x": 472.9677429199219,
+          "y": 98,
+          "width": 494.0644836425781,
+          "height": 839.9868774414062
+        },
+        "overflow": false
+      },
+      {
+        "id": "code-collection",
+        "mascot": {
+          "x": 472.9677429199219,
+          "y": 98,
+          "width": 494.0644836425781,
+          "height": 839.9868774414062
+        },
+        "overflow": false
+      },
+      {
+        "id": "built-by-coders",
+        "mascot": {
+          "x": 472.9677429199219,
+          "y": 98,
+          "width": 494.0644836425781,
+          "height": 839.9868774414062
+        },
+        "overflow": false
+      },
+      {
+        "id": "deploy-identity",
+        "mascot": {
+          "x": 472.9677429199219,
+          "y": 98,
+          "width": 494.0644836425781,
+          "height": 839.9868774414062
+        },
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "name": "mobile",
+    "errors": [],
+    "checkpoints": [
+      {
+        "id": "select-loadout",
+        "mascot": {
+          "x": 11.49032211303711,
+          "y": 128,
+          "width": 367.0193519592285,
+          "height": 623.990234375
+        },
+        "overflow": false
+      },
+      {
+        "id": "code-collection",
+        "mascot": {
+          "x": 11.49032211303711,
+          "y": 128,
+          "width": 367.0193519592285,
+          "height": 623.990234375
+        },
+        "overflow": false
+      },
+      {
+        "id": "built-by-coders",
+        "mascot": {
+          "x": 11.49032211303711,
+          "y": 128,
+          "width": 367.0193519592285,
+          "height": 623.990234375
+        },
+        "overflow": false
+      },
+      {
+        "id": "deploy-identity",
+        "mascot": {
+          "x": 11.49032211303711,
+          "y": 128,
+          "width": 367.0193519592285,
+          "height": 623.990234375
+        },
+        "overflow": false
+      }
+    ]
+  }
+]

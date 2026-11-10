@@ -1,0 +1,37 @@
+/* The viewport is a window onto one monumental figure, revealed from head to feet. */
+.mascot-plane.mascot-journey {
+  contain: layout paint;
+  isolation: isolate;
+}
+.mascot-journey .mascot-anchor {
+  pointer-events: none;
+}
+.mascot-journey .mascot-sprite {
+  animation: none;
+  filter: none;
+}
+.mascot-journey .mascot-ambient-glow {
+  opacity: 0.5;
+}
+.mascot-journey::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #090c1b66, transparent 53%, #090c1b26),
+    linear-gradient(0deg, #070b1740, transparent 20%, transparent 84%, #070b1726);
+}
+.mascot-journey .mascot-ground-light {
+  opacity: 0.55;
+}
+@media (max-width: 760px) {
+  .mascot-journey::after {
+    background: linear-gradient(0deg, #080c1b80, #080c1b26 60%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-plane .mascot-sprite {
+    animation: none;
+  }
+}

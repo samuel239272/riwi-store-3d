@@ -1,0 +1,683 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "responsive": [
+    {
+      "width": 320,
+      "height": 812,
+      "errors": [],
+      "mascot": {
+        "x": 9.427956581115723,
+        "y": 168,
+        "width": 301.1440649032593,
+        "height": 511.991943359375
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 16,
+            "y": 477.3125,
+            "width": 288,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 16,
+            "y": 381.4375,
+            "width": 288,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 16,
+            "y": 353.875,
+            "width": 288,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 16,
+            "y": 422.1875,
+            "width": 288,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 16,
+            "y": 306.515625,
+            "width": 288,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 16,
+            "y": 268.515625,
+            "width": 288,
+            "height": 194.78125
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "errors": [],
+      "mascot": {
+        "x": 11.49032211303711,
+        "y": 128,
+        "width": 367.0193519592285,
+        "height": 623.990234375
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 54,
+            "y": 493.765625,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 54,
+            "y": 406.703125,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 49.0625,
+            "y": 378.0625,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 16,
+            "y": 436.46875,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 54,
+            "y": 316.234375,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 54,
+            "y": 276.734375,
+            "width": 320,
+            "height": 180.390625
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "errors": [],
+      "mascot": {
+        "x": 131.03897094726562,
+        "y": 99.91999816894531,
+        "width": 505.9220886230469,
+        "height": 860.1465911865234
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 432,
+            "y": 602.265625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 432,
+            "y": 548.90625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 135.140625,
+            "y": 514.140625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 16,
+            "y": 532.75,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 192.25,
+            "y": 386.875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 432,
+            "y": 338.953125,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "errors": [],
+      "mascot": {
+        "x": 322.27923583984375,
+        "y": 79.44000244140625,
+        "width": 379.44158935546875,
+        "height": 645.1099243164062
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 688,
+            "y": 470.703125,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 636.984375,
+            "y": 346.671875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 198.859375,
+            "y": 320.609375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 17.875,
+            "y": 418.5625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 275,
+            "y": 309.15625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 688,
+            "y": 273.21875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "errors": [],
+      "mascot": {
+        "x": 472.9677429199219,
+        "y": 98,
+        "width": 494.0644836425781,
+        "height": 839.9868774414062
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 1104,
+            "y": 589.9375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 918.515625,
+            "y": 529.9375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 302.40625,
+            "y": 496,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 47.890625,
+            "y": 522.046875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 409.46875,
+            "y": 379.59375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 1025.578125,
+            "y": 332.796875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "errors": [],
+      "mascot": {
+        "x": 701.2042846679688,
+        "y": 118,
+        "width": 517.5913696289062,
+        "height": 879.9862060546875
+      },
+      "panels": [
+        {
+          "name": "JavaScript",
+          "box": {
+            "x": 1584,
+            "y": 631.046875,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "TypeScript",
+          "box": {
+            "x": 1243.34375,
+            "y": 593.140625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "Python",
+          "box": {
+            "x": 421.875,
+            "y": 556.484375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "HTML",
+          "box": {
+            "x": 82.515625,
+            "y": 557.734375,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "CSS",
+          "box": {
+            "x": 564.640625,
+            "y": 403.890625,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        },
+        {
+          "name": "SQL",
+          "box": {
+            "x": 1386.109375,
+            "y": 353.328125,
+            "width": 320,
+            "height": 179.390625
+          },
+          "within": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "select-loadout",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "code-collection",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "built-by-coders",
+          "fixed": true,
+          "overflow": false
+        },
+        {
+          "id": "deploy-identity",
+          "fixed": true,
+          "overflow": false
+        }
+      ]
+    }
+  ],
+  "movement": {
+    "initial": [
+      {
+        "x": 1308.5108642578125,
+        "y": 518.7027587890625,
+        "depth": "1"
+      },
+      {
+        "x": 943.708984375,
+        "y": 817.2151489257812,
+        "depth": "2"
+      },
+      {
+        "x": 326.3381652832031,
+        "y": 803.444091796875,
+        "depth": "3"
+      },
+      {
+        "x": 72.79393768310547,
+        "y": 498.5650634765625,
+        "depth": "4"
+      },
+      {
+        "x": 432.43536376953125,
+        "y": 334.7945251464844,
+        "depth": "5"
+      },
+      {
+        "x": 1046.8978271484375,
+        "y": 245.85357666015625,
+        "depth": "6"
+      }
+    ],
+    "ambient": [
+      {
+        "x": 1303.453857421875,
+        "y": 538.0385131835938,
+        "depth": "1"
+      },
+      {
+        "x": 908.3717651367188,
+        "y": 825.0234375,
+        "depth": "2"
+      },
+      {
+        "x": 294.8197937011719,
+        "y": 790.1054077148438,
+        "depth": "3"
+      },
+      {
+        "x": 78.83506774902344,
+        "y": 475.9858703613281,
+        "depth": "4"
+      },
+      {
+        "x": 473.0794372558594,
+        "y": 360.56927490234375,
+        "depth": "5"
+      },
+      {
+        "x": 1083.1861572265625,
+        "y": 242.27975463867188,
+        "depth": "6"
+      }
+    ],
+    "scrolled": [
+      {
+        "x": 1298.2535400390625,
+        "y": 583.7698974609375,
+        "depth": "1"
+      },
+      {
+        "x": 880.7106323242188,
+        "y": 837.7734985351562,
+        "depth": "2"
+      },
+      {
+        "x": 271.6757507324219,
+        "y": 756.9822998046875,
+        "depth": "3"
+      },
+      {
+        "x": 84.93350219726562,
+        "y": 410.8839416503906,
+        "depth": "4"
+      },
+      {
+        "x": 505.05364990234375,
+        "y": 322.7914733886719,
+        "depth": "5"
+      },
+      {
+        "x": 1109.6402587890625,
+        "y": 194.86587524414062,
+        "depth": "6"
+      }
+    ],
+    "homeCanvasCount": 0
+  },
+  "cinema": {
+    "media": {
+      "duration": 10.090667,
+      "presentation": 10
+    },
+    "errors": [],
+    "videoCountAfter": 0,
+    "state": "EXPERIENCE_READY"
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "conditions": "Local Windows Chromium, production preview, no network/CPU throttling, software WebGL. Lab observation only; physical devices and field INP not measured.",
+  "visits": [
+    {
+      "intro": false,
+      "metrics": {
+        "lcp": 5820,
+        "cls": 0,
+        "longTasks": [
+          66,
+          117,
+          361,
+          71
+        ],
+        "resources": [
+          {
+            "name": "index-CRB77TET.js",
+            "transfer": 62014,
+            "encoded": 61714,
+            "duration": 51
+          },
+          {
+            "name": "react-core-B4kKeoXk.js",
+            "transfer": 74255,
+            "encoded": 73955,
+            "duration": 60.1000000089407
+          },
+          {
+            "name": "index-D5My_DWi.css",
+            "transfer": 43213,
+            "encoded": 42913,
+            "duration": 56.70000000298023
+          },
+          {
+            "name": "riwi-world-clean.webp",
+            "transfer": 263252,
+            "encoded": 262952,
+            "duration": 29.200000002980232
+          },
+          {
+            "name": "riwi-cyber-final.webp",
+            "transfer": 208252,
+            "encoded": 207952,
+            "duration": 31.299999997019768
+          },
+          {
+            "name": "riwi-mascot-alpha.webp",
+            "transfer": 166332,
+            "encoded": 166032,
+            "duration": 31.5
+          },
+          {
+            "name": "riwi-coder.png",
+            "transfer": 66702,
+            "encoded": 66402,
+            "duration": 33.099999994039536
+          },
+          {
+            "name": "space-grotesk-latin-400-normal-C_H9aji2.woff2",
+            "transfer": 13756,
+            "encoded": 13456,
+            "duration": 336.5
+          },
+          {
+            "name": "ibm-plex-mono-latin-400-normal-Dm_PoFIZ.woff2",
+            "transfer": 15112,
+            "encoded": 14812,
+            "duration": 326.6000000089407
+          },
+          {
+            "name": "javascript.svg",
+            "transfer": 1274,
+            "encoded": 974,
+            "duration": 29.700000002980232
+          },
+          {
+            "name": "typescript.svg",
+            "transfer": 979,
+            "encoded": 679,
+            "duration": 36.8999999910593
+          },
+          {
+            "name": "python.svg",
+            "transfer": 1030,
+            "encoded": 730,
+            "duration": 34.69999998807907
+          },
+          {
+            "name": "html5.svg",
+            "transfer": 627,
+            "encoded": 327,
+            "duration": 30.200000002980232
+          },
+          {
+            "name": "css.svg",
+            "transfer": 962,
+            "encoded": 662,
+            "duration": 29.19999998807907
+          },
+          {
+            "name": "inter-latin-400-normal-BOOGhInR.woff2",
+            "transfer": 23992,
+            "encoded": 23692,
+            "duration": 292.3999999910593
+          },
+          {
+            "name": "space-grotesk-latin-600-normal-0SbvWzVy.woff2",
+            "transfer": 13592,
+            "encoded": 13292,
+            "duration": 295.70000000298023
+          },
+          {
+            "name": "space-grotesk-latin-500-normal-KYfcXlvK.woff2",
+            "transfer": 13568,
+            "encoded": 13268,
+            "duration": 298
+          },
+          {
+            "name": "riwi-coder.png",
+            "transfer": 300,
+            "encoded": 66402,
+            "duration": 5.800000011920929
+          },
+          {
+            "name": "hoodie-compile-front.webp",
+            "transfer": 32654,
+            "encoded": 32354,
+            "duration": 28.700000002980232
+          },
+          {
+            "name": "camiseta-source-front.webp",
+            "transfer": 22292,
+            "encoded": 21992,
+            "duration": 28.700000002980232
+          },
+          {
+            "name": "gorra-commit-front.webp",
+            "transfer": 28450,
+            "encoded": 28150,
+            "duration": 29.5
+          }
+        ]
+      },
+      "homeCanvasCount": 0,
+      "initialThreeRequests": [],
+      "errors": [],
+      "videoCountAfter": 0
+    },
+    {
+      "intro": true,
+      "metrics": {
+        "lcp": 14140,
+        "cls": 0.000045318678867669757,
+        "longTasks": [
+          86,
+          240,
+          407,
+          146,
+          129
+        ],
+        "resources": [
+          {
+            "name": "index-CRB77TET.js",
+            "transfer": 62014,
+            "encoded": 61714,
+            "duration": 61.20000000298023
+          },
+          {
+            "name": "react-core-B4kKeoXk.js",
+            "transfer": 74255,
+            "encoded": 73955,
+            "duration": 107.29999999701977
+          },
+          {
+            "name": "index-D5My_DWi.css",
+            "transfer": 43213,
+            "encoded": 42913,
+            "duration": 89.20000000298023
+          },
+          {
+            "name": "riwi-world-clean.webp",
+            "transfer": 263252,
+            "encoded": 262952,
+            "duration": 59.79999999701977
+          },
+          {
+            "name": "riwi-cyber-final.webp",
+            "transfer": 208252,
+            "encoded": 207952,
+            "duration": 51.400000005960464
+          },
+          {
+            "name": "riwi-cyber-arrival.webp",
+            "transfer": 164468,
+            "encoded": 164168,
+            "duration": 61.8999999910593
+          },
+          {
+            "name": "riwi-mascot-alpha.webp",
+            "transfer": 166332,
+            "encoded": 166032,
+            "duration": 53.29999999701977
+          },
+          {
+            "name": "riwi-coder.png",
+            "transfer": 66702,
+            "encoded": 66402,
+            "duration": 53
+          },
+          {
+            "name": "space-grotesk-latin-400-normal-C_H9aji2.woff2",
+            "transfer": 13756,
+            "encoded": 13456,
+            "duration": 413.69999998807907
+          },
+          {
+            "name": "ibm-plex-mono-latin-400-normal-Dm_PoFIZ.woff2",
+            "transfer": 15112,
+            "encoded": 14812,
+            "duration": 404.5
+          },
+          {
+            "name": "javascript.svg",
+            "transfer": 1274,
+            "encoded": 974,
+            "duration": 22
+          },
+          {
+            "name": "typescript.svg",
+            "transfer": 979,
+            "encoded": 679,
+            "duration": 38.20000000298023
+          },
+          {
+            "name": "python.svg",
+            "transfer": 1030,
+            "encoded": 730,
+            "duration": 36.29999999701977
+          },
+          {
+            "name": "html5.svg",
+            "transfer": 627,
+            "encoded": 327,
+            "duration": 29.599999994039536
+          },
+          {
+            "name": "css.svg",
+            "transfer": 962,
+            "encoded": 662,
+            "duration": 30.200000002980232
+          },
+          {
+            "name": "space-grotesk-latin-600-normal-0SbvWzVy.woff2",
+            "transfer": 13592,
+            "encoded": 13292,
+            "duration": 369.5
+          },
+          {
+            "name": "space-grotesk-latin-500-normal-KYfcXlvK.woff2",
+            "transfer": 13568,
+            "encoded": 13268,
+            "duration": 369.70000000298023
+          },
+          {
+            "name": "inter-latin-400-normal-BOOGhInR.woff2",
+            "transfer": 23992,
+            "encoded": 23692,
+            "duration": 370.5
+          },
+          {
+            "name": "hoodie-compile-front.webp",
+            "transfer": 32654,
+            "encoded": 32354,
+            "duration": 28.200000002980232
+          },
+          {
+            "name": "camiseta-source-front.webp",
+            "transfer": 22292,
+            "encoded": 21992,
+            "duration": 29.299999997019768
+          },
+          {
+            "name": "gorra-commit-front.webp",
+            "transfer": 28450,
+            "encoded": 28150,
+            "duration": 30.399999991059303
+          },
+          {
+            "name": "riwi-coder.png",
+            "transfer": 300,
+            "encoded": 66402,
+            "duration": 17.200000002980232
+          },
+          {
+            "name": "riwi-cyber-intro.mp4",
+            "transfer": 300,
+            "encoded": 0,
+            "duration": 220
+          },
+          {
+            "name": "riwi-cyber-intro.mp4",
+            "transfer": 30626,
+            "encoded": 30326,
+            "duration": 50.29999999701977
+          },
+          {
+            "name": "riwi-cyber-intro.mp4",
+            "transfer": 2228524,
+            "encoded": 2228224,
+            "duration": 95.70000000298023
+          }
+        ]
+      },
+      "homeCanvasCount": 0,
+      "initialThreeRequests": [],
+      "errors": [],
+      "videoCountAfter": 0
+    }
+  ]
+}

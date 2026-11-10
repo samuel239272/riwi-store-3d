@@ -1,0 +1,32 @@
+[
+  {
+    "title": "JavaScript",
+    "source": "https://github.com/voodootikigod/logo.js/blob/1544bdeed6d618a6cfe4f0650d04ab8d9cfa76d9/js.svg",
+    "hex": "F7DF1E",
+    "license": "type:\"MIT\",url:\"https://spdx.org/licenses/MIT\""
+  },
+  {
+    "title": "TypeScript",
+    "source": "https://www.typescriptlang.org/branding",
+    "hex": "3178C6",
+    "license": "Check the original source terms; not specified by this package"
+  },
+  {
+    "title": "Python",
+    "source": "https://www.python.org/community/logos/",
+    "hex": "3776AB",
+    "license": "Check the original source terms; not specified by this package"
+  },
+  {
+    "title": "HTML5",
+    "source": "https://www.w3.org/html/logo/",
+    "hex": "E34F26",
+    "license": "Check the original source terms; not specified by this package"
+  },
+  {
+    "title": "CSS",
+    "source": "https://github.com/CSS-Next/logo.css/blob/bacc20878227204b283c68a6b935f8279e06b0cd/css.svg",
+    "hex": "663399",
+    "license": "Check the original source terms; not specified by this package"
+  }
+]

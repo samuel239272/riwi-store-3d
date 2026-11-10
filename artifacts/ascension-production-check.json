@@ -1,0 +1,32 @@
+[
+  {
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "errors": [],
+    "controlsAccessible": true,
+    "sharpMascotBehindViewer": true,
+    "cameraDistance": {
+      "before": 5.634,
+      "after": 4.508
+    },
+    "mascotFixed": true,
+    "canvasAfterSource": 0,
+    "overflow": false
+  },
+  {
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "controlsAccessible": true,
+    "sharpMascotBehindViewer": true,
+    "cameraDistance": {
+      "before": 5.634,
+      "after": 4.508
+    },
+    "mascotFixed": true,
+    "canvasAfterSource": 0,
+    "overflow": false
+  }
+]

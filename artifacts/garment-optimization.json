@@ -1,0 +1,58 @@
+[
+  {
+    "name": "cap.glb",
+    "sourceBytes": 5723132,
+    "optimizedBytes": 3167064,
+    "imagesReencoded": 1,
+    "meshoptViews": 21
+  },
+  {
+    "name": "hoodie.glb",
+    "sourceBytes": 19335216,
+    "optimizedBytes": 1188848,
+    "imagesReencoded": 4,
+    "meshoptViews": 24
+  },
+  {
+    "name": "jacket.glb",
+    "sourceBytes": 6533016,
+    "optimizedBytes": 2856416,
+    "imagesReencoded": 2,
+    "meshoptViews": 15
+  },
+  {
+    "name": "jeans.glb",
+    "sourceBytes": 2049716,
+    "optimizedBytes": 666600,
+    "imagesReencoded": 6,
+    "meshoptViews": 111
+  },
+  {
+    "name": "joggers.glb",
+    "sourceBytes": 1906276,
+    "optimizedBytes": 662940,
+    "imagesReencoded": 5,
+    "meshoptViews": 69
+  },
+  {
+    "name": "shirt.glb",
+    "sourceBytes": 2074972,
+    "optimizedBytes": 784960,
+    "imagesReencoded": 5,
+    "meshoptViews": 87
+  },
+  {
+    "name": "sweatshirt.glb",
+    "sourceBytes": 13498444,
+    "optimizedBytes": 8244400,
+    "imagesReencoded": 1,
+    "meshoptViews": 78
+  },
+  {
+    "name": "tee.glb",
+    "sourceBytes": 1059760,
+    "optimizedBytes": 677448,
+    "imagesReencoded": 1,
+    "meshoptViews": 9
+  }
+]

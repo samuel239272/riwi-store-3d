@@ -1,0 +1,13 @@
+{
+  "tool": "Built-in image_gen",
+  "editTarget": "public/media/riwi-cyber-final.webp",
+  "mascot": {
+    "path": "public/media/riwi-mascot-alpha.webp",
+    "prompt": "Use case: background-extraction. Edit target: the supplied final film frame. Create a production alpha cutout of ONLY the exact same RIWI fox astronaut mascot from this frame, including every part of the orange/white fur, both ears, face, grey/violet spacesuit, RIWI chest symbol, left arm holding the green fox-ear helmet, raised right hand, both boots and entire orange/white tail. Keep the original character absolutely unchanged: same face, proportions, expression, pose, colors, materials, insignia and edges. Do not redesign or repaint. Remove all spaceship, ramp, city, light sources and background. Genuine transparent alpha around the silhouette, including gaps between fingers, arms and body. No rectangular background, no white matte, no extra shadows or floor. Preserve full-body proportions and preserve original relative composition on a 1920x1080 transparent canvas if possible. This is background removal for an existing character, not generation of a new mascot."
+  },
+  "world": {
+    "path": "public/media/riwi-world-clean.webp",
+    "prompt": "Use case: precise-object-edit / clean background plate. Edit target: supplied final cinematic frame. Remove ONLY the fox astronaut character, helmet it holds, waving hand, boots, tail and the shadow directly belonging to the character. Reconstruct the spaceship ramp, doorway and floor behind the removed character so this is an empty version of the exact same scene. Keep every other pixel and all original composition as unchanged as possible: exact original camera viewpoint, 1920x1080 wide canvas, spaceship shape and position, ramp perspective, violet lights, city skyline, smoke, code holograms and original color grading. Do not add any person, mascot, vehicle, wording or extra light. The result must line up with the source frame for a seamless web transition. It is a clean plate, not a redesigned scene."
+  },
+  "note": "AI-assisted compositing derivatives of the supplied video frame. Original frame and video retained. Alpha metadata verified in artifacts/reborn-asset-metadata.json."
+}

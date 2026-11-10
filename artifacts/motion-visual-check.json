@@ -1,0 +1,156 @@
+[
+  {
+    "name": "desktop",
+    "base": "http://127.0.0.1:5173",
+    "errors": [],
+    "mascotMode": "scroll-reveal",
+    "mascotMonumental": true,
+    "mascotTravel": 1590,
+    "mascotCentered": true,
+    "journey": [
+      {
+        "section": "system-online",
+        "scrollY": 0,
+        "box": {
+          "x": 28.897850036621094,
+          "y": 120,
+          "width": 1382.2043228149414,
+          "height": 2349.96337890625
+        }
+      },
+      {
+        "section": "select-loadout",
+        "scrollY": 920,
+        "box": {
+          "x": 28.897850036621094,
+          "y": -222.0954132080078,
+          "width": 1382.2043228149414,
+          "height": 2349.963333129883
+        }
+      },
+      {
+        "section": "code-collection",
+        "scrollY": 2016,
+        "box": {
+          "x": 28.897850036621094,
+          "y": -629.6351928710938,
+          "width": 1382.2043228149414,
+          "height": 2349.9633178710938
+        }
+      },
+      {
+        "section": "built-by-coders",
+        "scrollY": 3216,
+        "box": {
+          "x": 28.897850036621094,
+          "y": -1075.8465576171875,
+          "width": 1382.2043228149414,
+          "height": 2349.96337890625
+        }
+      },
+      {
+        "section": "deploy-identity",
+        "scrollY": 4175,
+        "box": {
+          "x": 28.897850036621094,
+          "y": -1432.44384765625,
+          "width": 1382.2043228149414,
+          "height": 2349.96337890625
+        }
+      },
+      {
+        "section": "journey-end",
+        "scrollY": 4276,
+        "box": {
+          "x": 28.897850036621094,
+          "y": -1470,
+          "width": 1382.2043228149414,
+          "height": 2349.96337890625
+        }
+      }
+    ],
+    "overflow": false,
+    "layers": {
+      ".tech-field": "1",
+      ".mascot-plane": "2",
+      ".reborn-interface": "3"
+    }
+  },
+  {
+    "name": "mobile",
+    "base": "http://127.0.0.1:5173",
+    "errors": [],
+    "mascotMode": "scroll-reveal",
+    "mascotMonumental": true,
+    "mascotTravel": 1012.8000183105469,
+    "mascotCentered": true,
+    "journey": [
+      {
+        "section": "system-online",
+        "scrollY": 0,
+        "box": {
+          "x": -289.00677490234375,
+          "y": 109.72000122070312,
+          "width": 968.0135498046875,
+          "height": 1645.7742614746094
+        }
+      },
+      {
+        "section": "select-loadout",
+        "scrollY": 881,
+        "box": {
+          "x": -289.00677490234375,
+          "y": -48.56930160522461,
+          "width": 968.0135498046875,
+          "height": 1645.774257659912
+        }
+      },
+      {
+        "section": "code-collection",
+        "scrollY": 2364,
+        "box": {
+          "x": -289.00677490234375,
+          "y": -315.01995849609375,
+          "width": 968.0135498046875,
+          "height": 1645.7743530273438
+        }
+      },
+      {
+        "section": "built-by-coders",
+        "scrollY": 4584,
+        "box": {
+          "x": -289.00677490234375,
+          "y": -713.887451171875,
+          "width": 968.0135498046875,
+          "height": 1645.7742919921875
+        }
+      },
+      {
+        "section": "deploy-identity",
+        "scrollY": 5392,
+        "box": {
+          "x": -289.00677490234375,
+          "y": -859.0608520507812,
+          "width": 968.0135498046875,
+          "height": 1645.7742919921875
+        }
+      },
+      {
+        "section": "journey-end",
+        "scrollY": 5637,
+        "box": {
+          "x": -289.00677490234375,
+          "y": -903.0800170898438,
+          "width": 968.0135498046875,
+          "height": 1645.7742919921875
+        }
+      }
+    ],
+    "overflow": false,
+    "layers": {
+      ".tech-field": "1",
+      ".mascot-plane": "2",
+      ".reborn-interface": "3"
+    }
+  }
+]
